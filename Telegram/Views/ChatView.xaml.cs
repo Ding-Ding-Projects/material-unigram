@@ -2834,6 +2834,9 @@ namespace Telegram.Views
                 flyout.CreateFlyoutItem(ViewModel.ChangeTheme, Strings.SetWallpapers, Icons.PaintBrush);
             }
 
+            // Local to this device and this chat, so it is offered for every chat, groups included.
+            flyout.CreateFlyoutItem(ViewModel.ChangeChatLook, Strings.ChatLook, Icons.PaintBrush);
+
             if (supergroup != null && supergroup.Status is not ChatMemberStatusCreator && (supergroup.IsChannel || supergroup.HasActiveUsername()))
             {
                 flyout.CreateFlyoutItem(ViewModel.Report, Strings.ReportChat, Icons.ErrorCircle);
@@ -6036,6 +6039,16 @@ namespace Telegram.Views
             {
                 lightSettings = gift.GiftTheme.LightSettings;
                 darkSettings = gift.GiftTheme.DarkSettings;
+            }
+
+            // A look the user saved for this chat only wins over the shared chat theme, on top of
+            // whichever base (shared theme or app theme) it would otherwise use.
+            var lookLight = AppSettings.ChatLook.ToThemeSettings(chat.Id, lightSettings ?? AppSettings.Appearance.GetSettings(TelegramTheme.Light));
+            var lookDark = AppSettings.ChatLook.ToThemeSettings(chat.Id, darkSettings ?? AppSettings.Appearance.GetSettings(TelegramTheme.Dark));
+            if (lookLight != null && lookDark != null)
+            {
+                lightSettings = lookLight;
+                darkSettings = lookDark;
             }
 
             if (ViewModel.Window.UpdateChatTheme(ActualTheme, theme, lightSettings, darkSettings, chat.Background))

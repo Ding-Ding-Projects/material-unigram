@@ -576,6 +576,8 @@
                 <ResourceDictionary Source="ms-appx:///Themes/BadgeButton_themeresources.xaml" />
                 <ResourceDictionary Source="ms-appx:///Themes/TextBox_themeresources.xaml" />
                 <themes:Messages />
+                <!-- Ink and Tide shape and brushes; last so its corner radii win. -->
+                <ResourceDictionary Source="ms-appx:///Themes/InkTide.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

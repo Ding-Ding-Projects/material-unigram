@@ -5108,6 +5108,28 @@ namespace Telegram.ViewModels
             Delegate?.ChangeTheme();
         }
 
+        /// <summary>
+        /// Opens the per-chat look editor; the look is saved for this chat only and applied at once.
+        /// </summary>
+        public async void ChangeChatLook()
+        {
+            var chat = _chat;
+            if (chat == null)
+            {
+                return;
+            }
+
+            var popup = new ChatLookPopup(chat);
+            var result = await ShowPopupAsync(popup);
+
+            popup.Commit(result);
+
+            if (result != ContentDialogResult.None)
+            {
+                Delegate?.UpdateChatTheme(chat);
+            }
+        }
+
         #endregion
 
         #region Scheduled messages

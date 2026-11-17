@@ -1,0 +1,62 @@
+<controls:ModalPopup x:Class="Telegram.Views.Popups.ChatLookPopup"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:controls="using:Telegram.Controls"
+                     mc:Ignorable="d">
+
+    <StackPanel Spacing="16"
+                MinWidth="360">
+        <TextBlock x:Name="InfoLabel"
+                   TextWrapping="Wrap"
+                   Foreground="{ThemeResource InkTideMutedTextBrush}"
+                   Style="{StaticResource BodyTextBlockStyle}" />
+
+        <!-- Live preview of the two bubbles over this chat's wallpaper. -->
+        <Border x:Name="PreviewWall"
+                CornerRadius="{StaticResource InkTideSheetCornerRadius}"
+                Padding="16">
+            <StackPanel Spacing="8">
+                <Border x:Name="PreviewIncoming"
+                        HorizontalAlignment="Left"
+                        CornerRadius="18,18,18,6"
+                        Padding="12,8"
+                        Background="{ThemeResource InkTideSheetBrush}">
+                    <TextBlock Text="Sunday 8:00 at the trailhead?" />
+                </Border>
+                <Border x:Name="PreviewOutgoing"
+                        HorizontalAlignment="Right"
+                        CornerRadius="18,18,6,18"
+                        Padding="12,8">
+                    <TextBlock x:Name="PreviewOutgoingText"
+                               Text="Count me in." />
+                </Border>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Spacing="8">
+            <TextBlock x:Name="OutgoingLabel"
+                       Style="{StaticResource BaseTextBlockStyle}" />
+            <StackPanel x:Name="OutgoingSwatches"
+                        Orientation="Horizontal"
+                        Spacing="8" />
+        </StackPanel>
+
+        <StackPanel Spacing="8">
+            <TextBlock x:Name="AccentLabel"
+                       Style="{StaticResource BaseTextBlockStyle}" />
+            <StackPanel x:Name="AccentSwatches"
+                        Orientation="Horizontal"
+                        Spacing="8" />
+        </StackPanel>
+
+        <StackPanel Spacing="8">
+            <TextBlock x:Name="WallpaperLabel"
+                       Style="{StaticResource BaseTextBlockStyle}" />
+            <StackPanel x:Name="WallpaperSwatches"
+                        Orientation="Horizontal"
+                        Spacing="8" />
+        </StackPanel>
+    </StackPanel>
+</controls:ModalPopup>

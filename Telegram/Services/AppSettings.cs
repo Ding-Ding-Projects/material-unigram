@@ -365,6 +365,10 @@ namespace Telegram.Services
             set => _local.AddOrUpdateValue(ref _volumeMuted, "VolumeMuted", value);
         }
 
+        private static ChatLookSettings _chatLook;
+        /// <summary>Per-chat looks, keyed by chat id (see ChatLookSettings).</summary>
+        public static ChatLookSettings ChatLook => _chatLook ??= new ChatLookSettings(_local.GetContainer("ChatLook"));
+
         private static PencilSettings _pencil;
         public static PencilSettings Pencil => _pencil ??= new PencilSettings(_local);
 

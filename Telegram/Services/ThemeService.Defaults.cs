@@ -22,28 +22,28 @@ namespace Telegram.Services
                 // - shell gets colorized
                 // - incoming messages gets colorized
                 // - outgoing messages gets colorized
-                TelegramThemeType.Tinted, Color.FromArgb(0xFF, 0x52, 0x88, 0xC1)
+                TelegramThemeType.Tinted, Color.FromArgb(0xFF, 0x0E, 0x7C, 0x66)
             },
             {
                 // Night: dark theme
                 // - shell does not get colorized
                 // - incoming messages gets colorized
                 // - outgoing messages foreground turns white
-                TelegramThemeType.Night, Color.FromArgb(0xFF, 0x25, 0x8D, 0xE5)
+                TelegramThemeType.Night, Color.FromArgb(0xFF, 0x2F, 0xB8, 0x96)
             },
             {
                 // Day: light theme
                 // - shell does not get colorized
                 // - incoming messages gets colorized
                 // - outgoing messages foreground turns white
-                TelegramThemeType.Day, Color.FromArgb(0xFF, 0x40, 0xA7, 0xE3)
+                TelegramThemeType.Day, Color.FromArgb(0xFF, 0x0E, 0x7C, 0x66)
             },
             {
                 // Classic: light theme
                 // - shell does not get colorized
                 // - incoming messages gets colorized
                 // - outgoing messages gets colorized
-                TelegramThemeType.Classic, Color.FromArgb(0xFF, 0x40, 0xA7, 0xE3)
+                TelegramThemeType.Classic, Color.FromArgb(0xFF, 0x0E, 0x7C, 0x66)
             }
         };
 

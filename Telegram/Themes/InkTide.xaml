@@ -1,0 +1,93 @@
+<!--
+    Ink and Tide design tokens (see design/HANDOFF.md).
+
+    Merged last in App.xaml, so these values win for shape and the new Ink and Tide brushes.
+    Colours that the user's chosen theme controls (page backgrounds, message bubbles, accent) are
+    deliberately not overridden here: they come from the built-in theme defaults in
+    ThemeService.Defaults.cs and AppearanceSettings.GetHouse, so user themes keep working.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <Color x:Key="InkTideInkColor">#FF0F1A24</Color>
+            <Color x:Key="InkTideGroundColor">#FFE7ECF2</Color>
+            <Color x:Key="InkTideSheetColor">#FFFFFFFF</Color>
+            <Color x:Key="InkTideSheetSubtleColor">#FFF4F7FA</Color>
+            <Color x:Key="InkTideLineColor">#FFD6DEE6</Color>
+            <Color x:Key="InkTideEmeraldColor">#FF0E7C66</Color>
+            <Color x:Key="InkTideEmeraldContainerColor">#FFD3F1E7</Color>
+            <Color x:Key="InkTideLimeColor">#FFD4F36B</Color>
+            <Color x:Key="InkTideCoralColor">#FFE2482A</Color>
+            <Color x:Key="InkTideVioletColor">#FF5B4FE0</Color>
+            <Color x:Key="InkTideVioletContainerColor">#FFE6E3FF</Color>
+            <Color x:Key="InkTideMutedTextColor">#FF4A5A68</Color>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+            <Color x:Key="InkTideInkColor">#FF0A1219</Color>
+            <Color x:Key="InkTideGroundColor">#FF0F1A24</Color>
+            <Color x:Key="InkTideSheetColor">#FF1C2A37</Color>
+            <Color x:Key="InkTideSheetSubtleColor">#FF243442</Color>
+            <Color x:Key="InkTideLineColor">#FF2E4050</Color>
+            <Color x:Key="InkTideEmeraldColor">#FF2FB896</Color>
+            <Color x:Key="InkTideEmeraldContainerColor">#FF0E4A3E</Color>
+            <Color x:Key="InkTideLimeColor">#FFD4F36B</Color>
+            <Color x:Key="InkTideCoralColor">#FFFF7A5C</Color>
+            <Color x:Key="InkTideVioletColor">#FFA59CFF</Color>
+            <Color x:Key="InkTideVioletContainerColor">#FF2E2A66</Color>
+            <Color x:Key="InkTideMutedTextColor">#FF93A6B7</Color>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="HighContrast">
+            <Color x:Key="InkTideInkColor">#FF000000</Color>
+            <Color x:Key="InkTideGroundColor">#FF000000</Color>
+            <Color x:Key="InkTideSheetColor">#FF000000</Color>
+            <Color x:Key="InkTideSheetSubtleColor">#FF000000</Color>
+            <Color x:Key="InkTideLineColor">#FFFFFFFF</Color>
+            <Color x:Key="InkTideEmeraldColor">#FFFFFF00</Color>
+            <Color x:Key="InkTideEmeraldContainerColor">#FF000000</Color>
+            <Color x:Key="InkTideLimeColor">#FFFFFF00</Color>
+            <Color x:Key="InkTideCoralColor">#FFFF0000</Color>
+            <Color x:Key="InkTideVioletColor">#FF00FFFF</Color>
+            <Color x:Key="InkTideVioletContainerColor">#FF000000</Color>
+            <Color x:Key="InkTideMutedTextColor">#FFFFFFFF</Color>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <SolidColorBrush x:Key="InkTideInkBrush" Color="{ThemeResource InkTideInkColor}" />
+    <SolidColorBrush x:Key="InkTideGroundBrush" Color="{ThemeResource InkTideGroundColor}" />
+    <SolidColorBrush x:Key="InkTideSheetBrush" Color="{ThemeResource InkTideSheetColor}" />
+    <SolidColorBrush x:Key="InkTideSheetSubtleBrush" Color="{ThemeResource InkTideSheetSubtleColor}" />
+    <SolidColorBrush x:Key="InkTideLineBrush" Color="{ThemeResource InkTideLineColor}" />
+    <SolidColorBrush x:Key="InkTideEmeraldBrush" Color="{ThemeResource InkTideEmeraldColor}" />
+    <SolidColorBrush x:Key="InkTideEmeraldContainerBrush" Color="{ThemeResource InkTideEmeraldContainerColor}" />
+    <SolidColorBrush x:Key="InkTideLimeBrush" Color="{ThemeResource InkTideLimeColor}" />
+    <SolidColorBrush x:Key="InkTideCoralBrush" Color="{ThemeResource InkTideCoralColor}" />
+    <SolidColorBrush x:Key="InkTideVioletBrush" Color="{ThemeResource InkTideVioletColor}" />
+    <SolidColorBrush x:Key="InkTideVioletContainerBrush" Color="{ThemeResource InkTideVioletContainerColor}" />
+    <SolidColorBrush x:Key="InkTideMutedTextBrush" Color="{ThemeResource InkTideMutedTextColor}" />
+
+    <!-- Shape: Material Design 3 rounding, larger than the Fluent defaults. -->
+    <CornerRadius x:Key="ControlCornerRadius">12</CornerRadius>
+    <CornerRadius x:Key="OverlayCornerRadius">20</CornerRadius>
+    <CornerRadius x:Key="InkTideSheetCornerRadius">24</CornerRadius>
+    <CornerRadius x:Key="InkTideChipCornerRadius">17</CornerRadius>
+    <CornerRadius x:Key="InkTideAvatarCornerRadius">14</CornerRadius>
+    <x:Double x:Key="InkTideSheetGap">10</x:Double>
+
+    <!-- A regex builder toggle that sits beside every search box. -->
+    <Style x:Key="InkTideRegexButtonStyle" TargetType="ToggleButton">
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="FontFamily" Value="Consolas" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Content" Value=".*" />
+        <Setter Property="Background" Value="{ThemeResource InkTideVioletContainerBrush}" />
+        <Setter Property="Foreground" Value="{ThemeResource InkTideVioletBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="AutomationProperties.Name" Value="Regex builder" />
+        <Setter Property="ToolTipService.ToolTip" Value="Regex builder" />
+    </Style>
+</ResourceDictionary>

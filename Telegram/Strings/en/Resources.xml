@@ -4895,6 +4895,14 @@
     <string name="ShowCaption">Show Caption</string>
 
     <string name="SetWallpapers">Change Wallpaper</string>
+    <string name="ChatLook">This chat's look</string>
+    <string name="ChatLookInfo">Applies only to this chat. Every other chat keeps the app theme.</string>
+    <string name="ChatLookSavedFor">Saved for {0}</string>
+    <string name="ChatLookYourMessages">Your messages</string>
+    <string name="ChatLookAccent">Accent and names</string>
+    <string name="ChatLookWallpaper">Wallpaper</string>
+    <string name="ChatLookUseAppTheme">Use app theme</string>
+    <string name="ChatLookDefault">App default</string>
     <string name="SelectTheme">Select theme</string>
     <string name="ChatApplyTheme">Apply Theme</string>
     <string name="ChatResetTheme">Reset Theme</string>

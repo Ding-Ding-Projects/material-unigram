@@ -527,10 +527,11 @@ namespace Telegram.Services.Settings
                 return new ThemeSettings
                 {
                     BaseTheme = new BuiltInThemeNight(),
-                    AccentColor = 0x71BAFA,
+                    // Ink and Tide night: emerald accent, deep emerald outgoing bubbles.
+                    AccentColor = 0x2FB896,
                     HasOutgoingMessageAccentColor = true,
-                    OutgoingMessageAccentColor = 0x2B5278,
-                    OutgoingMessageFill = new BackgroundFillFreeformGradient(new[] { 0x258DE5, 0x4272DF, 0x8146D7, 0x9F3EAA }),
+                    OutgoingMessageAccentColor = 0x0E7C66,
+                    OutgoingMessageFill = new BackgroundFillSolid(0x0E7C66),
                     Background = GetDefaultBackground(true)
                 };
             }
@@ -539,10 +540,11 @@ namespace Telegram.Services.Settings
                 return new ThemeSettings
                 {
                     BaseTheme = new BuiltInThemeClassic(),
-                    AccentColor = 0x158DCD,
+                    // Ink and Tide day: emerald accent, emerald-container outgoing bubbles.
+                    AccentColor = 0x0E7C66,
                     HasOutgoingMessageAccentColor = true,
-                    OutgoingMessageAccentColor = 0xF0FDDF,
-                    OutgoingMessageFill = new BackgroundFillSolid(0xF0FDDF),
+                    OutgoingMessageAccentColor = 0xD3F1E7,
+                    OutgoingMessageFill = new BackgroundFillSolid(0xD3F1E7),
                     Background = GetDefaultBackground(false)
                 };
             }
@@ -587,7 +589,8 @@ namespace Telegram.Services.Settings
 
         public static Background GetDefaultBackground(bool dark)
         {
-            var freeform = dark ? new[] { 0x6C7FA6, 0x2E344B, 0x7874A7, 0x333258 } : new[] { 0xDBDDBB, 0x6BA587, 0xD5D88D, 0x88B884 };
+            // Ink and Tide grounds: cool grey, mint and lilac by day; ink, deep emerald and indigo by night.
+            var freeform = dark ? new[] { 0x0F1A24, 0x1C2A37, 0x0E4A3E, 0x2E2A66 } : new[] { 0xDFE7EE, 0xD3F1E7, 0xE6E3FF, 0xE7ECF2 };
             return new Background(0, true, dark, string.Empty,
                 new Document(string.Empty, "application/x-tgwallpattern", null, null, TdExtensions.GetLocalFile("Assets\\Background.tgv", "Background")),
                 new BackgroundTypePattern(new BackgroundFillFreeformGradient(freeform), dark ? 100 : 50, dark, false));

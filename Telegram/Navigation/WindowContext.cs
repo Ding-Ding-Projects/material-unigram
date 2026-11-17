@@ -673,8 +673,11 @@ namespace Telegram.Navigation
             // Both sides, because both have to be right before the base flips - the switch itself
             // recolours nothing. Comparing both accents rather than the current one: two themes
             // can share a light accent and differ in dark.
+            // Outgoing colour too: a per-chat look can keep the accent and change only the bubbles.
             var changed = _lastLightSettings?.AccentColor != lightSettings?.AccentColor
-                || _lastDarkSettings?.AccentColor != darkSettings?.AccentColor;
+                || _lastDarkSettings?.AccentColor != darkSettings?.AccentColor
+                || _lastLightSettings?.OutgoingMessageAccentColor != lightSettings?.OutgoingMessageAccentColor
+                || _lastDarkSettings?.OutgoingMessageAccentColor != darkSettings?.OutgoingMessageAccentColor;
 
             _lastLightSettings = lightSettings;
             _lastDarkSettings = darkSettings;
