@@ -11,7 +11,8 @@ real built app. Anything written but unverified stays unticked with its state be
 
 - [x] Public fork created from `TelegramMessenger/Unigram` with an `upstream` remote
 - [x] Agent instructions, roadmap and handoff records added
-- [ ] Root `build.bat` and `build-installer.bat` that install missing dependencies automatically
+- [ ] Root `build.bat` that installs missing dependencies automatically (written: Chocolatey tools, a dedicated Visual Studio 2026 Build Tools install, vcpkg at a pinned baseline; a full native build has not finished yet)
+- [ ] Root `build-installer.bat` (not started)
 - [ ] API credentials supplied through a local, uncommitted configuration file (never in source)
 
 ## Phase 1: design
@@ -33,7 +34,8 @@ three language modes, persistence, tests and screenshots from the built app.
 - [ ] Search everywhere with an adjacent full regex builder
 - [ ] Workspace tabs per account and the New tab catalogue; every page open by default
 - [ ] Command palette
-- [ ] Material Design 3 theming, appearance customization and the animation editor
+- [ ] Material Design 3 theming, appearance customization and the animation editor (started: the Ink and Tide colours, corner radii and accent defaults are in `Telegram/Themes/InkTide.xaml`; not yet seen in a running build)
+- [ ] Per-chat appearance saved for each contact (written: `ChatLookSettings` and `ChatLookPopup` for outgoing colour, accent and wallpaper; bubble corners and text size are stored but not applied; not yet seen in a running build)
 - [ ] Action sound effects with a Settings switch
 - [ ] Spoken narrator with voice pickers
 - [ ] School mode and app lock
@@ -48,3 +50,16 @@ three language modes, persistence, tests and screenshots from the built app.
 - [ ] Documentation site on GitHub Pages with complete articles and wiki content
 - [ ] Repository About homepage pointing at the live documentation site
 - [ ] Normal GitHub release with installer assets
+
+## Phase 4: hosted servers
+
+Two servers, each in three forms: a Docker image with Compose and `host.bat`, plain processes in
+WSL, and a minimal Linux appliance image. Run from the repository or from the host assistant.
+
+- [x] MTProxy Docker image and dashboard (`server/`): built, started with `host.bat --detached`, signed in, LAN address checked
+- [x] MTProxy in WSL (`go-host.bat`): built in a dedicated distribution, started, LAN address checked
+- [x] Teamgram full server in Docker (`server/full/`): all seven services up, and a real MTProto handshake offered this install's own key fingerprint
+- [ ] Appliance image (`appliance/`): the proxy image builds (`.img` and `.vhdx`); a boot test is running, not yet confirmed healthy; the full-server image has not been built
+- [ ] Host assistant (`hostassistant/`): the portable exe builds; not yet driven end to end
+- [ ] Sign in to the full server from Material Unigram (written: TDLib patch `Libraries/tdjson/patches/private-server.patch`, `PrivateServerSettings`, `PrivateServerPopup` and the Add account menu; not yet seen working in a running build)
+- [ ] Share links and the private server's values as QR codes on the dashboard
