@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>One-click host assistant</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div class="app" style="width: 1100px; height: 720px; display: flex; gap: 10px; padding: 10px; position: relative">
+  <aside style="width: 330px; background: var(--ink); color: #fff; border-radius: 24px; padding: 28px 20px; display: flex; flex-direction: column; gap: 6px">
+    <div class="hbar" style="margin-bottom: 18px"><span class="logo" style="width: 40px; height: 40px; margin: 0" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 5h16v11H10l-6 4z"/></svg></span><b class="disp" style="font-size: 20px">Host your Telegram proxy</b></div>
+    <sc-for list="{{steps}}" as="s" hint-placeholder-count="5">
+      <button onClick="{{s.go}}" style="{{s.row}}"><span style="{{s.dot}}">{{s.mark}}</span><span style="text-align: left"><b style="display: block">{{s.label}}</b><span class="small" style="color: var(--ink-mute)">{{s.state}}</span></span></button>
+    </sc-for>
+    <span class="small" style="margin-top: auto; color: var(--ink-mute)">Assistant v0.1.0 · one portable file</span>
+  </aside>
+  <main class="sheet" style="flex: 1; padding: 30px 34px; display: flex; flex-direction: column; gap: 16px">
+    <sc-if value="{{isForm}}" hint-placeholder-val="{{true}}">
+      <h1 class="disp" style="margin: 0; font-size: 34px">How do you want to host it?</h1>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <sc-for list="{{forms}}" as="f" hint-placeholder-count="3">
+          <button onClick="{{f.pick}}" style="{{f.card}}"><span class="hbar"><b class="disp" style="font-size: 20px; flex: 1">{{f.title}}</b><span class="{{f.tagCls}}">{{f.tag}}</span></span><span class="mute small" style="line-height: 1.5">{{f.body}}</span></button>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{isCreds}}" hint-placeholder-val="{{false}}">
+      <h1 class="disp" style="margin: 0; font-size: 34px">Proxy settings</h1>
+      <p class="mute" style="margin: 0; line-height: 1.5">A new secret is made for you. Nothing here is sent anywhere except to Telegram's own proxy configuration service.</p>
+      <label class="field"><b>Port</b><input value="443"><span class="small mute">443 looks like ordinary web traffic. Forward it on your router to reach the proxy from outside home.</span></label>
+      <label class="field"><b>Disguise as HTTPS to</b><input value="www.example.org"><span class="small mute">Makes the proxy look like a visit to this site. Leave blank to turn the disguise off.</span></label>
+      <label class="field"><b>Dashboard password</b><input type="password" value="••••••••"><span class="small mute">Needed to open the dashboard from another device.</span></label>
+    </sc-if>
+    <sc-if value="{{isDone}}" hint-placeholder-val="{{false}}">
+      <span class="tag ok" style="align-self: flex-start">Proxy running and reachable</span>
+      <h1 class="disp" style="margin: 0; font-size: 34px">Your Telegram proxy is ready</h1>
+      <div class="sheet2 hbar" style="padding: 14px 16px"><b class="mono" style="flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">tg://proxy?server=[ADDRESS]&amp;port=443&amp;secret=[SECRET]</b><button class="btn sm tonal">Copy</button><button class="btn sm">Add to Material Unigram</button></div>
+      <div class="hbar" style="gap: 16px"><div role="img" aria-label="QR code of the share link" class="mono" style="width: 140px; height: 140px; border-radius: 18px; background: var(--ink); color: var(--lime); display: flex; align-items: center; justify-content: center">[QR]</div><div class="small mute" style="line-height: 1.6">Dashboard: http://[LAN ADDRESS]:8080/<br>Checked just now: the proxy port answered from the network address, not only from this computer.</div></div>
+    </sc-if>
+    <div class="hbar" style="margin-top: auto"><button onClick="{{back}}" class="btn ghost">Back</button><span style="flex: 1"></span><button class="btn ghost">Cancel</button><button onClick="{{next}}" class="btn">{{nextLabel}}</button></div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1100,"height":720}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { step: 0, form: 0 }; }
+  renderVals() {
+    const s = this.state.step;
+    const names = [['How to host', 'Choose a form'], ['Check this computer', 'Docker, ports, disk'], ['Proxy settings', 'Port, disguise, password'], ['Start', 'Start and check'], ['Ready', 'Share link and QR code']];
+    const steps = names.map((n, i) => { const done = i < s, on = i === s; return { label: n[0], state: done ? 'Done' : on ? n[1] : 'Up next', mark: done ? '✓' : String(i + 1), go: () => this.setState({ step: i }),
+      row: `display: flex; gap: 12px; align-items: center; border: 0; padding: 10px 12px; border-radius: 16px; cursor: pointer; color: #fff; font: inherit; background: ${on ? 'rgba(255,255,255,.1)' : 'transparent'}`,
+      dot: `width: 32px; height: 32px; border-radius: 11px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; flex: 0 0 auto; background: ${done || on ? '#d4f36b' : 'rgba(255,255,255,.12)'}; color: ${done || on ? '#0f1a24' : '#93a6b7'}` }; });
+    const formsData = [['Docker container', 'Recommended', 'tag ok', 'Runs MTProxy in Docker Desktop on this computer. Updates by pulling a new image; the secret stays in a named volume.'], ['Direct process', 'No Docker', 'tag', 'Runs MTProxy as plain processes inside WSL on this computer, no Docker. Updates with this assistant.'], ['Appliance image', 'Spare machine', 'tag vio', 'Writes a small Linux image for a spare PC or virtual machine that boots straight into the proxy.']];
+    const forms = formsData.map((f, i) => ({ title: f[0], tag: f[1], tagCls: f[2], body: f[3], pick: () => this.setState({ form: i }),
+      card: `display: flex; flex-direction: column; gap: 6px; text-align: left; padding: 18px; border-radius: 20px; cursor: pointer; font: inherit; color: inherit; border: 2px solid ${this.state.form === i ? '#0f1a24' : '#d6dee6'}; background: ${this.state.form === i ? '#e8f6a8' : '#fff'}` }));
+    return { steps, forms, isForm: s <= 1, isCreds: s === 2 || s === 3, isDone: s === 4, nextLabel: s === 3 ? 'Start' : s === 4 ? 'Finish' : 'Continue',
+      back: () => this.setState({ step: Math.max(0, s - 1) }), next: () => this.setState({ step: Math.min(4, s + 1) }) };
+  }
+}
+</script>
+</body>
+</html>

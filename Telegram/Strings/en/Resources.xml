@@ -4903,6 +4903,15 @@
     <string name="ChatLookWallpaper">Wallpaper</string>
     <string name="ChatLookUseAppTheme">Use app theme</string>
     <string name="ChatLookDefault">App default</string>
+    <string name="PrivateServer">Private server</string>
+    <string name="PrivateServerInfo">Sign in to a Telegram-compatible server you host yourself. Accounts on it can talk to each other, but not to people on Telegram. Copy both values from the server dashboard.</string>
+    <string name="PrivateServerAddress">Server address (host:port)</string>
+    <string name="PrivateServerKey">Server public key</string>
+    <string name="PrivateServerNote">A changed key takes effect after Material Unigram restarts.</string>
+    <string name="PrivateServerForget">Forget server</string>
+    <string name="PrivateServerAddAccount">Add account on your private server</string>
+    <string name="PrivateServerSetUp">Set up a private server…</string>
+    <string name="TelegramAddAccount">Add Telegram account</string>
     <string name="SelectTheme">Select theme</string>
     <string name="ChatApplyTheme">Apply Theme</string>
     <string name="ChatResetTheme">Reset Theme</string>

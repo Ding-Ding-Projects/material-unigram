@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Private server sign-in</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Settings · Accounts" hint-size="1440px,64px"></dc-import>
+<div class="app" style="width: 1440px; height: 836px; padding: 10px; display: flex; gap: 10px; box-sizing: border-box">
+
+  <main class="sheet" style="flex: 1; padding: 26px 30px; display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden">
+    <div class="hbar"><h1 class="disp" style="margin: 0; font-size: 30px; flex: 1">Accounts</h1><span class="tag">3 of 3 Telegram accounts</span></div>
+    <div class="set"><span class="av" style="width: 40px; height: 40px; background: #c9d7ff">AL</span><div class="t"><b>Ada Lin</b><span class="small mute">Telegram · +44 ••• ••• 0417</span></div><span class="tag ok">Active</span></div>
+    <div class="set"><span class="av" style="width: 40px; height: 40px; background: #d3f1e7">HQ</span><div class="t"><b>Home server</b><span class="small mute">Private server · {{address}}</span></div><span class="tag vio">Private</span></div>
+    <div class="hbar"><button class="btn tonal" aria-haspopup="menu" aria-expanded="true" style="{{accentBtn}}">Add account</button><span class="small mute">Right-click for more ways to add one</span></div>
+
+    <div role="menu" aria-label="Add account" style="{{menuStyle}}">
+      <button role="menuitem" class="set" style="border: 0; background: none; width: 100%; text-align: left; font: inherit; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg><div class="t"><b>Add Telegram account</b><span class="small mute">Your phone number on Telegram</span></div></button>
+      <button role="menuitem" class="set" style="border: 0; background: none; width: 100%; text-align: left; font: inherit; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 18a4 4 0 0 1-.6-8A6 6 0 0 1 18 9a4.5 4.5 0 0 1-1 9z"/></svg><div class="t"><b>Add account on your private server</b><span class="small mute">Talks only to people on {{address}}</span></div></button>
+      <button role="menuitem" class="set" style="border: 0; background: none; width: 100%; text-align: left; font: inherit; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/></svg><div class="t"><b>Set up a private server…</b><span class="small mute">Address and public key from its dashboard</span></div></button>
+    </div>
+  </main>
+
+  <aside class="sheet" role="dialog" aria-label="Private server" style="width: 520px; padding: 26px; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box">
+    <h2 class="disp" style="margin: 0; font-size: 26px">Private server</h2>
+    <span class="small mute">Sign in to a Telegram-compatible server you host yourself. Accounts on it can talk to each other, but not to people on Telegram. Copy both values from the server dashboard.</span>
+    <label class="field"><b>Server address (host:port)</b><input value="{{address}}" placeholder="192.0.2.10:10443"></label>
+    <label class="field"><b>Server public key</b><textarea class="mono" style="height: 170px; font-size: 12px; resize: none; white-space: pre; padding: 10px; border-radius: 12px; border: 1.5px solid #d6dee6">{{key}}</textarea></label>
+    <sc-if value="{{isError}}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin: 0; color: #b8321a">Paste the whole public key, from -----BEGIN RSA PUBLIC KEY----- to -----END RSA PUBLIC KEY-----.</p></sc-if>
+    <sc-if value="{{isSaved}}" hint-placeholder-val="{{ false }}"><span class="tag ok">Saved · Add account on your private server is now in the menu</span></sc-if>
+    <span class="small mute">A changed key takes effect after Material Unigram restarts.</span>
+    <div class="hbar" style="margin-top: auto"><button class="btn sm ghost">Forget server</button><span style="flex: 1"></span><button class="btn sm ghost">Cancel</button><button class="btn sm" style="{{accentBtn}}">Save</button></div>
+  </aside>
+
+  <aside class="sheet2" aria-label="Where the values come from" style="width: 300px; padding: 20px; display: flex; flex-direction: column; gap: 10px; box-sizing: border-box; align-self: flex-start">
+    <b class="disp">From the full server dashboard</b>
+    <div class="set"><div class="t"><b>Gateway</b><span class="mono small">{{address}}</span></div><button class="btn sm tonal">Copy</button></div>
+    <div class="set"><div class="t"><b>Key fingerprint</b><span class="mono small">9124426022131445589</span></div></div>
+    <button class="btn sm tonal">Copy public key</button>
+    <span class="small mute">Each install makes its own key, so the one Teamgram ships never works.</span>
+  </aside>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0e7c66","options":["#0e7c66","#5b4fe0","#e2482a","#0f1a24"],"section":"Look"},"motion":{"editor":"boolean","default":true,"section":"Look"},"state":{"editor":"enum","default":"empty","options":["empty","error","saved"],"section":"Popup"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#0e7c66';
+    const motion = this.props.motion ?? true;
+    const state = this.props.state ?? 'empty';
+    const pem = '-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAx0Wf…\n…your server key…\n-----END RSA PUBLIC KEY-----';
+    return {
+      address: '192.0.2.10:10443',
+      key: state === 'error' ? 'MIIBCgKCAQEAx0Wf…' : state === 'saved' ? pem : '',
+      isError: state === 'error',
+      isSaved: state === 'saved',
+      accentBtn: `background: ${accent}; color: #fff`,
+      menuStyle: `position: absolute; left: 30px; top: 300px; width: 380px; padding: 6px; border-radius: 20px; background: #fff; box-shadow: 0 12px 32px rgba(15,26,36,.18); display: flex; flex-direction: column; ${motion ? 'transition: transform .22s cubic-bezier(.2,0,0,1), opacity .22s; transform-origin: top left' : ''}`
+    };
+  }
+}
+</script>
+</body>
+</html>

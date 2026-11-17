@@ -1,0 +1,126 @@
+diff --git a/td/telegram/net/ConnectionCreator.cpp b/td/telegram/net/ConnectionCreator.cpp
+index d81900c51..859b41f70 100644
+--- a/td/telegram/net/ConnectionCreator.cpp
++++ b/td/telegram/net/ConnectionCreator.cpp
+@@ -6,6 +6,9 @@
+ //
+ #include "td/telegram/net/ConnectionCreator.h"
+ 
++#include <cstdlib>
++#include <string>
++
+ #include "td/telegram/ConfigManager.h"
+ #include "td/telegram/Global.h"
+ #include "td/telegram/logevent/LogEvent.h"
+@@ -43,6 +46,24 @@
+ 
+ namespace td {
+ 
++namespace {
++// Read through the operating system rather than getenv: the C runtime copies the environment
++// when the process starts, so a value the app sets afterwards is only visible this way.
++std::string material_unigram_setting(const char *name) {
++#if TD_WINDOWS
++  char buffer[16384];
++  auto size = GetEnvironmentVariableA(name, buffer, static_cast<DWORD>(sizeof(buffer)));
++  if (size == 0 || size >= sizeof(buffer)) {
++    return std::string();
++  }
++  return std::string(buffer, size);
++#else
++  const char *value = std::getenv(name);
++  return value == nullptr ? std::string() : std::string(value);
++#endif
++}
++}  // namespace
++
+ int VERBOSITY_NAME(connections) = VERBOSITY_NAME(INFO);
+ 
+ namespace detail {
+@@ -1276,6 +1297,33 @@ DcOptions ConnectionCreator::get_default_dc_options(bool is_test) {
+     }
+   };
+   vector<int> ports = {443, 80, 5222};
++#if !TD_EMSCRIPTEN
++  // Material Unigram: a session marked as using a private server runs on the test path, and the
++  // app names that server here. Every data centre id points at it, because a self-hosted
++  // Telegram-compatible server answers for all of them at one address.
++  if (is_test) {
++    auto custom = material_unigram_setting("MATERIAL_UNIGRAM_SERVER");
++    if (!custom.empty()) {
++      Slice value(custom);
++      auto colon = value.rfind(':');
++      if (colon != static_cast<size_t>(-1)) {
++        auto host = value.substr(0, colon).str();
++        auto port = to_integer<int32>(value.substr(colon + 1));
++        if (!host.empty() && port > 0 && port < 65536) {
++          for (int32 dc_id = 1; dc_id <= 5; dc_id++) {
++            IPAddress ip_address;
++            if (ip_address.init_host_port(host, port).is_ok()) {
++              res.dc_options.emplace_back(DcId::internal(dc_id), ip_address);
++            }
++          }
++          if (!res.dc_options.empty()) {
++            return res;
++          }
++        }
++      }
++    }
++  }
++#endif
+ #if TD_EMSCRIPTEN
+   if (is_test) {
+     add_ip_ports(1, {"pluto.web.telegram.org/apiws_test"}, {443}, HostType::Url);
+diff --git a/td/telegram/net/PublicRsaKeySharedMain.cpp b/td/telegram/net/PublicRsaKeySharedMain.cpp
+index 9553c2852..06fdb88a6 100644
+--- a/td/telegram/net/PublicRsaKeySharedMain.cpp
++++ b/td/telegram/net/PublicRsaKeySharedMain.cpp
+@@ -9,8 +9,29 @@
+ #include "td/utils/Slice.h"
+ #include "td/utils/SliceBuilder.h"
+ 
++#include <cstdlib>
++#include <string>
++
+ namespace td {
+ 
++namespace {
++// Read through the operating system rather than getenv: the C runtime copies the environment
++// when the process starts, so a value the app sets afterwards is only visible this way.
++std::string material_unigram_setting(const char *name) {
++#if TD_WINDOWS
++  char buffer[16384];
++  auto size = GetEnvironmentVariableA(name, buffer, static_cast<DWORD>(sizeof(buffer)));
++  if (size == 0 || size >= sizeof(buffer)) {
++    return std::string();
++  }
++  return std::string(buffer, size);
++#else
++  const char *value = std::getenv(name);
++  return value == nullptr ? std::string() : std::string(value);
++#endif
++}
++}  // namespace
++
+ std::shared_ptr<PublicRsaKeySharedMain> PublicRsaKeySharedMain::create(bool is_test) {
+   auto add_pem = [](vector<RsaKey> &keys, Slice pem) {
+     auto rsa = mtproto::RSA::from_pem_public_key(pem).move_as_ok();
+@@ -21,6 +42,18 @@ std::shared_ptr<PublicRsaKeySharedMain> PublicRsaKeySharedMain::create(bool is_t
+   if (is_test) {
+     static auto test_public_rsa_key = [&] {
+       vector<RsaKey> keys;
++      // Material Unigram: the private server's own public key, in PEM form. Every install of
++      // the server generates a fresh key, so it cannot be compiled in.
++      auto custom_key = material_unigram_setting("MATERIAL_UNIGRAM_SERVER_KEY");
++      if (!custom_key.empty()) {
++        auto r_rsa = mtproto::RSA::from_pem_public_key(Slice(custom_key));
++        if (r_rsa.is_ok()) {
++          auto rsa = r_rsa.move_as_ok();
++          auto fingerprint = rsa.get_fingerprint();
++          keys.push_back(RsaKey{std::move(rsa), fingerprint});
++          return std::make_shared<PublicRsaKeySharedMain>(std::move(keys));
++        }
++      }
+       add_pem(keys,
+               "-----BEGIN RSA PUBLIC KEY-----\n"
+               "MIIBCgKCAQEAyMEdY1aR+sCR3ZSJrtztKTKqigvO/vBfqACJLZtS7QMgCGXJ6XIR\n"

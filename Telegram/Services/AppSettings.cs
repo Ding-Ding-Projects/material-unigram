@@ -369,6 +369,10 @@ namespace Telegram.Services
         /// <summary>Per-chat looks, keyed by chat id (see ChatLookSettings).</summary>
         public static ChatLookSettings ChatLook => _chatLook ??= new ChatLookSettings(_local.GetContainer("ChatLook"));
 
+        private static PrivateServerSettings _privateServer;
+        /// <summary>The self-hosted server accounts can use instead of Telegram.</summary>
+        public static PrivateServerSettings PrivateServer => _privateServer ??= new PrivateServerSettings(_local.GetContainer("PrivateServer"));
+
         private static PencilSettings _pencil;
         public static PencilSettings Pencil => _pencil ??= new PencilSettings(_local);
 

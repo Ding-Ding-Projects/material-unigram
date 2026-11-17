@@ -2037,6 +2037,7 @@
     <Compile Include="Services\NightModeService.cs" />
     <Compile Include="Services\Settings\SettingsStore.cs" />
     <Compile Include="Services\Settings\PencilSettings.cs" />
+    <Compile Include="Services\Settings\PrivateServerSettings.cs" />
     <Compile Include="Services\Settings\ChatLookSettings.cs" />
     <Compile Include="Services\Settings\PlaybackSettings.cs" />
     <Compile Include="Services\Settings\RecentEmojiSettings.cs" />
@@ -2217,6 +2218,9 @@
     </Compile>
     <Compile Include="Views\Popups\LoginUrlInfoPopup.xaml.cs">
       <DependentUpon>LoginUrlInfoPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Popups\PrivateServerPopup.xaml.cs">
+      <DependentUpon>PrivateServerPopup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Popups\ChatLookPopup.xaml.cs">
       <DependentUpon>ChatLookPopup.xaml</DependentUpon>
@@ -4782,6 +4786,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Popups\LoginUrlInfoPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Popups\PrivateServerPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Per-chat appearance</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Ada Lin" hint-size="1440px,64px"></dc-import>
+<div class="app" style="width: 1440px; height: 900px; padding: 10px; display: flex; gap: 10px">
+  <main class="sheet" style="flex: 1; display: flex; flex-direction: column; overflow: hidden">
+    <div class="hbar" style="padding: 14px 18px"><span class="av" style="width: 44px; height: 44px; background: #c9d7ff">AL</span><span style="flex: 1"><b class="disp" style="font-size: 20px; display: block">Ada Lin</b><span class="small mute">online · this chat has its own look</span></span><span class="tag vio">Custom look</span></div>
+    <div style="{{wall}}">
+      <div style="display: flex"><div style="{{inStyle}}">Sunday 8:00 at the trailhead?<span class="ts">10:32</span></div></div>
+      <div style="display: flex; justify-content: flex-end"><div style="{{outStyle}}">Count me in. I'll bring the map.<span class="ts">10:33</span></div></div>
+      <div style="display: flex"><div style="{{inStyle}}">Perfect, see you there.<span class="ts">10:34</span></div></div>
+    </div>
+    <div class="hbar" style="padding: 12px 18px 16px"><label class="search" style="flex: 1; background: #fff"><span class="sr">Message</span><input placeholder="Write a message"></label><button class="btn">Send</button></div>
+  </main>
+  <aside class="sheet" aria-label="This chat's look" style="width: 440px; padding: 22px; display: flex; flex-direction: column; gap: 14px; overflow: hidden">
+    <div class="hbar"><h1 class="disp" style="margin: 0; font-size: 26px; flex: 1">This chat's look</h1><span class="tag ok">Saved for Ada Lin</span></div>
+    <span class="small mute">Applies only to your chat with Ada Lin, on this device and your other devices that sync settings. Every other chat keeps the app theme.</span>
+    <div style="display: flex; gap: 6px"><label class="search" style="flex: 1; height: 40px; border-radius: 12px"><span class="sr">Search look settings</span><input placeholder="Search 14 look settings"></label><button class="rx" aria-label="Regex builder for look settings" style="width: 40px; height: 40px; border-radius: 12px">.*</button></div>
+    <div class="field"><b>Your messages</b><div class="hbar" style="gap: 8px"><sc-for list="{{outs}}" as="c" hint-placeholder-count="5"><button onClick="{{c.pick}}" aria-label="{{c.name}}" style="{{c.sw}}"></button></sc-for></div></div>
+    <div class="field"><b>Their messages</b><div class="hbar" style="gap: 8px"><sc-for list="{{ins}}" as="c" hint-placeholder-count="4"><button onClick="{{c.pick}}" aria-label="{{c.name}}" style="{{c.sw}}"></button></sc-for></div></div>
+    <div class="field"><b>Wallpaper</b><div class="hbar" style="gap: 6px"><sc-for list="{{walls}}" as="w" hint-placeholder-count="4"><button onClick="{{w.pick}}" class="{{w.cls}}">{{w.name}}</button></sc-for></div></div>
+    <label class="field"><span class="hbar"><b style="flex: 1">Bubble corners</b><span class="mono small">{{radius}} px</span></span><input type="range" class="range" min="4" max="28" value="{{radius}}" onInput="{{setRadius}}"></label>
+    <label class="field"><span class="hbar"><b style="flex: 1">Text size</b><span class="mono small">{{size}} px</span></span><input type="range" class="range" min="12" max="22" value="{{size}}" onInput="{{setSize}}"></label>
+    <div class="set" style="padding: 8px 0"><div class="t"><b>Notification sound</b><span class="small mute">Chime for this chat</span></div><button class="btn sm ghost">Change</button></div>
+    <div class="hbar" style="margin-top: auto; flex-wrap: wrap"><button class="btn sm ghost">Copy to another chat</button><button class="btn sm ghost">Use app theme</button><span style="flex: 1"></span><button class="btn sm">Done</button></div>
+  </aside>
+</div>
+<div style="position: absolute; left: 20px; top: 300px; z-index: 5"><dc-import name="ElementTools" target="Chat: Ada Lin" hint-size="680px,560px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { out: 1, inn: 0, wall: 0, radius: 20, size: 15 }; }
+  renderVals() {
+    const s = this.state;
+    const outC = [['Emerald', '#0e7c66', '#fff'], ['Violet', '#5b4fe0', '#fff'], ['Coral', '#e2482a', '#fff'], ['Lime', '#d4f36b', '#0f1a24'], ['Ink', '#0f1a24', '#fff']];
+    const inC = [['White', '#ffffff', '#121a21'], ['Mint', '#d3f1e7', '#121a21'], ['Lilac', '#e6e3ff', '#121a21'], ['Sand', '#ffe7a8', '#121a21']];
+    const walls = [['Dots', '#dfe7ee', 'radial-gradient(rgba(15,26,36,.09) 1.2px, transparent 1.3px)'], ['Plain', '#e7ecf2', 'none'], ['Night', '#0f1a24', 'radial-gradient(rgba(255,255,255,.08) 1.2px, transparent 1.3px)'], ['Your image', '#c9d7ff', 'none']];
+    const sw = (on, bg) => `width: 40px; height: 40px; border-radius: 14px; cursor: pointer; background: ${bg}; border: ${on ? '3px solid #0f1a24' : '1.5px solid #d6dee6'}`;
+    const o = outC[s.out], i = inC[s.inn], w = walls[s.wall];
+    return {
+      outs: outC.map((c, k) => ({ name: c[0], sw: sw(k === s.out, c[1]), pick: () => this.setState({ out: k }) })),
+      ins: inC.map((c, k) => ({ name: c[0], sw: sw(k === s.inn, c[1]), pick: () => this.setState({ inn: k }) })),
+      walls: walls.map((c, k) => ({ name: c[0], cls: k === s.wall ? 'chip on' : 'chip', pick: () => this.setState({ wall: k }) })),
+      radius: s.radius, size: s.size,
+      setRadius: e => this.setState({ radius: +e.target.value }), setSize: e => this.setState({ size: +e.target.value }),
+      wall: `flex: 1; margin: 0 10px; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 10px; justify-content: flex-end; background-color: ${w[1]}; background-image: ${w[2]}; background-size: 18px 18px`,
+      outStyle: `max-width: 62%; padding: 10px 14px; line-height: 1.45; font-size: ${s.size}px; background: ${o[1]}; color: ${o[2]}; border-radius: ${s.radius}px ${s.radius}px 6px ${s.radius}px`,
+      inStyle: `max-width: 62%; padding: 10px 14px; line-height: 1.45; font-size: ${s.size}px; background: ${i[1]}; color: ${i[2]}; border-radius: ${s.radius}px ${s.radius}px ${s.radius}px 6px`
+    };
+  }
+}
+</script>
+</body>
+</html>

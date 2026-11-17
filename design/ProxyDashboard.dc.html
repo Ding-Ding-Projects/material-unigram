@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MTProxy dashboard</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<header class="app hbar" style="height: 64px; padding: 0 18px; background: var(--ink); color: #fff; gap: 12px">
+  <span class="logo" style="width: 36px; height: 36px; border-radius: 12px; margin: 0" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v6c0 4 3.5 7 8 8 4.5-1 8-4 8-8V7z"/></svg></span>
+  <b class="disp" style="font-size: 20px">Material Unigram proxy</b>
+  <span class="chip" style="color: var(--ink-mute); border-color: rgba(255,255,255,.2)">Docker container</span>
+  <span style="flex: 1"></span>
+  <label class="hbar" style="background: rgba(255,255,255,.1); border-radius: 12px; height: 40px; padding: 0 12px; width: 260px"><span class="sr">Search the dashboard</span><input placeholder="Search logs and settings" style="border: 0; background: transparent; color: #fff; font: inherit; outline: none; flex: 1; min-width: 0"></label>
+  <span class="rx" role="button" aria-label="Regex builder for dashboard search" style="width: 40px; height: 40px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: var(--violet); color: #fff">.*</span>
+  <span class="seg" role="radiogroup" aria-label="Language" style="border-color: rgba(255,255,255,.25)"><button style="color: var(--ink-mute); height: 34px; padding: 0 10px">EN</button><button style="color: var(--ink-mute); height: 34px; padding: 0 10px">粵</button><button class="on" style="background: #fff; color: var(--ink); height: 34px; padding: 0 10px">Both</button></span>
+  <span class="small" style="color: var(--ink-mute)">v0.1.0 · MTProxy [COMMIT] · updated 17 Nov 12:40</span>
+</header>
+<div class="app" style="width: 1440px; height: 836px; padding: 10px; display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: auto 1fr; gap: 10px">
+  <section class="sheet" style="padding: 26px 28px; display: flex; flex-direction: column; gap: 14px">
+    <div class="hbar"><h1 class="disp" style="margin: 0; font-size: 34px; flex: 1">Your proxy is running</h1><span class="tag ok">Healthy · reachable from the network</span></div>
+    <p class="mute" style="margin: 0; line-height: 1.5">Material Unigram and your phones connect to Telegram through this computer. Share the link only with people you trust.</p>
+    <div class="sheet2" style="padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+      <span class="small mute">Share link</span>
+      <div class="hbar"><b class="mono" style="flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">tg://proxy?server=[ADDRESS]&amp;port=443&amp;secret=[SECRET]</b><button class="btn sm tonal">Copy</button><button class="btn sm">Add to Material Unigram</button></div>
+    </div>
+    <div class="hbar" style="gap: 18px; align-items: flex-start">
+      <div role="img" aria-label="QR code of the share link" class="mono" style="width: 150px; height: 150px; border-radius: 18px; background: var(--ink); color: var(--lime); display: flex; align-items: center; justify-content: center; flex: 0 0 auto">[QR]</div>
+      <div class="grid2" style="flex: 1; gap: 10px">
+        <div class="sheet2" style="padding: 12px"><div class="small mute">Address</div><b class="mono">[LAN ADDRESS] · [PUBLIC ADDRESS]</b></div>
+        <div class="sheet2" style="padding: 12px"><div class="small mute">Port</div><b class="mono">443</b></div>
+        <div class="sheet2" style="padding: 12px"><div class="small mute">Disguise</div><b>Looks like HTTPS to [DOMAIN]</b></div>
+        <div class="sheet2" style="padding: 12px"><div class="small mute">Sponsored channel</div><b>None</b></div>
+      </div>
+    </div>
+  </section>
+  <section class="sheet" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
+    <div class="hbar"><h2 class="disp" style="margin: 0; font-size: 24px; flex: 1">Right now</h2><span class="tag ok">Live</span></div>
+    <div class="grid2" style="gap: 10px">
+      <div class="sheet2" style="padding: 14px"><div class="small mute">Connections</div><b class="disp" style="font-size: 36px">12</b></div>
+      <div class="sheet2" style="padding: 14px"><div class="small mute">Traffic today</div><b class="disp" style="font-size: 36px">1.4 GB</b></div>
+    </div>
+    <div style="height: 140px; position: relative" role="img" aria-label="Line chart of connections over the last hour, steady around 10 to 14">
+      <svg width="100%" height="140" viewBox="0 0 500 140" preserveAspectRatio="none" aria-hidden="true"><path d="M0 90 L60 80 L120 85 L180 60 L240 70 L300 55 L360 62 L420 48 L500 52" fill="none" stroke="#0e7c66" stroke-width="3"/><circle cx="500" cy="52" r="6" fill="#0e7c66"/></svg>
+    </div>
+    <div class="hbar"><button class="btn sm ghost">Restart proxy</button><button class="btn sm ghost">New secret</button><button class="btn sm ghost">Export settings</button></div>
+  </section>
+  <section class="sheet" style="grid-column: 1 / 3; padding: 20px 24px; display: flex; flex-direction: column; gap: 10px; min-height: 0">
+    <div class="hbar"><h2 class="disp" style="margin: 0; font-size: 22px; flex: 1">Log</h2><button class="chip on">All</button><button class="chip">Proxy</button><button class="chip">Dashboard</button><button class="chip">Problems</button></div>
+    <pre class="mono small" style="flex: 1; margin: 0; background: var(--ink); color: #c9d4de; border-radius: 14px; padding: 14px; overflow: hidden; line-height: 1.7">12:40:01 proxy      fetched Telegram proxy configuration (8 data centres)
+12:40:02 proxy      listening on 0.0.0.0:443, stats on 127.0.0.1:8888
+12:40:02 dashboard  listening on 0.0.0.0:8080
+12:41:15 dashboard  signed in from [LAN DEVICE]
+04:00:00 proxy      refreshed proxy configuration (daily)</pre>
+  </section>
+</div>
+<div style="position: absolute; left: 740px; top: 420px; z-index: 5"><dc-import name="ElementTools" target="Share link" hint-size="680px,560px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

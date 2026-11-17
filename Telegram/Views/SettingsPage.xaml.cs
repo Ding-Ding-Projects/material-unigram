@@ -20,6 +20,7 @@ using Telegram.Views.Business;
 using Telegram.Views.Folders;
 using Telegram.Views.Grams;
 using Telegram.Views.Host;
+using Telegram.Views.Popups;
 using Telegram.Views.Settings;
 using Telegram.Views.Stars;
 using Windows.UI.Xaml;
@@ -351,17 +352,37 @@ namespace Telegram.Views
         private void AddAccount_ContextRequested(UIElement sender, ContextRequestedEventArgs args)
         {
             var root = this.GetParent<RootWindow>();
-            if (root != null)
+            if (root == null)
             {
-                var modifiers = WindowContext.KeyModifiers();
-                if (modifiers == (VirtualKeyModifiers.Menu | VirtualKeyModifiers.Shift))
-                {
-                    var flyout = new MenuFlyout();
-                    flyout.CreateFlyoutItem(() => root.Switch(LifetimeService.Current.Create(test: false)), "Production Server", Icons.Globe);
-                    flyout.CreateFlyoutItem(() => root.Switch(LifetimeService.Current.Create(test: true)), "Test Server", Icons.Bug);
-                    flyout.ShowAt(sender, args);
-                }
+                return;
             }
+
+            var flyout = new MenuFlyout();
+            flyout.CreateFlyoutItem(() => AddAccount_Click(sender, null), Strings.TelegramAddAccount, Icons.Globe);
+
+            // Accounts on the private server are test-path sessions: the patched TDLib sends
+            // them to the server named in AppSettings.PrivateServer instead of Telegram.
+            if (AppSettings.PrivateServer.IsConfigured)
+            {
+                flyout.CreateFlyoutItem(() => root.Switch(LifetimeService.Current.Create(test: true)), Strings.PrivateServerAddAccount, Icons.Cloud);
+            }
+
+            flyout.CreateFlyoutItem(SetUpPrivateServer, Strings.PrivateServerSetUp, Icons.Settings);
+
+            var modifiers = WindowContext.KeyModifiers();
+            if (modifiers == (VirtualKeyModifiers.Menu | VirtualKeyModifiers.Shift) && !AppSettings.PrivateServer.IsConfigured)
+            {
+                flyout.CreateFlyoutItem(() => root.Switch(LifetimeService.Current.Create(test: true)), "Test Server", Icons.Bug);
+            }
+
+            flyout.ShowAt(sender, args);
+        }
+
+        private async void SetUpPrivateServer()
+        {
+            var popup = new PrivateServerPopup();
+            var result = await ViewModel.ShowPopupAsync(popup);
+            popup.Commit(result);
         }
     }
 }

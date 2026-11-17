@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>host.bat log view and appliance console</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Figtree:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div class="app" style="width: 1440px; height: 760px; padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px">
+  <section aria-label="host.bat interactive log view" class="mono" style="background: #0c0c0c; color: #cccccc; border-radius: 18px; padding: 18px 20px; font-size: 14px; line-height: 1.6; display: flex; flex-direction: column; gap: 2px; overflow: hidden">
+    <div style="color: #d4f36b; font-weight: 700">Material Unigram proxy · logs</div>
+    <div>Status: <span style="color: #2fb896">running, healthy</span>   Image: ghcr.io/ding-ding-projects/material-unigram-proxy:0.1.0</div>
+    <div>Proxy:  <span style="color: #ffffff">[LAN ADDRESS]:443</span>   Dashboard: <span style="color: #ffffff">http://[LAN ADDRESS]:8080/</span></div>
+    <div style="color: #666">────────────────────────────────────────────────────────────────</div>
+    <div>12:40:01 proxy    listening on 0.0.0.0:443</div>
+    <div>12:40:02 proxy    fetched configuration (8 data centres)</div>
+    <div>12:40:02 dashboard listening on 0.0.0.0:8080</div>
+    <div>12:41:15 dashboard signed in from [LAN DEVICE]</div>
+    <div>12:41:16 proxy    12 connections</div>
+    <div style="color: #ffe7a8">12:42:30 proxy    data centre 4 slow, retrying</div>
+    <div>12:42:31 proxy    data centre 4 ok</div>
+    <div style="flex: 1"></div>
+    <div style="color: #666">────────────────────────────────────────────────────────────────</div>
+    <div><span style="color: #d4f36b">[F]</span> follow on/off  <span style="color: #d4f36b">[1]</span> proxy  <span style="color: #d4f36b">[2]</span> dashboard  <span style="color: #d4f36b">[/]</span> filter  <span style="color: #d4f36b">[Q]</span> leave (keeps running)  <span style="color: #d4f36b">[S]</span> stop</div>
+  </section>
+  <section aria-label="Appliance console" class="mono" style="background: #0f1a24; color: #c9d4de; border-radius: 18px; padding: 28px; font-size: 15px; line-height: 1.7; display: flex; flex-direction: column; gap: 4px">
+    <div style="color: #d4f36b; font-weight: 700; font-size: 18px">Material Unigram proxy appliance 0.1.0</div>
+    <div style="color: #93a6b7">Minimal Linux · Docker 28 · booted in 9 s</div>
+    <div style="margin-top: 18px">Your Telegram proxy is running.</div>
+    <div>Open the dashboard on any device at home:</div>
+    <div style="color: #ffffff; font-size: 26px; font-weight: 700; margin: 10px 0">http://[LAN ADDRESS]:8080/</div>
+    <div role="img" aria-label="QR code for the address" style="width: 150px; height: 150px; background: #fff; color: #0f1a24; display: flex; align-items: center; justify-content: center; border-radius: 10px">[QR]</div>
+    <div style="flex: 1"></div>
+    <div style="color: #93a6b7">First setup: open the dashboard to see the share link. Updates install at 04:00.</div>
+    <div style="color: #93a6b7">Console: press Alt+F2 to sign in for maintenance.</div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":760}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

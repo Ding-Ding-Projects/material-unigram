@@ -77,3 +77,5 @@ Libraries/vcpkg-ports/** text eol=lf
 *.sh text eol=lf
 appliance/mkosi.postinst text eol=lf
 appliance/mkosi.extra/** text eol=lf
+Libraries/tdjson/patches/*.patch -text
+appliance/mkosi.conf text eol=lf

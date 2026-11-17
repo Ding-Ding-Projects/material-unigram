@@ -45,6 +45,21 @@ $target_list = SplitList $target @('uwp', 'windows') "target"
 
 $td_root = Resolve-Path "../tdlib"
 
+# Material Unigram's TDLib changes live as patches beside this script, so the TDLib submodule
+# stays on its pinned commit. Each one is applied once: a patch that already reverses cleanly
+# is in place and is left alone, and one that neither applies nor reverses stops the build.
+foreach ($patch in Get-ChildItem (Join-Path $PSScriptRoot "patches") -Filter *.patch -ErrorAction SilentlyContinue) {
+  & git -C "$td_root" apply --check --reverse "$($patch.FullName)" 2>$null
+  if ($LastExitCode -eq 0) {
+    continue
+  }
+  & git -C "$td_root" apply "$($patch.FullName)"
+  if ($LastExitCode -ne 0) {
+    throw "The TDLib patch $($patch.Name) does not apply to the pinned TDLib commit."
+  }
+  Write-Host "Applied TDLib patch $($patch.Name)"
+}
+
 # TDLib and the app share one manifest, so that openssl and zlib cannot drift between the
 # tdjson.dll we ship and the copies the app links against.
 $manifest_root = Resolve-Path "../.."

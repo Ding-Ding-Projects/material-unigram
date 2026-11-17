@@ -453,6 +453,8 @@ namespace Telegram.Services
 
         static ClientService()
         {
+            // Before any client starts, so TDLib sees the private server on its first connection.
+            AppSettings.PrivateServer.Apply();
             InitializeDiagnostics();
 
             _runThread = new Thread(Client.Run)

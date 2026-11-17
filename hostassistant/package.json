@@ -1,0 +1,32 @@
+{
+  "name": "material-unigram-host-assistant",
+  "productName": "Material Unigram Host Assistant",
+  "version": "0.1.0",
+  "private": true,
+  "description": "One-click assistant that hosts the Material Unigram Telegram proxy or full server.",
+  "license": "GPL-3.0-only",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check src/main.js && node --check src/preload.js && node --check src/renderer/app.js",
+    "dist": "electron-builder --win portable --x64"
+  },
+  "devDependencies": {
+    "electron": "45.2.2",
+    "electron-builder": "26.18.1"
+  },
+  "build": {
+    "appId": "io.github.dingdingprojects.materialunigram.hostassistant",
+    "productName": "Material Unigram Host Assistant",
+    "artifactName": "MaterialUnigramHostAssistant-${version}.exe",
+    "directories": { "output": "dist" },
+    "files": ["src/**/*", "package.json"],
+    "extraResources": [
+      { "from": "../server", "to": "bundle/server", "filter": ["**/*", "!.env", "!full/.env"] },
+      { "from": "../scripts", "to": "bundle/scripts", "filter": ["host.ps1", "go-host.ps1"] },
+      { "from": "../appliance", "to": "bundle/appliance", "filter": ["**/*", "!.build/**", "!out/**"] }
+    ],
+    "win": { "target": [{ "target": "portable", "arch": ["x64"] }], "signAndEditExecutable": false },
+    "portable": { "requestExecutionLevel": "user" }
+  }
+}

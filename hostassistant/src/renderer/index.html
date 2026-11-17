@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:">
+<title>Material Unigram Host Assistant</title>
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="app.css">
+<script src="app.js" defer></script>
+</head>
+<body class="app">
+<div class="shell">
+  <aside class="steps" aria-label="Setup steps">
+    <div class="hbar brandrow"><span class="logo" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v6c0 4 3.5 7 8 8 4.5-1 8-4 8-8V7z"/></svg></span><b class="disp">Host your server</b></div>
+    <ol id="stepList" class="steplist"></ol>
+    <span id="version" class="small muted-on-ink"></span>
+  </aside>
+
+  <main class="sheet page">
+    <section data-step="0">
+      <h1 class="disp">What do you want to host?</h1>
+      <div class="choices" role="radiogroup" aria-label="Server">
+        <button class="choice" role="radio" data-server="proxy" aria-checked="true"><b class="disp">Telegram proxy</b><span class="small mute">Your real Telegram account, phones and Material Unigram connect through your own MTProxy. Recommended.</span></button>
+        <button class="choice" role="radio" data-server="full" aria-checked="false"><b class="disp">Full private server</b><span class="small mute">A Telegram-compatible server of your own (Teamgram). Accounts made on it can only talk to each other, not to people on Telegram.</span></button>
+      </div>
+      <h2 class="disp sub">Where should it run?</h2>
+      <div class="choices" role="radiogroup" aria-label="Form">
+        <button class="choice" role="radio" data-form="docker" aria-checked="true"><b>Docker container</b><span class="small mute">Docker Desktop on this computer. Easiest to update.</span></button>
+        <button class="choice" role="radio" data-form="wsl" aria-checked="false"><b>Directly in WSL</b><span class="small mute">Plain processes in a small Linux on this computer, no Docker. Proxy only.</span></button>
+        <button class="choice" role="radio" data-form="appliance" aria-checked="false"><b>Appliance image</b><span class="small mute">Makes a disk image for a spare PC or virtual machine that boots straight into the server.</span></button>
+      </div>
+    </section>
+
+    <section data-step="1" hidden>
+      <h1 class="disp">Checking this computer</h1>
+      <ul id="checks" class="checks"></ul>
+      <button id="recheck" class="btn ghost">Check again</button>
+    </section>
+
+    <section data-step="2" hidden>
+      <h1 class="disp">Settings</h1>
+      <label class="field"><b>Port</b><input id="port" inputmode="numeric"><span id="portHelp" class="small mute"></span></label>
+      <label class="field" id="tlsField"><b>Disguise as HTTPS to (optional)</b><input id="tlsDomain" placeholder="www.example.org"><span class="small mute">Makes the proxy look like a visit to this site. Leave blank to turn it off.</span></label>
+      <label class="field"><b>Dashboard password</b>
+        <span class="hbar"><input id="password" type="password" autocomplete="new-password" minlength="8" class="grow"><button id="suggest" class="btn sm ghost" type="button">Suggest one</button></span>
+        <span class="small mute">8 characters or more. Needed to open the dashboard from another device. Stored on this computer only.</span>
+      </label>
+      <p id="settingsError" class="error" role="alert"></p>
+    </section>
+
+    <section data-step="3" hidden>
+      <h1 class="disp">Starting</h1>
+      <p class="mute" id="startNote">This can take a few minutes the first time. Windows may ask for approval.</p>
+      <div class="hbar"><label class="search grow"><span class="sr">Search the output</span><input id="outSearch" placeholder="Search the output"></label><button id="outRegex" class="rx" aria-pressed="false" title="Regex builder" aria-label="Regex builder for the output">.*</button></div>
+      <p id="outRegexState" class="small mute" hidden></p>
+      <pre id="output" class="mono output" aria-live="polite"></pre>
+    </section>
+
+    <section data-step="4" hidden>
+      <span id="doneTag" class="tag ok">Running and reachable</span>
+      <h1 id="doneTitle" class="disp">Ready</h1>
+      <div class="sheet2 linkbox">
+        <span class="small mute" id="linkLabel">Share link</span>
+        <div class="hbar wrap"><code id="link" class="mono grow ellipsis"></code><button id="copyLink" class="btn sm tonal">Copy</button><button id="openLink" class="btn sm">Add to Material Unigram</button></div>
+      </div>
+      <p class="mute">Dashboard: <a id="dashboard" href="#"></a></p>
+      <p id="doneNote" class="small mute"></p>
+    </section>
+
+    <div class="hbar nav">
+      <button id="back" class="btn ghost">Back</button>
+      <span class="grow"></span>
+      <button id="next" class="btn">Continue</button>
+    </div>
+  </main>
+</div>
+</body>
+</html>

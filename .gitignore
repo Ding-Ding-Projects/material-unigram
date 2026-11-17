@@ -318,3 +318,5 @@ _Pvt_Extensions
 /server/full/.env
 /appliance/.build/
 /appliance/out/
+/hostassistant/node_modules/
+/hostassistant/dist/

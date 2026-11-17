@@ -1,0 +1,29 @@
+html, body { margin: 0; height: 100%; }
+body.app { min-height: 100vh; }
+.shell { display: flex; gap: 10px; padding: 10px; min-height: calc(100vh - 20px); box-sizing: border-box; flex-wrap: wrap; }
+.grow { flex: 1; min-width: 0; }
+.wrap { flex-wrap: wrap; }
+.ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.steps { flex: 0 0 280px; background: var(--ink); color: #fff; border-radius: 24px; padding: 26px 18px; display: flex; flex-direction: column; gap: 10px; }
+.brandrow { margin-bottom: 14px; font-size: 18px; }
+.brandrow .logo { margin: 0; }
+.muted-on-ink { color: var(--ink-mute); margin-top: auto; }
+.steplist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.steplist li { display: flex; gap: 12px; align-items: center; padding: 10px 12px; border-radius: 16px; color: var(--ink-mute); }
+.steplist li.on { background: rgba(255, 255, 255, .1); color: #fff; }
+.steplist li.done { color: #fff; }
+.steplist .mark { width: 30px; height: 30px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; background: rgba(255, 255, 255, .12); }
+.steplist li.on .mark, .steplist li.done .mark { background: var(--lime); color: var(--ink); }
+.page { flex: 1 1 520px; padding: 30px 34px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.page section { display: flex; flex-direction: column; gap: 14px; }
+.page h1 { margin: 0; font-size: 32px; }
+.sub { margin: 10px 0 0; font-size: 20px; }
+.choices { display: flex; flex-direction: column; gap: 10px; }
+.choice { display: flex; flex-direction: column; gap: 6px; text-align: left; padding: 16px 18px; border-radius: 20px; border: 2px solid var(--line); background: #fff; font: inherit; color: inherit; cursor: pointer; }
+.choice[aria-checked="true"] { border-color: var(--ink); background: var(--emerald-c); }
+.checks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.output { margin: 0; background: var(--ink); color: #c9d4de; border-radius: 14px; padding: 14px; height: 320px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 12px; line-height: 1.6; }
+.linkbox { padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.nav { margin-top: auto; }
+.error { color: #b8321a; min-height: 1.4em; margin: 0; }
+button:disabled { opacity: .5; cursor: not-allowed; }
