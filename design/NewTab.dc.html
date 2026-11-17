@@ -4,85 +4,46 @@
 <meta charset="utf-8">
 <title>New tab catalogue</title>
 <script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
 </head>
 <body>
 <x-dc>
 <helmet>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&amp;family=Roboto+Mono:wght@500&amp;display=swap" rel="stylesheet">
-<style>
-body{margin:0}
-a{color:#0b6780}a:hover{color:#08485a}
-button{font:inherit}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
 </helmet>
-<div style="width: 1440px; height: 900px; position: relative; overflow: hidden; background: #f6f9fb; font-family: 'Roboto Flex', system-ui, sans-serif; font-size: 14px; color: #171c1f">
-  <!-- dimmed workspace behind the dialog -->
-  <div aria-hidden="true" style="position: absolute; inset: 0; display: flex; flex-direction: column">
-    <div style="height: 52px; background: #e9eef2"></div>
-    <div style="flex: 1; display: flex">
-      <div style="width: 80px; background: #eef3f6"></div>
-      <div style="width: 380px; border-right: 1px solid #dbe4ea; display: flex; flex-direction: column; gap: 12px; padding: 16px">
-        <div style="height: 48px; border-radius: 24px; background: #e3e9ed"></div>
-        <div style="height: 60px; border-radius: 16px; background: #eef2f5"></div>
-        <div style="height: 60px; border-radius: 16px; background: #eef2f5"></div>
-        <div style="height: 60px; border-radius: 16px; background: #eef2f5"></div>
-      </div>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="New tab" hint-size="1440px,64px"></dc-import>
+<div class="app wall" style="width: 1440px; height: 900px; position: relative; overflow: hidden">
+  <div class="scrim" aria-hidden="true"></div>
+  <section role="dialog" aria-modal="true" aria-labelledby="nt-h" class="dialog" style="left: 220px; top: 50px; width: 1000px; height: 800px; padding: 30px 32px; display: flex; flex-direction: column; gap: 16px">
+    <div class="hbar"><h2 id="nt-h" class="disp" style="margin: 0; font-size: 32px; flex: 1">Open anything in a new tab</h2><button class="btn ghost sm">Open every tab</button><button class="icon-btn" aria-label="Close">&#215;</button></div>
+    <div style="display: flex; gap: 8px"><label class="search" style="flex: 1; height: 52px"><span class="sr">Search destinations</span><input placeholder="Search every menu, settings page and tool"></label><button class="rx on" aria-label="Regex builder for destination search" style="height: 52px; width: 52px">.*</button></div>
+    <div class="sheet2 mono small" style="padding: 10px 14px; display: flex; gap: 12px; align-items: center"><span style="color: var(--violet)">^(set|tool)</span><span class="mute">flags: i</span><span class="tag ok">Valid · 17 matches</span><span style="flex: 1"></span><span class="mute">mode: filter</span></div>
+    <div role="tablist" aria-label="Groups" style="display: flex; gap: 6px; flex-wrap: wrap">
+      <sc-for list="{{groups}}" as="g" hint-placeholder-count="6"><button role="tab" aria-selected="{{g.on}}" onClick="{{g.pick}}" class="{{g.cls}}">{{g.label}}</button></sc-for>
     </div>
-  </div>
-  <div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(23, 28, 31, .32)"></div>
-
-  <section role="dialog" aria-modal="true" aria-labelledby="nt-h" style="position: absolute; left: 50%; top: 60px; transform: translateX(-50%); width: 960px; height: 780px; box-sizing: border-box; background: #fbfcfd; border-radius: 28px; padding: 28px 32px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.18)">
-    <div style="display: flex; align-items: center; gap: 12px">
-      <h2 id="nt-h" style="margin: 0; font-size: 24px; font-weight: 600; flex: 1">Open a new tab</h2>
-      <button style="border: 1px solid #c1c8cd; background: transparent; border-radius: 20px; padding: 0 16px; height: 40px; cursor: pointer; color: #0b6780">Open every tab</button>
-      <button aria-label="Close" style="border: 0; background: transparent; width: 40px; height: 40px; border-radius: 20px; cursor: pointer; color: #41484d"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-    </div>
-    <div style="display: flex; gap: 8px">
-      <label style="flex: 1; display: flex; align-items: center; gap: 10px; background: #e3e9ed; border-radius: 28px; padding: 0 20px; height: 52px">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#41484d" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <span style="position: absolute; left: -9999px">Search destinations</span>
-        <input placeholder="Search menus, settings pages and tools" style="border: 0; background: transparent; flex: 1; font: inherit; outline: none">
-      </label>
-      <button aria-label="Regex builder for destination search" style="border: 0; background: #cfe6f1; color: #08485a; width: 52px; height: 52px; border-radius: 26px; cursor: pointer; font-family: 'Roboto Mono', monospace">.*</button>
-    </div>
-    <div role="tablist" aria-label="Destination groups" style="display: flex; gap: 8px; flex-wrap: wrap">
-      <sc-for list="{{groups}}" as="c" hint-placeholder-count="5">
-        <button role="tab" aria-selected="{{c.on}}" onClick="{{c.pick}}" style="{{c.style}}">{{c.label}}</button>
+    <div style="flex: 1; overflow: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-content: start">
+      <sc-for list="{{items}}" as="it" hint-placeholder-count="15">
+        <button class="row" style="border: 1.5px solid var(--line); min-height: 68px"><span class="av" style="{{it.av}}">{{it.ini}}</span><span style="flex: 1; min-width: 0"><b style="display: block">{{it.label}}</b><span class="{{it.stateCls}}">{{it.state}}</span></span></button>
       </sc-for>
     </div>
-    <div style="flex: 1; overflow: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-content: start">
-      <sc-for list="{{items}}" as="it" hint-placeholder-count="12">
-        <button style="display: flex; align-items: center; gap: 14px; text-align: left; border: 1px solid #dbe4ea; background: #fff; border-radius: 16px; padding: 14px 16px; cursor: pointer; color: inherit; min-height: 64px">
-          <span style="width: 40px; height: 40px; border-radius: 12px; background: #e4f2f8; color: #0b6780; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{it.icon}}"/></svg>
-          </span>
-          <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
-            <span style="font-weight: 500">{{it.label}}</span>
-            <span style="font-size: 12px; color: #41484d">{{it.state}}</span>
-          </span>
-        </button>
-      </sc-for>
-    </div>
-    <div style="font-size: 12px; color: #41484d">Every page starts open. A tab you close stays closed until you reopen it here.</div>
+    <p class="small mute" style="margin: 0">Every page starts open. A tab you close stays closed until you reopen it here or choose Open every tab.</p>
   </section>
 </div>
+<div style="position: absolute; left: 780px; top: 394px; z-index: 5"><dc-import name="ElementTools" target="Destination: Regex workbench" hint-size="640px,470px"></dc-import></div>
+</div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { grp: 0 }; }
   renderVals() {
-    const names = ['All', 'Chats', 'Settings pages', 'Tools', 'Help'];
-    const groups = names.map((label, i) => ({ label, on: this.state.grp === i, pick: () => this.setState({ grp: i }),
-      style: `border: ${this.state.grp === i ? '0' : '1px solid #c1c8cd'}; background: ${this.state.grp === i ? '#cfe6f1' : 'transparent'}; color: ${this.state.grp === i ? '#08485a' : '#41484d'}; border-radius: 8px; padding: 6px 14px; cursor: pointer` }));
-    const I = { chat: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z', gear: 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', tool: 'M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5z', book: 'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5z' };
-    const all = [
-      ['Chats', 'chat', 'Open', 1], ['Contacts', 'chat', 'Open', 1], ['Calls', 'chat', 'Closed', 1], ['Saved messages', 'chat', 'Open', 1],
-      ['Language and voice', 'gear', 'Open', 2], ['Personal wording', 'gear', 'Open', 2], ['Appearance', 'gear', 'Open', 2], ['Animation editor', 'gear', 'Closed', 2],
-      ['Notifications and sounds', 'gear', 'Open', 2], ['Privacy and locks', 'gear', 'Open', 2],
-      ['Message history export', 'tool', 'Open', 3], ['Regex workbench', 'tool', 'Open', 3], ['Media downloads', 'tool', 'Open', 3],
-      ['Guided tours', 'book', 'Open', 4], ['Documentation', 'book', 'Closed', 4]
-    ];
-    const items = all.filter(a => this.state.grp === 0 || a[3] === this.state.grp).map(a => ({ label: a[0], icon: I[a[1]], state: a[2] === 'Open' ? 'Already open, selects its tab' : 'Closed, opens a new tab' }));
+    const names = ['All', 'Messenger', 'Settings pages', 'Tools', 'Records', 'Help'];
+    const groups = names.map((label, i) => ({ label, on: this.state.grp === i, cls: this.state.grp === i ? 'chip on' : 'chip', pick: () => this.setState({ grp: i }) }));
+    const tint = ['', '#bfeedd', '#c9d7ff', '#e8f6a8', '#ffd5c8', '#e3dcff'];
+    const all = [['Chats', 1, 1], ['Contacts', 1, 1], ['Calls', 1, 0], ['Language and voice', 2, 1], ['Appearance', 2, 1], ['Animation editor', 2, 0], ['Notifications and sounds', 2, 1], ['Privacy and locks', 2, 1], ['Accounts and devices', 2, 1], ['File converter', 3, 1], ['Regex workbench', 3, 1], ['Virtual disk manager', 3, 0], ['Ollama suite', 3, 1], ['Server manager', 3, 1], ['Drawing', 3, 1], ['Export', 4, 1], ['Version history', 4, 1], ['Changelog', 4, 0], ['Documentation', 5, 1], ['Guided tours', 5, 1], ['Support tickets', 5, 0]];
+    const items = all.filter(a => this.state.grp === 0 || a[1] === this.state.grp).map(a => ({ label: a[0], ini: a[0].slice(0, 2), av: `width: 40px; height: 40px; font-size: 13px; background: ${tint[a[1]]}`,
+      state: a[2] ? 'Open · selects its tab' : 'Closed · opens a new tab', stateCls: a[2] ? 'small mute' : 'small tag warn' }));
     return { groups, items };
   }
 }

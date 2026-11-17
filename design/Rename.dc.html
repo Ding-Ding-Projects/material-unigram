@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rename the app and customize its logo</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Make it yours" hint-size="1440px,64px"></dc-import>
+<div class="app" style="width: 1440px; height: 900px; padding: 10px; display: flex; gap: 10px">
+  <section class="sheet" style="flex: 1; padding: 34px 40px; display: flex; flex-direction: column; gap: 20px">
+    <h1 class="disp" style="margin: 0; font-size: 38px">Make it yours</h1>
+    <label class="field" style="max-width: 520px"><b>App name</b><input value="Chat Den"><span class="small mute">Shown in the title bar, taskbar and notifications. The original name stays in About.</span></label>
+    <div><b>Logo shape</b>
+      <div class="hbar" style="margin-top: 10px; gap: 12px">
+        <button aria-pressed="true" style="width: 72px; height: 72px; border-radius: 24px; border: 3px solid var(--ink); background: var(--lime); cursor: pointer" aria-label="Rounded square"></button>
+        <button aria-pressed="false" style="width: 72px; height: 72px; border-radius: 36px; border: 1.5px solid var(--line); background: var(--sheet2); cursor: pointer" aria-label="Circle"></button>
+        <button aria-pressed="false" style="width: 72px; height: 72px; border-radius: 36px 36px 36px 8px; border: 1.5px solid var(--line); background: var(--sheet2); cursor: pointer" aria-label="Speech bubble"></button>
+        <button aria-pressed="false" style="width: 72px; height: 72px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--sheet2); cursor: pointer; transform: rotate(45deg) scale(.8)" aria-label="Diamond"></button>
+      </div></div>
+    <div><b>Logo colours</b>
+      <div class="hbar" style="margin-top: 10px; gap: 10px">
+        <span style="width: 44px; height: 44px; border-radius: 14px; background: #d4f36b; border: 3px solid var(--ink)"></span><span style="width: 44px; height: 44px; border-radius: 14px; background: #bfeedd"></span><span style="width: 44px; height: 44px; border-radius: 14px; background: #ffd5c8"></span><span style="width: 44px; height: 44px; border-radius: 14px; background: #c9d7ff"></span><a class="btn sm ghost" href="SetAppearance.dc.html">Any colour</a>
+      </div></div>
+    <div><b>Mark</b>
+      <div class="hbar" style="margin-top: 10px; gap: 8px"><button class="chip on">Bubble</button><button class="chip">Initials</button><button class="chip">Your image</button></div></div>
+    <div class="hbar" style="margin-top: auto"><button class="btn ghost">Reset to original</button><span style="flex: 1"></span><button class="btn">Apply</button></div>
+  </section>
+  <aside class="sheet" aria-label="Preview" style="width: 520px; padding: 34px; display: flex; flex-direction: column; gap: 22px; background: var(--ink); color: #fff">
+    <b class="disp" style="font-size: 22px">Preview</b>
+    <div style="display: flex; align-items: center; gap: 18px">
+      <span class="logo" style="width: 112px; height: 112px; border-radius: 36px; margin: 0" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H10l-6 4z"/></svg></span>
+      <div><b class="disp" style="font-size: 32px">Chat Den</b><div style="color: var(--ink-mute)">based on Material Unigram</div></div>
+    </div>
+    <div style="background: #1c2a37; border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; gap: 12px">
+      <span class="logo" style="width: 36px; height: 36px; border-radius: 12px; margin: 0" aria-hidden="true"></span>
+      <span style="flex: 1"><b style="display: block">Chat Den</b><span class="small" style="color: var(--ink-mute)">Ada: the boards are up</span></span>
+      <span class="small" style="color: var(--ink-mute)">now</span>
+    </div>
+    <div class="hbar" style="background: #e7ecf2; border-radius: 14px; padding: 10px 14px; color: var(--ink)"><span class="logo" style="width: 26px; height: 26px; border-radius: 8px; margin: 0" aria-hidden="true"></span><span class="small">Chat Den</span><span style="flex: 1"></span><span class="small mute">taskbar</span></div>
+  </aside>
+</div>
+<div style="position: absolute; left: 420px; top: 394px; z-index: 5"><dc-import name="ElementTools" target="Logo shape: Circle" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

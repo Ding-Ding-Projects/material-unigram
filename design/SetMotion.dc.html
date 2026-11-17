@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings: animation editor</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 100%; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Settings" hint-size="1440px,64px"></dc-import>
+<div class="app" style="min-height: 1080px; padding: 10px; display: flex; flex-wrap: wrap; gap: 10px">
+  <nav aria-label="Settings groups" class="sheet" style="flex: 1 1 260px; max-width: 300px; padding: 22px 12px; display: flex; flex-direction: column; gap: 2px">
+    <h1 class="disp" style="margin: 0 12px 14px; font-size: 32px">Settings</h1>
+    <a class="row" href="Settings.dc.html" style="text-decoration: none">Language and voice</a>
+    <a class="row" href="SetAppearance.dc.html" style="text-decoration: none">Appearance</a>
+    <a class="row on" href="SetMotion.dc.html" style="text-decoration: none">Motion</a>
+    <a class="row" href="SetNotify.dc.html" style="text-decoration: none">Notifications and sounds</a>
+    <a class="row" href="SetPrivacy.dc.html" style="text-decoration: none">Privacy and locks</a>
+    <a class="row" href="SetChats.dc.html" style="text-decoration: none">Chats, media and focus</a>
+    <a class="row" href="SetAccounts.dc.html" style="text-decoration: none">Accounts and devices</a>
+    <a class="row" href="SetAdvanced.dc.html" style="text-decoration: none">Advanced and about</a>
+  </nav>
+  <main style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+    <section class="sheet" style="padding: 24px 28px; display: flex; flex-direction: column; gap: 14px">
+      <div class="hbar" style="flex-wrap: wrap"><h2 class="disp" style="margin: 0; font-size: 26px; flex: 1">Animation editor</h2><button class="btn sm ghost">Import JSON</button><button class="btn sm ghost">Export JSON</button><button class="btn sm ghost">Reset all</button></div>
+      <div class="hbar sheet2" style="padding: 12px 16px; background: var(--amber-c); color: var(--amber)"><b>Windows asks for reduced motion.</b><span>Animations stay off everywhere while that is on, whatever you set here.</span></div>
+      <div class="hbar" style="flex-wrap: wrap; gap: 8px"><b>Profile</b><button class="chip">Calm</button><button class="chip">Standard</button><button class="chip on">Expressive</button><button class="chip">Playful</button><button class="chip">My profile</button><span style="flex: 1"></span><b>All motion</b><button class="sw on" role="switch" aria-checked="true" aria-label="All motion"></button></div>
+      <label class="field"><span class="hbar"><b style="flex: 1">Global speed</b><span class="tag vio">1.25x</span></span><input type="range" class="range" min="0.25" max="2" step="0.25" value="1.25"></label>
+    </section>
+    <div style="display: grid; grid-template-columns: 320px 1fr; gap: 10px">
+      <section class="sheet" aria-label="Animated elements" style="padding: 14px; display: flex; flex-direction: column; gap: 2px">
+        <sc-for list="{{kinds}}" as="k" hint-placeholder-count="14">
+          <button class="{{k.cls}}" style="padding: 9px 12px"><span style="flex: 1">{{k.label}}</span><span class="{{k.tagCls}}">{{k.state}}</span></button>
+        </sc-for>
+      </section>
+      <section class="sheet" aria-label="List stagger" style="padding: 24px 28px; display: flex; flex-direction: column; gap: 16px">
+        <div class="hbar"><h3 class="disp" style="margin: 0; font-size: 22px; flex: 1">List stagger</h3><button class="btn sm tonal">Play preview</button><button class="sw on" role="switch" aria-checked="true" aria-label="List stagger on"></button></div>
+        <div class="sheet2" style="padding: 16px; display: flex; flex-direction: column; gap: 8px" aria-label="Preview, frozen mid-animation">
+          <div style="height: 40px; border-radius: 12px; background: #fff; opacity: 1"></div>
+          <div style="height: 40px; border-radius: 12px; background: #fff; opacity: .75; transform: translateY(6px)"></div>
+          <div style="height: 40px; border-radius: 12px; background: #fff; opacity: .45; transform: translateY(14px)"></div>
+          <div style="height: 40px; border-radius: 12px; background: #fff; opacity: .15; transform: translateY(24px)"></div>
+        </div>
+        <div class="grid2">
+          <label class="field"><span class="hbar"><b style="flex: 1">Duration</b><span class="mono small">320 ms</span></span><input type="range" class="range" min="0" max="1000" value="320"></label>
+          <label class="field"><span class="hbar"><b style="flex: 1">Stagger</b><span class="mono small">40 ms</span></span><input type="range" class="range" min="0" max="200" value="40"></label>
+          <label class="field"><span class="hbar"><b style="flex: 1">Distance</b><span class="mono small">24 px</span></span><input type="range" class="range" min="0" max="80" value="24"></label>
+          <label class="field"><span class="hbar"><b style="flex: 1">Delay</b><span class="mono small">0 ms</span></span><input type="range" class="range" min="0" max="500" value="0"></label>
+        </div>
+        <div class="field"><span class="hbar"><b style="flex: 1">Easing</b><span class="mono small">cubic-bezier(0.2, 0, 0, 1)</span></span>
+          <div class="hbar" style="align-items: stretch; gap: 16px">
+            <svg width="200" height="160" viewBox="0 0 200 160" role="img" aria-label="Easing curve editor: emphasized curve" style="background: var(--sheet2); border-radius: 14px; flex: 0 0 auto">
+              <path d="M20 140 L180 20" stroke="#d6dee6" stroke-dasharray="4 4"/>
+              <path d="M20 140 C52 140 20 20 180 20" fill="none" stroke="#0e7c66" stroke-width="3"/>
+              <line x1="20" y1="140" x2="52" y2="140" stroke="#5b4fe0"/><circle cx="52" cy="140" r="6" fill="#5b4fe0"/>
+              <line x1="180" y1="20" x2="20" y2="20" stroke="#5b4fe0" opacity=".4"/><circle cx="20" cy="20" r="6" fill="#5b4fe0"/>
+            </svg>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; align-content: flex-start"><button class="chip">Standard</button><button class="chip on">Emphasized</button><button class="chip">Spring</button><button class="chip">Linear</button><button class="chip">Bounce</button></div>
+          </div>
+        </div>
+        <button class="btn sm ghost" style="align-self: flex-start">Reset list stagger</button>
+      </section>
+    </div>
+  </main>
+</div>
+<div style="position: absolute; left: 380px; top: 584px; z-index: 5"><dc-import name="ElementTools" target="Animated element: Cards" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1144}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const names = [['Page entry', 'On'], ['List stagger', 'On'], ['Cards', 'On'], ['Dialogs', 'On'], ['Menus', 'On'], ['Bottom sheets', 'On'], ['Tooltips', 'Off'], ['Toasts', 'On'], ['Switches', 'On'], ['Charts drawing in', 'On'], ['Progress shimmer', 'On'], ['Live value pulse', 'Changed'], ['Tab changes', 'On'], ['Hover lift', 'Off']];
+    const kinds = names.map((n, i) => ({ label: n[0], state: n[1], cls: i === 1 ? 'row on' : 'row', tagCls: n[1] === 'Off' ? 'tag' : n[1] === 'Changed' ? 'tag vio' : 'tag ok' }));
+    return { kinds };
+  }
+}
+</script>
+</body>
+</html>

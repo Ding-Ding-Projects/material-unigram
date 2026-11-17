@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings: appearance</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 100%; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Settings" hint-size="1440px,64px"></dc-import>
+<div class="app" style="min-height: 1080px; padding: 10px; display: flex; flex-wrap: wrap; gap: 10px">
+  <nav aria-label="Settings groups" class="sheet" style="flex: 1 1 260px; max-width: 300px; padding: 22px 12px; display: flex; flex-direction: column; gap: 2px">
+    <h1 class="disp" style="margin: 0 12px 14px; font-size: 32px">Settings</h1>
+    <a class="row" href="Settings.dc.html" style="text-decoration: none">Language and voice</a>
+    <a class="row on" href="SetAppearance.dc.html" style="text-decoration: none">Appearance</a>
+    <a class="row" href="SetMotion.dc.html" style="text-decoration: none">Motion</a>
+    <a class="row" href="SetNotify.dc.html" style="text-decoration: none">Notifications and sounds</a>
+    <a class="row" href="SetPrivacy.dc.html" style="text-decoration: none">Privacy and locks</a>
+    <a class="row" href="SetChats.dc.html" style="text-decoration: none">Chats, media and focus</a>
+    <a class="row" href="SetAccounts.dc.html" style="text-decoration: none">Accounts and devices</a>
+    <a class="row" href="SetAdvanced.dc.html" style="text-decoration: none">Advanced and about</a>
+  </nav>
+  <main style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+    <div class="sheet" style="padding: 14px; display: flex; gap: 8px"><label class="search" style="flex: 1; height: 54px"><span class="sr">Search every setting</span><input placeholder="Search every setting"></label><button class="rx" aria-label="Regex builder for settings search" style="height: 54px; width: 54px">.*</button></div>
+    <section class="sheet" style="padding: 24px 28px; display: flex; flex-direction: column; gap: 16px">
+      <div class="hbar"><h2 class="disp" style="margin: 0; font-size: 26px; flex: 1">Theme</h2><button class="btn sm ghost">Reset appearance</button></div>
+      <div class="grid4">
+        <button style="border: 2.5px solid var(--ink); border-radius: 20px; padding: 0; overflow: hidden; background: #fff; cursor: pointer; font: inherit"><div style="height: 90px; display: flex; gap: 6px; padding: 10px; background: #e7ecf2"><span style="width: 18px; background: #0f1a24; border-radius: 6px"></span><span style="flex: 1; background: #fff; border-radius: 8px"></span></div><b style="display: block; padding: 10px">Ink and Tide</b></button>
+        <button style="border: 1.5px solid var(--line); border-radius: 20px; padding: 0; overflow: hidden; background: #fff; cursor: pointer; font: inherit"><div style="height: 90px; display: flex; gap: 6px; padding: 10px; background: #0f1a24"><span style="width: 18px; background: #d4f36b; border-radius: 6px"></span><span style="flex: 1; background: #1c2a37; border-radius: 8px"></span></div><b style="display: block; padding: 10px">Night</b></button>
+        <button style="border: 1.5px solid var(--line); border-radius: 20px; padding: 0; overflow: hidden; background: #fff; cursor: pointer; font: inherit"><div style="height: 90px; display: flex; gap: 6px; padding: 10px; background: #fff"><span style="width: 18px; background: #000; border-radius: 6px"></span><span style="flex: 1; border: 2px solid #000; border-radius: 8px"></span></div><b style="display: block; padding: 10px">High contrast</b></button>
+        <button style="border: 1.5px solid var(--line); border-radius: 20px; padding: 0; overflow: hidden; background: #fff; cursor: pointer; font: inherit"><div style="height: 90px; display: flex; align-items: center; justify-content: center; background: var(--sheet2)" class="mute">Follows Windows</div><b style="display: block; padding: 10px">Automatic</b></button>
+      </div>
+    </section>
+    <div class="grid2" style="gap: 10px">
+      <section class="sheet" aria-label="Element editor" style="padding: 24px 26px; display: flex; flex-direction: column; gap: 14px">
+        <h2 class="disp" style="margin: 0; font-size: 22px">Edit any element</h2>
+        <p class="small mute" style="margin: 0">Pick something in the preview, then change just that element. Each change can be reset on its own.</p>
+        <div class="wall" style="border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px">
+          <div class="bin" style="font-size: 13px">Sunday 8:00 at the trailhead.</div>
+          <div class="bout" style="align-self: flex-end; font-size: 13px; outline: 3px dashed var(--violet); outline-offset: 3px">Count me in!</div>
+        </div>
+        <div class="tag vio" style="align-self: flex-start">Selected: Outgoing message bubble</div>
+        <div class="grid2">
+          <label class="field small"><b>Fill</b><span class="hbar"><span style="width: 28px; height: 28px; border-radius: 8px; background: #0e7c66"></span><span class="mono">#0E7C66</span></span></label>
+          <label class="field small"><b>Corner radius · 20 px</b><input type="range" class="range" min="0" max="32" value="20"></label>
+          <label class="field small"><b>Text size · 14 px</b><input type="range" class="range" min="11" max="22" value="14"></label>
+          <label class="field small"><b>Tail</b><select><option>Bottom right</option><option>None</option></select></label>
+        </div>
+      </section>
+      <section class="sheet" aria-label="Colour picker" style="padding: 24px 26px; display: flex; flex-direction: column; gap: 14px">
+        <h2 class="disp" style="margin: 0; font-size: 22px">Colour picker</h2>
+        <div style="height: 150px; border-radius: 16px; position: relative; background: linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, #0e7c66)" role="img" aria-label="Saturation and brightness field"><span style="position: absolute; left: 70%; top: 38%; width: 18px; height: 18px; border-radius: 9px; border: 3px solid #fff; box-shadow: 0 0 0 1px #0004"></span></div>
+        <input type="range" min="0" max="360" value="168" aria-label="Hue" style="width: 100%; accent-color: #0e7c66">
+        <div class="grid2 mono small" style="gap: 8px">
+          <label class="field"><span class="mute">HEX</span><input value="#0E7C66"></label>
+          <label class="field"><span class="mute">RGB</span><input value="14 124 102"></label>
+          <label class="field"><span class="mute">HSL</span><input value="168 80% 27%"></label>
+          <label class="field"><span class="mute">OKLCH</span><input value="0.52 0.10 172"></label>
+        </div>
+        <div class="hbar small"><span class="tag ok">Contrast 5.4:1 on white · passes AA</span><span class="mute">Nearest name: Deep jungle green</span></div>
+      </section>
+    </div>
+    <section class="sheet" style="padding: 20px 28px">
+      <div class="set"><div class="t"><b>Text size</b><span class="small mute">Scales every screen. Layouts reflow; nothing is cut off.</span></div><div class="seg"><button>90%</button><button class="on">100%</button><button>125%</button><button>150%</button><button>200%</button></div></div>
+      <div class="set"><div class="t"><b>Density</b><span class="small mute">Comfortable keeps 48 px touch targets.</span></div><div class="seg"><button class="on">Comfortable</button><button>Compact</button></div></div>
+      <div class="set"><div class="t"><b>Chat wallpaper</b><span class="small mute">Dots, plain, or your own image.</span></div><button class="btn sm ghost">Choose</button></div>
+    </section>
+  </main>
+</div>
+<div style="position: absolute; left: 760px; top: 264px; z-index: 5"><dc-import name="ElementTools" target="Theme card: Night" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1144}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

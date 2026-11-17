@@ -1,5 +1,16 @@
 # Handoff
 
+## 2026-11-17: second design pass, every screen and every feature
+
+- Replaced the first, generic-looking design with the "Ink and Tide" look: ink navigation, floating
+  white sheets, emerald, lime, coral and violet accents, Bricolage Grotesque and Figtree type.
+- Drew 48 boards on 12 category pages, plus three shared parts (`TopBar`, `ElementTools`,
+  `SiteBar`) that put search with the regex builder, context menus with shortcuts, the per-element
+  appearance editor, tabs, language and version on every screen. See `design/HANDOFF.md`.
+- Features with nothing to draw for this app are listed with reasons in `design/HANDOFF.md`.
+- Verification: every design file passes the public-language scan. Boards were not rendered or
+  reviewed as frames. No app code has changed.
+
 ## 2026-11-17: repository and first design pass
 
 - Created `Ding-Ding-Projects/material-unigram` as a public fork of `TelegramMessenger/Unigram`

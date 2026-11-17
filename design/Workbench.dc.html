@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Regex workbench</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Regex workbench" hint-size="1440px,64px"></dc-import>
+<div class="app" style="width: 1440px; height: 900px; padding: 10px; display: grid; grid-template-columns: 300px 1fr 360px; grid-template-rows: auto 1fr; gap: 10px">
+  <header class="sheet hbar" style="grid-column: 1 / 4; padding: 14px 20px; flex-wrap: wrap">
+    <h1 class="disp" style="margin: 0; font-size: 26px">Regex workbench</h1>
+    <span class="tag vio">Linked to: chat search</span>
+    <span style="flex: 1"></span>
+    <label class="small mute">Engine <select style="font: inherit; border: 1.5px solid var(--line); border-radius: 10px; padding: 6px 10px; margin-left: 6px"><option>.NET 8 (app search)</option><option>ECMAScript 2024</option><option>PCRE2 10.44</option><option>Python 3.13 re</option></select></label>
+    <div class="seg" role="group" aria-label="Mode"><button class="on">Match</button><button>Replace</button><button>Split</button><button>Debug</button></div>
+  </header>
+
+  <aside class="sheet" aria-label="Token tree and library" style="padding: 18px; display: flex; flex-direction: column; gap: 12px; overflow: hidden">
+    <b>Pattern structure</b>
+    <ol class="mono small" style="margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 6px">
+      <li style="padding: 8px 10px; border-radius: 10px; background: var(--sheet2)"><span style="color: var(--violet)">^</span> start of line</li>
+      <li style="padding: 8px 10px; border-radius: 10px; background: var(--emerald-c)"><span style="color: var(--emerald-d)">(?&lt;id&gt;</span> named group "id"
+        <ol style="list-style: none; padding-left: 14px; margin: 6px 0 0"><li><span style="color: #9a2a12">INV-</span> literal text</li><li><span style="color: var(--violet)">\d{4}</span> exactly 4 digits</li></ol></li>
+      <li style="padding: 8px 10px; border-radius: 10px; background: var(--sheet2)"><span style="color: var(--violet)">\s+</span> whitespace, 1 or more</li>
+      <li style="padding: 8px 10px; border-radius: 10px; background: var(--sheet2)"><span style="color: var(--emerald-d)">(?&lt;amt&gt;</span> named group "amt"</li>
+    </ol>
+    <b style="margin-top: 8px">Library</b>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <button class="row" style="padding: 8px 10px; border: 1.5px solid var(--line)">Invoice numbers <span class="tag ok" style="margin-left: auto">saved</span></button>
+      <button class="row" style="padding: 8px 10px; border: 1.5px solid var(--line)">Phone numbers (HK)</button>
+      <button class="row" style="padding: 8px 10px; border: 1.5px solid var(--line)">URLs in messages</button>
+    </div>
+  </aside>
+
+  <main class="sheet" style="padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0">
+    <label class="field"><b>Pattern</b><div class="mono" style="font-size: 17px; border: 2px solid var(--violet); border-radius: 14px; padding: 14px 16px; background: #fff"><span style="color: var(--violet)">^</span><span style="color: var(--emerald-d)">(?&lt;id&gt;</span><span style="color: #9a2a12">INV-</span><span style="color: var(--violet)">\d{4}</span><span style="color: var(--emerald-d)">)</span><span style="color: var(--violet)">\s+</span><span style="color: var(--emerald-d)">(?&lt;amt&gt;</span><span style="color: var(--violet)">\$[\d,.]+</span><span style="color: var(--emerald-d)">)</span></div></label>
+    <div class="hbar" style="flex-wrap: wrap; gap: 6px"><button class="chip on">i ignore case</button><button class="chip on">m multiline</button><button class="chip">s single line</button><button class="chip">x free spacing</button><button class="chip">n explicit capture</button><span style="flex: 1"></span><span class="tag ok">Valid</span><span class="tag">0.4 ms · limit 50 ms</span></div>
+    <label class="field" style="flex: 1"><b>Test text</b>
+      <div class="mono" style="flex: 1; font-size: 14px; line-height: 2; border: 1.5px solid var(--line); border-radius: 14px; padding: 14px 16px; background: var(--sheet2)">
+        <mark style="background: #e8f6a8; border-radius: 4px">INV-2041  $1,250.00</mark> paid on Monday<br>
+        Reminder: invoice INV-2042 is still open<br>
+        <mark style="background: #e8f6a8; border-radius: 4px">INV-2043 $98.40</mark><br>
+        <mark style="background: #e8f6a8; border-radius: 4px">inv-2044   $12.00</mark> (case-insensitive)
+      </div>
+    </label>
+  </main>
+
+  <aside class="sheet" aria-label="Matches and code" style="padding: 18px; display: flex; flex-direction: column; gap: 12px">
+    <div class="hbar"><b style="flex: 1">3 matches</b><button class="btn sm ghost">Export CSV</button></div>
+    <table class="small" style="border-collapse: collapse; width: 100%">
+      <thead><tr class="mute" style="text-align: left"><th style="padding: 6px 4px">#</th><th>id</th><th>amt</th></tr></thead>
+      <tbody class="mono">
+        <tr style="border-top: 1px solid var(--line)"><td style="padding: 8px 4px">1</td><td>INV-2041</td><td>$1,250.00</td></tr>
+        <tr style="border-top: 1px solid var(--line)"><td style="padding: 8px 4px">2</td><td>INV-2043</td><td>$98.40</td></tr>
+        <tr style="border-top: 1px solid var(--line)"><td style="padding: 8px 4px">3</td><td>inv-2044</td><td>$12.00</td></tr>
+      </tbody>
+    </table>
+    <b style="margin-top: 6px">Why line 2 did not match</b>
+    <p class="small mute" style="margin: 0; line-height: 1.5">"^" needs INV at the start of the line, but line 2 starts with "Reminder". Step 14 of the debugger shows the failure.</p>
+    <b style="margin-top: 6px">Use in code</b>
+    <pre class="mono small" style="margin: 0; background: var(--ink); color: #e7ecf2; border-radius: 14px; padding: 14px; white-space: pre-wrap">new Regex(@"^(?&lt;id&gt;INV-\d{4})\s+(?&lt;amt&gt;\$[\d,.]+)",
+  RegexOptions.IgnoreCase | RegexOptions.Multiline,
+  TimeSpan.FromMilliseconds(50));</pre>
+    <div class="hbar"><button class="btn sm">Use in chat search</button><button class="btn sm tonal">Save to library</button></div>
+  </aside>
+</div>
+<div style="position: absolute; left: 760px; top: 384px; z-index: 5"><dc-import name="ElementTools" target="Match table row" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

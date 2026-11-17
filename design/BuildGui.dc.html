@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Build companion</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1120px; position: relative">
+<div class="app" style="width: 1120px; height: 760px; padding: 10px; display: grid; grid-template-columns: 380px 1fr; gap: 10px">
+  <section class="sheet" style="padding: 24px; display: flex; flex-direction: column; gap: 12px">
+    <div class="hbar"><span class="logo" style="width: 40px; height: 40px; margin: 0" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5z"/></svg></span><b class="disp" style="font-size: 22px; flex: 1">Build Material Unigram</b></div>
+    <span class="small mute">v0.1.0 build companion · source 177c621 · runs build.bat and build-installer.bat</span>
+    <button class="btn" style="height: 52px; justify-content: center">Build</button>
+    <button class="btn tonal" style="height: 52px; justify-content: center">Build and run</button>
+    <button class="btn ghost" style="height: 52px; justify-content: center">Build installer</button>
+    <b style="margin-top: 8px">Needed tools</b>
+    <sc-for list="{{deps}}" as="d" hint-placeholder-count="6">
+      <div class="hbar small"><span style="flex: 1">{{d.name}}</span><span class="{{d.cls}}">{{d.state}}</span></div>
+    </sc-for>
+    <span class="small mute" style="margin-top: auto">Missing tools install through Chocolatey. Windows asks you to approve once.</span>
+  </section>
+  <section class="sheet" style="padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; min-width: 0">
+    <div class="hbar"><b class="disp" style="font-size: 20px; flex: 1">Build log</b><span class="tag vio">Running · 4 of 7 steps · 6 min</span></div>
+    <div style="display: flex; gap: 8px"><label class="search" style="flex: 1; height: 44px"><span class="sr">Search the log</span><input placeholder="Search the log" value="error"></label><button class="rx" style="width: 44px; height: 44px" aria-label="Regex builder for log search">.*</button></div>
+    <div style="height: 8px; border-radius: 4px; background: var(--line)"><div style="width: 57%; height: 8px; border-radius: 4px; background: var(--violet)"></div></div>
+    <pre class="mono small" style="flex: 1; margin: 0; background: var(--ink); color: #c9d4de; border-radius: 16px; padding: 16px; overflow: hidden; line-height: 1.7">[1/7] Checking tools ............ ok
+[2/7] Installing vcpkg ports ..... ok (cached)
+[3/7] Building TDLib .............. ok 4m12s
+[4/7] Building Telegram.Native ... running
+      cl.exe /O2 /MP Telegram.Native\...
+      warning C4996: 'strcpy': consider strcpy_s
+[5/7] Building app ................ waiting
+[6/7] Packaging ................... waiting
+[7/7] Self-check .................. waiting</pre>
+    <div class="hbar"><button class="btn sm ghost">Copy log</button><button class="btn sm ghost">Open output folder</button><span style="flex: 1"></span><button class="btn sm danger">Stop</button></div>
+  </section>
+</div>
+<div style="position: absolute; left: 400px; top: 240px; z-index: 5"><dc-import name="ElementTools" target="Button: Build installer" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1120,"height":760}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const deps = [['Visual Studio 2022 Build Tools', 'Found 17.14', 'tag ok'], ['Windows SDK 10.0.26100', 'Found', 'tag ok'], ['.NET 9 SDK', 'Found', 'tag ok'], ['vcpkg', 'Installed now', 'tag vio'], ['Git', 'Found', 'tag ok'], ['Squirrel tools', 'Downloads at packaging', 'tag']].map(d => ({ name: d[0], state: d[1], cls: d[2] }));
+    return { deps };
+  }
+}
+</script>
+</body>
+</html>

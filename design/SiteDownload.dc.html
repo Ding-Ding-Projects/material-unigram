@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Download</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div class="app" style="position: relative; background: var(--ground)">
+  <dc-import name="SiteBar" active="Download" hint-size="1440px,114px"></dc-import>
+  <div style="max-width: 1100px; margin: 0 auto; padding: 56px 24px; display: flex; flex-direction: column; gap: 24px">
+    <h1 class="disp" style="margin: 0; font-size: 56px">Download</h1>
+    <div class="sheet" style="padding: 32px; display: flex; flex-direction: column; gap: 14px; border: 2px dashed var(--line)">
+      <span class="tag warn" style="align-self: flex-start">No release yet</span>
+      <b class="disp" style="font-size: 28px">The installer button appears here once a verified release exists.</b>
+      <p class="mute" style="margin: 0; line-height: 1.6">The button only ever points at a published release whose file, size and SHA-256 were checked. Until then there is nothing to download, and this page says so instead of linking to a placeholder.</p>
+      <a href="SiteGuide.dc.html" class="btn ghost" style="align-self: flex-start">Build it yourself instead</a>
+    </div>
+    <b class="disp" style="font-size: 24px">When a release is out, it looks like this</b>
+    <div class="sheet" style="padding: 28px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; opacity: .6" aria-label="Example of a future release card">
+      <span class="logo" style="width: 72px; height: 72px; border-radius: 24px; margin: 0" aria-hidden="true"></span>
+      <div style="flex: 1; min-width: 260px"><b class="disp" style="font-size: 26px">Version [X.Y.Z] "[CODE NAME]"</b><div class="mute">Windows 10 and 11, 64-bit · [SIZE] MB · released [DATE]</div><div class="mono small mute">SHA-256 [HASH]</div></div>
+      <span class="btn" style="height: 56px; padding: 0 28px">Download for Windows</span>
+    </div>
+    <div class="grid3">
+      <div class="sheet" style="padding: 20px"><b>Updates itself</b><p class="small mute" style="margin: 6px 0 0">Checks in the background and installs on restart.</p></div>
+      <div class="sheet" style="padding: 20px"><b>No admin rights</b><p class="small mute" style="margin: 6px 0 0">Installs for your account only.</p></div>
+      <div class="sheet" style="padding: 20px"><b>Not code-signed</b><p class="small mute" style="margin: 6px 0 0">Windows shows an unknown-publisher warning. Check the hash first.</p></div>
+    </div>
+  </div>
+  <div style="position: absolute; left: 640px; top: 300px; z-index: 5"><dc-import name="ElementTools" target="Notice: No release yet" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

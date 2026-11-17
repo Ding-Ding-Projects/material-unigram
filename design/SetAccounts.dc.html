@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings: accounts and devices</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 100%; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Settings" hint-size="1440px,64px"></dc-import>
+<div class="app" style="min-height: 1080px; padding: 10px; display: flex; flex-wrap: wrap; gap: 10px">
+  <nav aria-label="Settings groups" class="sheet" style="flex: 1 1 260px; max-width: 300px; padding: 22px 12px; display: flex; flex-direction: column; gap: 2px">
+    <h1 class="disp" style="margin: 0 12px 14px; font-size: 32px">Settings</h1>
+    <a class="row" href="Settings.dc.html" style="text-decoration: none">Language and voice</a>
+    <a class="row" href="SetAppearance.dc.html" style="text-decoration: none">Appearance</a>
+    <a class="row" href="SetMotion.dc.html" style="text-decoration: none">Motion</a>
+    <a class="row" href="SetNotify.dc.html" style="text-decoration: none">Notifications and sounds</a>
+    <a class="row" href="SetPrivacy.dc.html" style="text-decoration: none">Privacy and locks</a>
+    <a class="row" href="SetChats.dc.html" style="text-decoration: none">Chats, media and focus</a>
+    <a class="row on" href="SetAccounts.dc.html" style="text-decoration: none">Accounts and devices</a>
+    <a class="row" href="SetAdvanced.dc.html" style="text-decoration: none">Advanced and about</a>
+  </nav>
+  <main style="flex: 999 1 640px; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-content: start">
+    <section class="sheet" style="padding: 24px 26px; display: flex; flex-direction: column; gap: 8px">
+      <div class="hbar"><h2 class="disp" style="margin: 0; font-size: 24px; flex: 1">Accounts</h2><button class="btn sm tonal">Add account</button></div>
+      <div class="row on"><span class="av" style="width: 44px; height: 44px; background: #c9d7ff">P</span><span style="flex: 1"><b style="display: block">Personal</b><span class="small mute">Tab 1 · this device</span></span><span class="tag ok">Active</span></div>
+      <div class="row"><span class="av" style="width: 44px; height: 44px; background: #e8f6a8">W</span><span style="flex: 1"><b style="display: block">Work</b><span class="small mute">Tab 2</span></span></div>
+      <span class="small mute">Each account opens in its own workspace tab.</span>
+    </section>
+    <section class="sheet" style="padding: 24px 26px; display: flex; flex-direction: column; gap: 8px">
+      <div class="hbar"><h2 class="disp" style="margin: 0; font-size: 24px; flex: 1">Devices</h2><button class="btn sm danger">End other sessions</button></div>
+      <div class="set"><div class="t"><b>This computer</b><span class="small mute">Material Unigram 0.1.0 · Windows 11 · Hong Kong · now</span></div><span class="tag ok">This device</span></div>
+      <div class="set"><div class="t"><b>Phone</b><span class="small mute">Official app · Android · 2 hours ago</span></div><button class="btn sm ghost">End</button></div>
+      <div class="set"><div class="t"><b>Web browser</b><span class="small mute">Web · 6 days ago</span></div><button class="btn sm ghost">End</button></div>
+    </section>
+    <section class="sheet" style="padding: 24px 26px; display: flex; flex-direction: column; gap: 8px">
+      <div class="hbar"><h2 class="disp" style="margin: 0; font-size: 24px; flex: 1">Extensions</h2><button class="btn sm tonal">Add from file</button></div>
+      <div class="set"><div class="t"><b>Message translator</b><span class="small mute">Reads: messages you select · Network: one translation service</span></div><button class="sw on" role="switch" aria-checked="true" aria-label="Message translator extension"></button></div>
+      <div class="set"><div class="t"><b>Reminder bot helper</b><span class="small mute">Reads: nothing · Adds: a menu item</span></div><button class="sw" role="switch" aria-checked="false" aria-label="Reminder helper extension"></button></div>
+      <span class="small mute">Extensions run sandboxed and list every permission before you turn them on.</span>
+    </section>
+    <section class="sheet" style="padding: 24px 26px; display: flex; flex-direction: column; gap: 10px">
+      <div class="hbar"><h2 class="disp" style="margin: 0; font-size: 24px; flex: 1">Status Hub</h2><span class="tag">Not connected</span></div>
+      <p class="small mute" style="margin: 0; line-height: 1.5">Report this app's health and updates to your own Status Hub on your network. Nothing is sent until you connect.</p>
+      <label class="field"><b>Hub address</b><input placeholder="http://[HUB ADDRESS]:8080/"></label>
+      <button class="btn sm" style="align-self: flex-start">Connect and test</button>
+    </section>
+  </main>
+</div>
+<div style="position: absolute; left: 760px; top: 264px; z-index: 5"><dc-import name="ElementTools" target="Device: Phone" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1144}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

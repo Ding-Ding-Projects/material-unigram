@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Features</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div class="app" style="position: relative; background: var(--ground)">
+  <dc-import name="SiteBar" active="Features" hint-size="1440px,114px"></dc-import>
+  <div style="max-width: 1240px; margin: 0 auto; padding: 48px 24px; display: flex; flex-direction: column; gap: 20px">
+    <h1 class="disp" style="margin: 0; font-size: 56px">Every feature, with its real state</h1>
+    <p class="mute" style="margin: 0; font-size: 18px">Designed means drawn. Built means it works in the released app and has screenshots to prove it.</p>
+    <div style="display: flex; gap: 8px"><label class="search" style="flex: 1; background: #fff"><span class="sr">Search features</span><input placeholder="Search 98 app features"></label><button class="rx" aria-label="Regex builder for feature search">.*</button></div>
+    <div class="hbar" style="gap: 6px; flex-wrap: wrap"><button class="chip on">All 98</button><button class="chip">Designed 98</button><button class="chip">Built 0</button><button class="chip">Language</button><button class="chip">Search</button><button class="chip">Safety</button><button class="chip">Tools</button></div>
+    <div class="grid3">
+      <sc-for list="{{feats}}" as="f" hint-placeholder-count="9">
+        <article class="sheet" style="padding: 20px; display: flex; flex-direction: column; gap: 8px">
+          <div class="hbar"><b class="disp" style="font-size: 20px; flex: 1">{{f.name}}</b><span class="tag vio">Designed</span></div>
+          <span class="mute small" style="line-height: 1.5">{{f.body}}</span>
+          <a href="SiteGuide.dc.html" class="small" style="margin-top: auto">Read the article</a>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+  <div style="position: absolute; left: 640px; top: 620px; z-index: 5"><dc-import name="ElementTools" target="Feature card: Regex builder" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const feats = [['Three language modes', 'English, Cantonese or both, everywhere.'], ['Regex builder', 'Beside every search bar, with its own pattern.'], ['Command palette', 'Ctrl Shift F finds commands, settings and chats.'], ['Context menus', 'Right-click anything for actions with shortcuts.'], ['Edit any element', 'Restyle one element or all like it.'], ['Animation editor', 'Tune every motion; reduced motion always wins.'], ['Tabs per account', 'Reopen anything from the New tab catalogue.'], ['Two-key confirmation', 'Destructive actions need two separate steps.'], ['Export everything', 'HTML, JSON, PDF, CSV and more, resumable.']].map(f => ({ name: f[0], body: f[1] }));
+    return { feats };
+  }
+}
+</script>
+</body>
+</html>

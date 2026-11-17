@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>External editor and publishing</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Design team" hint-size="1440px,64px"></dc-import>
+<div class="app wall" style="width: 1440px; height: 900px; padding: 10px; display: flex; gap: 10px">
+  <section class="sheet" style="flex: 1; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px">
+    <div class="hbar"><b class="disp" style="font-size: 22px; flex: 1">Design team · code snippet</b></div>
+    <div class="bin" style="max-width: 100%; background: var(--sheet2); position: relative">
+      <pre class="mono small" style="margin: 0; white-space: pre-wrap">function nextMeetup(date) {
+  return date.addDays(7).at("08:00");
+}</pre>
+      <span class="ts">Ada · 10:52 · JavaScript</span>
+    </div>
+    <div role="menu" aria-label="Snippet actions" class="sheet" style="width: 340px; padding: 8px; box-shadow: 0 16px 40px rgba(15,26,36,.2); border: 1.5px solid var(--line)">
+      <button role="menuitem" class="row"><span style="flex: 1">Copy</span><span class="kbd">Ctrl C</span></button>
+      <button role="menuitem" class="row on"><span style="flex: 1">Open in VS Code</span><span class="kbd">Ctrl Shift E</span></button>
+      <button role="menuitem" class="row"><span style="flex: 1">Open in default editor</span></button>
+      <button role="menuitem" class="row"><span style="flex: 1">Publish as a gist</span></button>
+      <button role="menuitem" class="row"><span style="flex: 1">Save as file</span><span class="kbd">Ctrl S</span></button>
+    </div>
+  </section>
+  <section class="sheet" style="width: 520px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+    <h2 class="disp" style="margin: 0; font-size: 26px">Open in VS Code</h2>
+    <div class="sheet2" style="padding: 14px 16px; display: flex; flex-direction: column; gap: 6px">
+      <div class="hbar"><span class="tag ok">Editing</span><b class="mono small" style="flex: 1">next-meetup.js</b></div>
+      <span class="small mute">Saved changes come back here as a new message draft. Nothing is sent until you press Send.</span>
+    </div>
+    <hr style="border: 0; border-top: 1.5px solid var(--line); width: 100%">
+    <h2 class="disp" style="margin: 0; font-size: 26px">Publish as a gist</h2>
+    <label class="field"><b>Account</b><select><option>Signed in with GitHub CLI</option></select></label>
+    <label class="field"><b>Description</b><input value="Next meetup helper"></label>
+    <div class="field"><b>Visibility</b><div class="seg"><button class="on">Secret</button><button>Public</button></div></div>
+    <div class="sheet2" style="padding: 12px 14px; background: var(--amber-c); color: var(--amber)">Public gists can be found by anyone. Check the code has no passwords or keys.</div>
+    <div class="hbar" style="margin-top: auto"><span style="flex: 1"></span><button class="btn ghost">Cancel</button><button class="btn">Publish</button></div>
+  </section>
+</div>
+<div style="position: absolute; left: 760px; top: 364px; z-index: 5"><dc-import name="ElementTools" target="Code snippet message" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

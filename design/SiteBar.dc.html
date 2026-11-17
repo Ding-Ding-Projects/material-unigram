@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Documentation site bar</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<header class="app" style="width: 1440px; background: var(--ink); color: #fff; font-family: 'Figtree', system-ui, sans-serif; padding: 12px 24px; display: flex; flex-direction: column; gap: 10px">
+  <div class="hbar" style="gap: 12px">
+    <span class="logo" style="width: 36px; height: 36px; border-radius: 12px; margin: 0" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M4 5h16v11H10l-6 4z"/></svg></span>
+    <b class="disp" style="font-size: 20px">Material Unigram</b>
+    <span class="small" style="color: var(--ink-mute)">docs for v0.1.0 · updated 17 Nov 2026 12:40</span>
+    <span style="flex: 1"></span>
+    <label class="hbar" style="background: rgba(255,255,255,.1); border-radius: 12px; height: 40px; padding: 0 12px; width: 300px"><span class="sr">Search the docs</span><input placeholder="Search guides, features, wiki" style="border: 0; background: transparent; color: #fff; font: inherit; outline: none; flex: 1; min-width: 0"><span class="kbd" style="background: transparent; color: var(--ink-mute); border-color: rgba(255,255,255,.25)">Ctrl Shift F</span></label>
+    <span class="rx" role="button" aria-label="Regex builder for docs search" style="width: 40px; height: 40px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: var(--violet); color: #fff">.*</span>
+    <span class="seg" role="radiogroup" aria-label="Language" style="border-color: rgba(255,255,255,.25)"><button style="color: var(--ink-mute); height: 34px; padding: 0 10px">EN</button><button style="color: var(--ink-mute); height: 34px; padding: 0 10px">粵</button><button class="on" style="background: #fff; color: var(--ink); height: 34px; padding: 0 10px">Both</button></span>
+    <span class="chip" role="button" style="color: #fff; border-color: rgba(255,255,255,.25)">Playfulness 5 · 5</span>
+    <span class="chip" role="button" style="color: #fff; border-color: rgba(255,255,255,.25)">Load wording file</span>
+    <span class="chip" role="switch" aria-checked="false" style="color: #fff; border-color: rgba(255,255,255,.25)">Edit look</span>
+  </div>
+  <nav aria-label="Site tabs" class="hbar" style="gap: 4px">
+    <sc-for list="{{tabs}}" as="t" hint-placeholder-count="6"><span class="chip" style="{{t.style}}">{{t.label}}</span></sc-for>
+    <span class="chip" style="color: #fff; border-color: rgba(255,255,255,.25); width: 34px; padding: 0; justify-content: center" aria-label="New tab">+</span>
+  </nav>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"active":{"editor":"text","default":"Home"},"$preview":{"width":1440,"height":114}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const a = this.props.active ?? 'Home';
+    const tabs = ['Home', 'Get started', 'Guides', 'Features', 'Wiki', 'Download'].map(label => ({ label, style: label === a ? 'background: #fff; color: #0f1a24; border-color: #fff' : 'color: #93a6b7; border-color: transparent' }));
+    return { tabs };
+  }
+}
+</script>
+</body>
+</html>

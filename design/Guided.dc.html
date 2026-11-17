@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Create a group</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="New group" hint-size="1440px,64px"></dc-import>
+<div class="app" style="width: 1440px; height: 900px; padding: 10px; display: flex; gap: 10px">
+  <section class="sheet" style="flex: 1; padding: 32px 40px; display: flex; flex-direction: column; gap: 20px">
+    <div class="hbar"><h1 class="disp" style="margin: 0; font-size: 36px; flex: 1">Create a group</h1><span class="tag">Step 2 of 3 · Details</span></div>
+    <div>
+      <b>Start from a preset</b> <span class="small mute">or keep the blank form</span>
+      <div class="grid4" style="margin-top: 10px">
+        <button class="sheet2" style="border: 2px solid var(--ink); padding: 16px; text-align: left; font: inherit; cursor: pointer; background: #e8f6a8"><b style="display: block">Friends</b><span class="small mute">Everyone can add members</span></button>
+        <button class="sheet2" style="border: 1.5px solid var(--line); padding: 16px; text-align: left; font: inherit; cursor: pointer"><b style="display: block">Team</b><span class="small mute">Admins approve joins</span></button>
+        <button class="sheet2" style="border: 1.5px solid var(--line); padding: 16px; text-align: left; font: inherit; cursor: pointer"><b style="display: block">Event</b><span class="small mute">Ends on a date you pick</span></button>
+        <button class="sheet2" style="border: 1.5px solid var(--line); padding: 16px; text-align: left; font: inherit; cursor: pointer"><b style="display: block">Announcements</b><span class="small mute">Only admins post</span></button>
+      </div>
+    </div>
+    <div class="grid2">
+      <label class="field"><span class="hbar"><b style="flex: 1">Group name</b><button class="info" aria-label="About the group name">i</button></span><input value="Weekend hikers"><span class="small mute">Shown to every member. 14 of 128 characters.</span></label>
+      <label class="field"><span class="hbar"><b style="flex: 1">Who can add members</b><button class="info" aria-label="About adding members">i</button></span><select><option>Everyone in the group</option><option>Admins only</option></select><span class="small mute">Admins only stops strangers being added by members.</span></label>
+      <div class="field"><span class="hbar"><b style="flex: 1">Group colour</b><button class="info" aria-label="About the group colour">i</button></span>
+        <div class="hbar"><span style="width: 44px; height: 44px; border-radius: 14px; background: #0e7c66; border: 3px solid var(--ink)"></span><span style="width: 44px; height: 44px; border-radius: 14px; background: #5b4fe0"></span><span style="width: 44px; height: 44px; border-radius: 14px; background: #e2482a"></span><span style="width: 44px; height: 44px; border-radius: 14px; background: #d4f36b"></span><a href="SetAppearance.dc.html" class="btn sm ghost">Any colour</a></div></div>
+      <div class="field"><span class="hbar"><b style="flex: 1">Slow mode</b><button class="info" aria-label="About slow mode">i</button></span>
+        <div class="hbar"><button class="icon-btn" aria-label="Less" style="background: var(--sheet2)">&#8722;</button><b class="disp" style="font-size: 24px; min-width: 90px; text-align: center">30 s</b><button class="icon-btn" aria-label="More" style="background: var(--sheet2)">+</button><span class="small mute">between messages per member</span></div></div>
+      <label class="field"><span class="hbar"><b style="flex: 1">Ends on</b><button class="info" aria-label="About the end date">i</button></span><input type="datetime-local" value="2026-12-20T18:00"><span class="small mute">Sunday 20 December 2026, 18:00 Hong Kong time</span></label>
+      <div class="field"><b>Members</b>
+        <div class="sheet2" style="padding: 18px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; border: 1.5px dashed var(--line)"><b>No members yet</b><span class="small mute">A group needs at least one other person. Add people now or share an invite link after you create it.</span><button class="btn sm tonal">Add people</button></div>
+      </div>
+    </div>
+    <div class="hbar" style="margin-top: auto"><button class="btn ghost">Back</button><span style="flex: 1"></span><button class="btn">Continue to review</button></div>
+  </section>
+  <aside class="sheet" aria-label="Help for the selected field" style="width: 380px; padding: 28px; display: flex; flex-direction: column; gap: 14px; background: var(--ink); color: #fff">
+    <span class="tag" style="background: var(--lime); color: var(--ink); align-self: flex-start">About this setting</span>
+    <h2 class="disp" style="margin: 0; font-size: 28px">Who can add members</h2>
+    <p style="margin: 0; line-height: 1.6; color: #c9d4de"><b style="color: #fff">What it does:</b> decides whether ordinary members can bring new people into the group.</p>
+    <p style="margin: 0; line-height: 1.6; color: #c9d4de"><b style="color: #fff">When to change it:</b> pick Admins only for larger groups, or if spam accounts have been added before.</p>
+    <p style="margin: 0; line-height: 1.6; color: #c9d4de"><b style="color: #fff">You can undo it:</b> change it any time in the group's settings. Nobody already in the group is removed.</p>
+    <a href="HelpArticle.dc.html" style="color: var(--lime); margin-top: auto">Read the full article</a>
+  </aside>
+</div>
+<div style="position: absolute; left: 560px; top: 364px; z-index: 5"><dc-import name="ElementTools" target="Field: Group name" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

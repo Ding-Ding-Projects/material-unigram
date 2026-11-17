@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Drawing and annotation</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Drawing" hint-size="1440px,64px"></dc-import>
+<div class="app" style="width: 1440px; height: 900px; padding: 10px; display: flex; gap: 10px">
+  <nav class="sheet" aria-label="Drawing tools" style="width: 84px; padding: 14px 0; display: flex; flex-direction: column; align-items: center; gap: 8px">
+    <button class="icon-btn" aria-label="Select" style="width: 52px; height: 52px; border-radius: 16px">&#8598;</button>
+    <button class="icon-btn" aria-label="Pen" style="width: 52px; height: 52px; border-radius: 16px; background: var(--ink); color: var(--lime)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+    <button class="icon-btn" aria-label="Highlighter" style="width: 52px; height: 52px; border-radius: 16px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 11-6 6v3h3l6-6M22 2l-9 9"/></svg></button>
+    <button class="icon-btn" aria-label="Arrow" style="width: 52px; height: 52px; border-radius: 16px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 19 19 5M9 5h10v10"/></svg></button>
+    <button class="icon-btn" aria-label="Rectangle" style="width: 52px; height: 52px; border-radius: 16px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="2"/></svg></button>
+    <button class="icon-btn" aria-label="Text" style="width: 52px; height: 52px; border-radius: 16px; font-weight: 700; font-size: 18px">T</button>
+    <button class="icon-btn" aria-label="Blur to hide" style="width: 52px; height: 52px; border-radius: 16px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8" cy="8" r="2"/><circle cx="16" cy="8" r="2"/><circle cx="8" cy="16" r="2"/><circle cx="16" cy="16" r="2"/></svg></button>
+    <span style="flex: 1"></span>
+    <span style="width: 32px; height: 32px; border-radius: 10px; background: var(--coral); border: 3px solid var(--ink)"></span>
+  </nav>
+  <main class="sheet" style="flex: 1; display: flex; flex-direction: column; overflow: hidden">
+    <div class="hbar" style="padding: 14px 20px"><b class="disp" style="font-size: 20px; flex: 1">Annotate: trail-map.png</b><button class="btn sm ghost">Undo</button><button class="btn sm ghost">Redo</button><button class="btn sm tonal">Save copy</button><button class="btn sm">Send to Hiking club</button></div>
+    <div class="wall" style="flex: 1; margin: 0 14px 14px; border-radius: 18px; position: relative; display: flex; align-items: center; justify-content: center">
+      <div role="img" aria-label="Map image with a red circle around the trailhead, an arrow and the note 'meet here 8:00'" style="width: 820px; height: 560px; background: #e9f2d8; border-radius: 12px; position: relative; box-shadow: 0 8px 24px rgba(15,26,36,.15)">
+        <svg width="820" height="560" viewBox="0 0 820 560" aria-hidden="true" style="position: absolute; inset: 0">
+          <path d="M60 480 C200 380 260 420 380 300 S600 160 760 90" stroke="#b9a37a" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <path d="M120 120 C220 160 300 120 420 160" stroke="#9cc1d9" stroke-width="18" fill="none" stroke-linecap="round" opacity=".7"/>
+          <ellipse cx="380" cy="300" rx="62" ry="46" fill="none" stroke="#e2482a" stroke-width="5"/>
+          <path d="M560 420 L430 330" stroke="#e2482a" stroke-width="5" stroke-linecap="round"/><path d="M430 330 L452 332 M430 330 L440 350" stroke="#e2482a" stroke-width="5" stroke-linecap="round"/>
+          <rect x="600" y="80" width="140" height="40" rx="8" fill="#0f1a24" opacity=".85"/>
+        </svg>
+        <span style="position: absolute; left: 560px; top: 424px; background: #fff; border: 2px solid #e2482a; border-radius: 12px; padding: 8px 12px; font-weight: 700; color: #b8321a">meet here 8:00</span>
+      </div>
+    </div>
+  </main>
+  <aside class="sheet" style="width: 280px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
+    <b class="disp" style="font-size: 20px">Pen</b>
+    <label class="field small"><b>Width · 5 px</b><input type="range" class="range" min="1" max="24" value="5"></label>
+    <label class="field small"><b>Opacity · 100%</b><input type="range" class="range" min="10" max="100" value="100"></label>
+    <div class="hbar" style="flex-wrap: wrap; gap: 8px"><span style="width: 32px; height: 32px; border-radius: 10px; background: #e2482a; border: 3px solid var(--ink)"></span><span style="width: 32px; height: 32px; border-radius: 10px; background: #0e7c66"></span><span style="width: 32px; height: 32px; border-radius: 10px; background: #5b4fe0"></span><span style="width: 32px; height: 32px; border-radius: 10px; background: #0f1a24"></span><span style="width: 32px; height: 32px; border-radius: 10px; background: #fff; border: 1.5px solid var(--line)"></span></div>
+    <span class="small mute" style="margin-top: auto">The blurred box hides a phone number before sending.</span>
+  </aside>
+</div>
+<div style="position: absolute; left: 600px; top: 364px; z-index: 5"><dc-import name="ElementTools" target="Arrow annotation" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

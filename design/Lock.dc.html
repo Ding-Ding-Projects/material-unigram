@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>App locked</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<div class="app" style="width: 1440px; height: 900px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; gap: 80px; padding: 40px">
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 18px; width: 420px">
+    <span class="logo" style="width: 88px; height: 88px; border-radius: 30px; margin: 0" aria-hidden="true"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+    <h1 class="disp" style="margin: 0; font-size: 40px">Locked</h1>
+    <p style="margin: 0; color: var(--ink-mute); text-align: center">Your chats are hidden until you unlock. Notifications show no previews.</p>
+    <button class="btn" style="background: var(--lime); color: var(--ink); height: 56px; width: 100%; justify-content: center; font-size: 16px">Unlock with Windows Hello</button>
+    <button class="btn" style="background: rgba(255,255,255,.1); width: 100%; justify-content: center">Use passkey instead</button>
+    <a href="Support.dc.html" class="small" style="color: var(--ink-mute)">Can't unlock? Open the recovery desk</a>
+  </div>
+  <section aria-label="Unlock ladder" style="width: 520px; background: var(--ink2); border-radius: 28px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+    <div class="hbar"><h2 class="disp" style="margin: 0; font-size: 24px; flex: 1">Unlock ladder</h2><span class="tag" style="background: rgba(255,255,255,.1); color: #fff">Step 2 of 4</span></div>
+    <p class="small" style="margin: 0; color: var(--ink-mute); line-height: 1.5">Locked extras open one rung at a time. Each rung says what it unlocks before you start.</p>
+    <sc-for list="{{rungs}}" as="r" hint-placeholder-count="4">
+      <div style="{{r.box}}"><span style="{{r.dot}}">{{r.mark}}</span><span style="flex: 1"><b style="display: block">{{r.title}}</b><span class="small" style="color: var(--ink-mute)">{{r.body}}</span></span></div>
+    </sc-for>
+    <div style="background: #fff; color: var(--ink); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+      <b>Solve to continue: 18 + 27 = ?</b>
+      <div class="hbar"><label style="flex: 1"><span class="sr">Answer</span><input value="45" class="mono" style="width: 100%; font: inherit; font-size: 18px; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 12px"></label><button class="btn">Check</button></div>
+    </div>
+  </section>
+</div>
+<div style="position: absolute; left: 40px; top: 380px; z-index: 5"><dc-import name="ElementTools" target="Unlock button" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const data = [['Unlock the app', 'Windows Hello or passkey', 'done'], ['Quick sums', 'Unlocks the playful wording levels', 'on'], ['Hold to confirm', 'Unlocks personal wording', 'next'], ['Owner passkey', 'Unlocks everything, including School mode off', 'next']];
+    const rungs = data.map((d, i) => ({ title: d[0], body: d[1], mark: d[2] === 'done' ? '✓' : String(i + 1),
+      box: `display: flex; gap: 14px; align-items: center; padding: 12px 14px; border-radius: 16px; background: ${d[2] === 'on' ? 'rgba(212,243,107,.14)' : 'transparent'}; opacity: ${d[2] === 'next' ? .6 : 1}`,
+      dot: `width: 34px; height: 34px; border-radius: 12px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; background: ${d[2] === 'next' ? 'rgba(255,255,255,.12)' : '#d4f36b'}; color: ${d[2] === 'next' ? '#93a6b7' : '#0f1a24'}` }));
+    return { rungs };
+  }
+}
+</script>
+</body>
+</html>

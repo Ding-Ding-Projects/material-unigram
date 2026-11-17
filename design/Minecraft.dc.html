@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Minecraft server manager</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Servers" hint-size="1440px,64px"></dc-import>
+<div class="app" style="width: 1440px; height: 900px; padding: 10px; display: grid; grid-template-columns: 300px 1fr 420px; gap: 10px">
+  <nav class="sheet" aria-label="Servers" style="padding: 20px 12px; display: flex; flex-direction: column; gap: 4px">
+    <div class="hbar" style="padding: 0 6px 10px"><h1 class="disp" style="margin: 0; font-size: 26px; flex: 1">Servers</h1><button class="btn sm">New</button></div>
+    <div class="row on"><span style="width: 10px; height: 10px; border-radius: 5px; background: #0e7c66"></span><span style="flex: 1"><b style="display: block">Hiking club SMP</b><span class="small mute">Paper 1.21.10 · Docker on this PC</span></span></div>
+    <div class="row"><span style="width: 10px; height: 10px; border-radius: 5px; background: #93a6b7"></span><span style="flex: 1"><b style="display: block">Creative test</b><span class="small mute">Fabric 1.20.1 · local process</span></span></div>
+    <div class="row"><span style="width: 10px; height: 10px; border-radius: 5px; background: #0e7c66"></span><span style="flex: 1"><b style="display: block">Bedrock friends</b><span class="small mute">Bedrock 1.21.111 · SSH Docker</span></span></div>
+  </nav>
+  <main class="sheet" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 12px; min-width: 0">
+    <div class="hbar" style="flex-wrap: wrap"><h2 class="disp" style="margin: 0; font-size: 28px; flex: 1">Hiking club SMP</h2><span class="tag ok">Online · 4 of 20 players</span><button class="btn sm ghost">Restart</button><button class="btn sm danger">Stop</button></div>
+    <div class="hbar" style="gap: 6px; flex-wrap: wrap"><button class="chip on">Console</button><button class="chip">Players</button><button class="chip">Plugins 12</button><button class="chip">Properties</button><button class="chip">Backups</button><button class="chip">World generator</button></div>
+    <div class="grid4" style="gap: 8px">
+      <div class="sheet2" style="padding: 12px"><div class="small mute">TPS</div><b class="disp" style="font-size: 22px">19.9</b></div>
+      <div class="sheet2" style="padding: 12px"><div class="small mute">Memory</div><b class="disp" style="font-size: 22px">3.2 / 6 GB</b></div>
+      <div class="sheet2" style="padding: 12px"><div class="small mute">Uptime</div><b class="disp" style="font-size: 22px">2 d 4 h</b></div>
+      <div class="sheet2" style="padding: 12px"><div class="small mute">Address</div><b class="mono small">[LAN ADDRESS]:25565</b></div>
+    </div>
+    <pre class="mono small" style="flex: 1; margin: 0; background: var(--ink); color: #c9d4de; border-radius: 16px; padding: 16px; overflow: hidden; line-height: 1.7">[12:40:02 INFO] Ada joined the game
+[12:40:15 INFO] Done preparing level "world" (0.4s)
+[12:41:30 INFO] &lt;Ada&gt; meet at the trailhead
+[12:42:01 WARN] Can't keep up! Running 2048ms behind
+[12:42:05 INFO] Saved the game</pre>
+    <div class="hbar"><label class="search" style="flex: 1"><span class="sr">Console command</span><input class="mono" placeholder="say Server restarts at 13:00"></label><button class="btn">Send</button></div>
+  </main>
+  <aside class="sheet" aria-label="World generator" style="padding: 22px; display: flex; flex-direction: column; gap: 12px">
+    <h2 class="disp" style="margin: 0; font-size: 24px">Generate a world</h2>
+    <div class="field"><b>Edition and version</b><div class="hbar"><div class="seg"><button class="on">Java</button><button>Bedrock</button></div><select style="flex: 1; font: inherit; border: 1.5px solid var(--line); border-radius: 12px; padding: 8px 10px"><option>1.21.10 (latest)</option><option>Every version back to 1.0</option></select></div></div>
+    <label class="field"><b>Seed</b><input class="mono" value="trailhead-2026"></label>
+    <div class="field"><b>Area</b><div class="grid2" style="gap: 8px"><input value="-512, -512"><input value="512, 512"></div><span class="small mute">1,024 by 1,024 blocks · about 4,096 chunks</span></div>
+    <div role="img" aria-label="Area preview map" style="height: 150px; border-radius: 14px; background: repeating-linear-gradient(45deg, #bfeedd 0 12px, #d3f1e7 12px 24px); position: relative"><span style="position: absolute; inset: 30px 60px; border: 2.5px solid var(--ink); border-radius: 6px"></span></div>
+    <div class="field"><b>Save as</b><div class="seg"><button class="on">Folder</button><button>ZIP</button></div></div>
+    <button class="btn" style="margin-top: auto">Generate · uses the 1.21.10 server jar</button>
+  </aside>
+</div>
+<div style="position: absolute; left: 240px; top: 304px; z-index: 5"><dc-import name="ElementTools" target="Server: Hiking club SMP" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

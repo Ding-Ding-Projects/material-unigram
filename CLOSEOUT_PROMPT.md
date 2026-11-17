@@ -9,8 +9,9 @@ required feature listed in ROADMAP.md.
 
 Done:
 - Fork created, upstream remote set, repository description set.
-- Six design boards in design/ (chat workspace, setup wizard, settings with regex builder,
-  New tab catalogue, mobile chat list, documentation site home). Design only, not implemented.
+- Second design pass in design/: 48 boards on 12 category pages plus shared TopBar,
+  ElementTools and SiteBar parts covering every screen and every applicable required feature.
+  Design only, not implemented. design/HANDOFF.md lists boards, tokens and what was not drawn.
 - AGENTS.md, ROADMAP.md, HANDOFF.md, design/HANDOFF.md, README fork notice, .gitignore
   exceptions for these Markdown records (upstream ignores *.md).
 

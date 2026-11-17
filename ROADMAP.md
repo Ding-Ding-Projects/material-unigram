@@ -17,8 +17,9 @@ real built app. Anything written but unverified stays unticked with its state be
 ## Phase 1: design
 
 - [x] First design pass: chat workspace, setup wizard, settings, New tab catalogue, mobile chat list, documentation site home (`design/`)
-- [ ] Rendered review of every board with fixes applied
-- [ ] Boards for the animation editor, message history export, notifications, calls and installer
+- [x] Second design pass, "Ink and Tide": 48 boards across 12 category pages covering every app, mobile and documentation-site screen and every applicable required feature (`design/HANDOFF.md`)
+- [x] Shared top bar, context menu with shortcuts and per-element appearance editor placed on every screen
+- [ ] Rendered review of every board with fixes applied (not done: the canvas needs a signed-in browser)
 
 ## Phase 2: required app features
 

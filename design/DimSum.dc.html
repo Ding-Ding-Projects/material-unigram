@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dim sum surprise</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Noto+Sans+HK:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Dim sum" hint-size="1440px,64px"></dc-import>
+<div class="app wall" style="width: 1440px; height: 900px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; gap: 40px">
+  <section class="sheet" role="dialog" aria-label="Dim sum surprise" style="width: 520px; overflow: hidden; box-shadow: 0 24px 60px rgba(15,26,36,.25)">
+    <div role="img" aria-label="Photo placeholder: a basket of har gow" style="height: 320px; background: #ffe7a8; display: flex; align-items: center; justify-content: center" class="mono">[PUBLIC PHOTO: HAR GOW]</div>
+    <div style="padding: 24px 26px; display: flex; flex-direction: column; gap: 10px">
+      <span class="tag hot" style="align-self: flex-start">Surprise · 1 in 50 app starts</span>
+      <h1 class="disp" style="margin: 0; font-size: 36px">Har gow <span style="font-family: 'Noto Sans HK'">蝦餃</span></h1>
+      <p class="mute" style="margin: 0; line-height: 1.5">Prawn dumplings in a see-through wrapper. A good basket has at least seven pleats.</p>
+      <span class="small mute">Photo: [PHOTOGRAPHER], [LICENCE], via a public photo library. <a href="#">Source</a></span>
+      <div class="hbar" style="margin-top: 6px"><button class="btn">Nice</button><button class="btn ghost">Show less often</button><button class="btn ghost">Turn off</button></div>
+    </div>
+  </section>
+  <aside class="sheet" style="width: 420px; padding: 26px; display: flex; flex-direction: column; gap: 10px">
+    <h2 class="disp" style="margin: 0; font-size: 24px">How the surprise works</h2>
+    <ul style="margin: 0; padding-left: 18px; line-height: 1.8"><li>Shows at most once a day, never during a call</li><li>Photos come from a public library with credit and licence</li><li>Hidden completely in School mode</li><li>Off or less often from the card itself</li></ul>
+  </aside>
+</div>
+<div style="position: absolute; left: 720px; top: 394px; z-index: 5"><dc-import name="ElementTools" target="Surprise card" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

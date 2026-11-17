@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Guide: install and sign in</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div class="app" style="position: relative; background: var(--ground)">
+  <dc-import name="SiteBar" active="Guides" hint-size="1440px,114px"></dc-import>
+  <div style="max-width: 1280px; margin: 0 auto; padding: 32px 24px 64px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+    <nav aria-label="Guides" class="sheet" style="flex: 1 1 260px; max-width: 280px; padding: 18px 12px; display: flex; flex-direction: column; gap: 2px">
+      <div class="small mute" style="padding: 6px 12px; font-weight: 600">GET STARTED</div>
+      <a class="row on" href="#" style="text-decoration: none">Install and sign in</a>
+      <a class="row" href="#" style="text-decoration: none">Choose your language</a>
+      <div class="small mute" style="padding: 10px 12px 6px; font-weight: 600">FIND THINGS</div>
+      <a class="row" href="#" style="text-decoration: none">Search with a regex</a>
+      <a class="row" href="#" style="text-decoration: none">Command palette</a>
+      <div class="small mute" style="padding: 10px 12px 6px; font-weight: 600">WIKI</div>
+      <a class="row" href="#" style="text-decoration: none">Building from source</a>
+      <a class="row" href="#" style="text-decoration: none">Frequently asked</a>
+    </nav>
+    <article class="sheet" style="flex: 999 1 560px; min-width: 0; padding: 40px 48px; display: flex; flex-direction: column; gap: 18px">
+      <span class="small mute">Get started · 5 minute read · matches v0.1.0</span>
+      <h1 class="disp" style="margin: 0; font-size: 52px; line-height: 1">Install and sign in</h1>
+      <div class="hbar" style="gap: 8px; flex-wrap: wrap"><span class="tag ok">1 Download</span><span class="tag vio">2 Install</span><span class="tag">3 Link your phone</span><span class="tag">4 Set up</span></div>
+      <h2 class="disp" style="margin: 8px 0 0; font-size: 28px">2. Install</h2>
+      <p style="margin: 0; line-height: 1.7; font-size: 17px">Run <span class="mono">MaterialUnigramSetup.exe</span>. It installs for your account only, so Windows does not ask for administrator rights. Windows may warn that the publisher is unknown, because the installer is not code-signed; choose <b>More info</b>, then <b>Run anyway</b> if the file hash matches the one on the download page.</p>
+      <div role="img" aria-label="Screenshot placeholder: installer progress window" class="mono" style="height: 260px; border-radius: 20px; background: var(--ink); color: var(--ink-mute); display: flex; align-items: center; justify-content: center">[SCREENSHOT: INSTALLER FROM THE BUILT PACKAGE]</div>
+      <div class="sheet2" style="padding: 16px 18px; border-left: 4px solid var(--violet); border-radius: 12px"><b>Check the hash in PowerShell</b><pre class="mono small" style="margin: 8px 0 0">Get-FileHash .\MaterialUnigramSetup.exe -Algorithm SHA256</pre></div>
+      <h2 class="disp" style="margin: 8px 0 0; font-size: 28px">3. Link your phone</h2>
+      <p style="margin: 0; line-height: 1.7; font-size: 17px">Open the app on your phone, go to Settings, then Devices, then Link desktop device, and scan the code shown in the setup wizard.</p>
+      <div class="hbar" style="margin-top: 10px; border-top: 1.5px solid var(--line); padding-top: 16px"><a href="SiteDownload.dc.html">&#8592; Download</a><span style="flex: 1"></span><a href="#" class="small">View source on GitHub</a><span style="flex: 1"></span><a href="#">Choose your language &#8594;</a></div>
+    </article>
+    <aside class="sheet" aria-label="On this page" style="flex: 1 1 200px; max-width: 220px; padding: 18px; display: flex; flex-direction: column; gap: 8px">
+      <b class="small">On this page</b><a href="#" class="small">1. Download</a><a href="#" class="small"><b>2. Install</b></a><a href="#" class="small">3. Link your phone</a><a href="#" class="small">4. Set up</a>
+    </aside>
+  </div>
+  <div style="position: absolute; left: 640px; top: 560px; z-index: 5"><dc-import name="ElementTools" target="Code block: Get-FileHash" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

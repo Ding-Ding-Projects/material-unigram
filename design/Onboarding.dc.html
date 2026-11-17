@@ -4,119 +4,76 @@
 <meta charset="utf-8">
 <title>First-run setup</title>
 <script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
 </head>
 <body>
 <x-dc>
 <helmet>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&amp;family=Noto+Sans+HK:wght@400;500&amp;display=swap" rel="stylesheet">
-<style>
-body{margin:0}
-a{color:#0b6780}a:hover{color:#08485a}
-button{font:inherit}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;family=Noto+Sans+HK:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
 </helmet>
-<div style="width: 1440px; height: 900px; box-sizing: border-box; display: flex; background: #e9eef2; color: #171c1f; font-family: 'Roboto Flex', 'Noto Sans HK', system-ui, sans-serif; font-size: 14px">
-
-  <aside aria-label="Setup steps" style="width: 360px; box-sizing: border-box; padding: 48px 32px; display: flex; flex-direction: column; gap: 8px">
-    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 32px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0b6780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 3 11l6 2 2 7 3-5 5 4z"/></svg>
-      <span style="font-weight: 700; font-size: 18px">Set up Material Unigram</span>
-    </div>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<div class="app" style="width: 1440px; height: 900px; display: flex; gap: 10px; padding: 10px">
+  <aside aria-label="Setup steps" style="width: 380px; background: var(--ink); color: #fff; border-radius: 24px; padding: 36px 24px; display: flex; flex-direction: column; gap: 6px">
+    <div class="hbar" style="margin-bottom: 28px"><span class="logo" style="margin: 0" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 5h16v11H10l-6 4z"/></svg></span><b class="disp" style="font-size: 22px">Let's get you set up</b></div>
     <sc-for list="{{steps}}" as="s" hint-placeholder-count="6">
-      <button onClick="{{s.go}}" style="{{s.row}}">
-        <span style="{{s.dot}}">{{s.num}}</span>
-        <span style="display: flex; flex-direction: column; gap: 2px; text-align: left">
-          <span style="font-weight: 600">{{s.label}}</span>
-          <span style="font-size: 12px; color: #41484d">{{s.state}}</span>
-        </span>
-      </button>
+      <button onClick="{{s.go}}" style="{{s.row}}"><span style="{{s.dot}}">{{s.mark}}</span><span style="text-align: left"><b style="display: block">{{s.label}}</b><span class="small" style="color: var(--ink-mute)">{{s.state}}</span></span></button>
     </sc-for>
-    <div style="margin-top: auto; font-size: 12px; color: #41484d; line-height: 1.5">Progress is saved after every step. Close the window and setup resumes here.</div>
+    <p class="small" style="margin-top: auto; color: var(--ink-mute); line-height: 1.5">Saved after every step. Close the window and you pick up right here.</p>
   </aside>
-
-  <main style="flex: 1; margin: 24px 24px 24px 0; background: #fbfcfd; border-radius: 28px; display: flex; flex-direction: column; padding: 48px 64px">
-    <div style="font-size: 12px; color: #41484d; letter-spacing: .4px; text-transform: uppercase">Step {{current.num}} of 6</div>
-    <div role="progressbar" aria-valuemin="0" aria-valuemax="6" aria-valuenow="{{current.num}}" aria-label="Setup progress" style="height: 4px; background: #dbe4ea; border-radius: 2px; margin: 12px 0 40px">
-      <div style="{{bar}}"></div>
-    </div>
-
+  <main class="sheet" style="flex: 1; padding: 48px 60px; display: flex; flex-direction: column">
+    <div class="hbar"><span class="small mute" style="flex: 1">Step {{num}} of 6</span><span class="small mute">About 2 minutes left</span></div>
+    <div role="progressbar" aria-label="Setup progress" aria-valuemin="0" aria-valuemax="6" aria-valuenow="{{num}}" style="height: 8px; background: var(--sheet2); border-radius: 4px; margin: 12px 0 40px"><div style="{{bar}}"></div></div>
     <sc-if value="{{isLanguage}}" hint-placeholder-val="{{true}}">
-      <h1 style="margin: 0 0 8px; font-size: 36px; font-weight: 600">Choose how the app talks to you</h1>
-      <p style="margin: 0 0 32px; color: #41484d; font-size: 16px; line-height: 1.5; max-width: 640px">Pick a language mode and how playful the wording should be. Every choice can be changed later in Settings.</p>
-      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; max-width: 860px">
+      <h1 class="disp" style="margin: 0 0 10px; font-size: 48px; line-height: 1.05">How should the app talk to you?</h1>
+      <p class="mute" style="margin: 0 0 32px; font-size: 17px; max-width: 620px; line-height: 1.5">Pick a language and how playful the wording is. The preview below changes as you choose.</p>
+      <div class="grid3" style="max-width: 900px">
         <sc-for list="{{langs}}" as="l" hint-placeholder-count="3">
-          <button onClick="{{l.pick}}" aria-pressed="{{l.on}}" style="{{l.card}}">
-            <span style="font-weight: 600; font-size: 18px">{{l.title}}</span>
-            <span style="color: #41484d; line-height: 1.4">{{l.sample}}</span>
-          </button>
+          <button onClick="{{l.pick}}" aria-pressed="{{l.on}}" style="{{l.card}}"><b class="disp" style="font-size: 22px">{{l.title}}</b><span class="mute" style="line-height: 1.45">{{l.sample}}</span></button>
         </sc-for>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; max-width: 860px; margin-top: 40px">
-        <label style="display: flex; flex-direction: column; gap: 8px">
-          <span style="font-weight: 600">English playfulness: 5 of 5</span>
-          <input type="range" min="1" max="5" value="5" style="accent-color: #0b6780">
-          <span style="font-size: 12px; color: #41484d">1 is fully serious. Facts never change.</span>
-        </label>
-        <label style="display: flex; flex-direction: column; gap: 8px">
-          <span style="font-weight: 600">Cantonese playfulness: 5 of 5</span>
-          <input type="range" min="1" max="5" value="5" style="accent-color: #0b6780">
-          <span style="font-size: 12px; color: #41484d">廣東話語氣，1 係最正經。</span>
-        </label>
+      <div class="grid2" style="max-width: 900px; margin-top: 32px">
+        <label class="field"><b>English playfulness · 5</b><input type="range" class="range" min="1" max="5" value="5"><span class="small mute">1 is fully serious. Facts stay the same at every level.</span></label>
+        <label class="field"><b>Cantonese playfulness · 5</b><input type="range" class="range" min="1" max="5" value="5"><span class="small mute">廣東話語氣，1 係最正經。</span></label>
       </div>
     </sc-if>
-
     <sc-if value="{{isSignIn}}" hint-placeholder-val="{{false}}">
-      <h1 style="margin: 0 0 8px; font-size: 36px; font-weight: 600">Sign in to your account</h1>
-      <p style="margin: 0 0 32px; color: #41484d; font-size: 16px; line-height: 1.5; max-width: 640px">Scan the code with the app on your phone, or sign in with your phone number.</p>
-      <div style="display: flex; gap: 48px; align-items: flex-start">
-        <div role="img" aria-label="Sign-in QR code placeholder" style="width: 240px; height: 240px; border-radius: 24px; background: #e3e9ed; display: flex; align-items: center; justify-content: center; color: #41484d">[QR CODE]</div>
-        <ol style="margin: 0; padding-left: 20px; line-height: 2; font-size: 16px">
-          <li>Open the app on your phone</li>
-          <li>Go to Settings, then Devices</li>
-          <li>Choose Link desktop device and scan</li>
-        </ol>
+      <h1 class="disp" style="margin: 0 0 10px; font-size: 48px">Link your account</h1>
+      <p class="mute" style="margin: 0 0 32px; font-size: 17px">Scan with the app on your phone, or use your phone number instead.</p>
+      <div class="hbar" style="gap: 48px; align-items: flex-start">
+        <div role="img" aria-label="Sign-in QR code" style="width: 260px; height: 260px; border-radius: 28px; background: var(--ink); color: var(--lime); display: flex; align-items: center; justify-content: center" class="mono">[QR CODE]</div>
+        <ol style="margin: 0; padding-left: 22px; line-height: 2.2; font-size: 17px"><li>Open the app on your phone</li><li>Settings, then Devices</li><li>Link desktop device, then scan</li></ol>
       </div>
+      <button class="btn ghost" style="margin-top: 28px; align-self: flex-start">Use phone number instead</button>
     </sc-if>
-
     <sc-if value="{{isOther}}" hint-placeholder-val="{{false}}">
-      <h1 style="margin: 0 0 8px; font-size: 36px; font-weight: 600">{{current.label}}</h1>
-      <p style="margin: 0; color: #41484d; font-size: 16px; line-height: 1.5; max-width: 640px">This step applies its settings as you choose them, then shows the result before you move on.</p>
+      <h1 class="disp" style="margin: 0 0 10px; font-size: 48px">{{label}}</h1>
+      <p class="mute" style="margin: 0; font-size: 17px; max-width: 620px; line-height: 1.5">Each choice applies right away and shows its result before you move on.</p>
     </sc-if>
-
-    <div style="margin-top: auto; display: flex; gap: 12px; align-items: center">
-      <button onClick="{{back}}" style="border: 1px solid #c1c8cd; background: transparent; border-radius: 20px; padding: 0 24px; height: 44px; cursor: pointer; color: #0b6780; font-weight: 500">Back</button>
-      <span style="flex: 1"></span>
-      <button onClick="{{next}}" style="border: 0; background: transparent; border-radius: 20px; padding: 0 20px; height: 44px; cursor: pointer; color: #0b6780; font-weight: 500">Skip this step</button>
-      <button onClick="{{next}}" style="border: 0; background: #0b6780; color: #fff; border-radius: 20px; padding: 0 28px; height: 44px; cursor: pointer; font-weight: 500">Next</button>
-    </div>
+    <div class="hbar" style="margin-top: auto"><button onClick="{{back}}" class="btn ghost">Back</button><span style="flex: 1"></span><button onClick="{{next}}" class="btn" style="background: transparent; color: var(--emerald-d)">Skip for now</button><button onClick="{{next}}" class="btn">Continue</button></div>
   </main>
+</div>
+<div style="position: absolute; left: 700px; top: 330px; z-index: 5"><dc-import name="ElementTools" target="Language card: Both" hint-size="640px,470px"></dc-import></div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
 class Component extends DCLogic {
   constructor(p) { super(p); this.state = { step: 0, lang: 2 }; }
   renderVals() {
-    const names = ['Language and voice', 'Sign in', 'Notifications and sounds', 'Appearance', 'Personal wording', 'Ready'];
-    const steps = names.map((label, i) => {
-      const done = i < this.state.step, on = i === this.state.step;
-      return { label, num: i + 1, state: done ? 'Done' : on ? 'In progress' : (i === 4 ? 'Optional' : 'Not started'),
-        go: () => this.setState({ step: i }),
-        row: `display: flex; gap: 14px; align-items: center; border: 0; padding: 12px 16px; border-radius: 16px; cursor: pointer; color: inherit; background: ${on ? '#fbfcfd' : 'transparent'}`,
-        dot: `width: 32px; height: 32px; border-radius: 16px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; background: ${done || on ? '#0b6780' : '#dbe4ea'}; color: ${done || on ? '#fff' : '#41484d'}` };
-    });
-    const langData = [
-      { title: 'English', sample: 'Your chats are ready.' },
-      { title: '廣東話', sample: '你啲傾偈準備好喇。' },
-      { title: 'Both', sample: 'Your chats are ready. 你啲傾偈準備好喇。' }
-    ];
-    const langs = langData.map((l, i) => ({ ...l, on: this.state.lang === i, pick: () => this.setState({ lang: i }),
-      card: `display: flex; flex-direction: column; gap: 8px; text-align: left; padding: 20px; border-radius: 20px; cursor: pointer; color: inherit; min-height: 120px; border: ${this.state.lang === i ? '2px solid #0b6780' : '1px solid #c1c8cd'}; background: ${this.state.lang === i ? '#e4f2f8' : '#fff'}` }));
+    const names = ['Language and voice', 'Link your account', 'Notifications and sounds', 'Look and motion', 'Personal wording', 'All set'];
     const s = this.state.step;
-    return { steps, langs, current: { num: s + 1, label: names[s] }, isOther: s > 1,
-      bar: `height: 4px; border-radius: 2px; background: #0b6780; width: ${Math.round((s + 1) / 6 * 100)}%`,
-      isLanguage: s === 0, isSignIn: s === 1,
-      back: () => this.setState({ step: Math.max(0, s - 1) }),
-      next: () => this.setState({ step: Math.min(5, s + 1) }) };
+    const steps = names.map((label, i) => {
+      const done = i < s, on = i === s;
+      return { label, mark: done ? '✓' : String(i + 1), state: done ? 'Done' : on ? 'In progress' : (i === 4 ? 'Optional' : 'Up next'), go: () => this.setState({ step: i }),
+        row: `display: flex; gap: 14px; align-items: center; border: 0; padding: 12px 14px; border-radius: 18px; cursor: pointer; color: #fff; font: inherit; background: ${on ? 'rgba(255,255,255,.1)' : 'transparent'}`,
+        dot: `width: 34px; height: 34px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; flex: 0 0 auto; background: ${done || on ? '#d4f36b' : 'rgba(255,255,255,.12)'}; color: ${done || on ? '#0f1a24' : '#93a6b7'}` };
+    });
+    const langs = [['English', 'Your chats are ready. Go say hi.'], ['廣東話', '你啲傾偈準備好喇，去打個招呼啦。'], ['Both', 'Your chats are ready. 你啲傾偈準備好喇。']]
+      .map((l, i) => ({ title: l[0], sample: l[1], on: this.state.lang === i, pick: () => this.setState({ lang: i }),
+        card: `display: flex; flex-direction: column; gap: 10px; text-align: left; padding: 22px; border-radius: 22px; cursor: pointer; font: inherit; color: inherit; min-height: 140px; border: 2px solid ${this.state.lang === i ? '#0f1a24' : '#d6dee6'}; background: ${this.state.lang === i ? '#e8f6a8' : '#fff'}` }));
+    return { steps, langs, num: s + 1, label: names[s], isLanguage: s === 0, isSignIn: s === 1, isOther: s > 1,
+      bar: `height: 8px; border-radius: 4px; background: #0e7c66; width: ${Math.round((s + 1) / 6 * 100)}%`,
+      back: () => this.setState({ step: Math.max(0, s - 1) }), next: () => this.setState({ step: Math.min(5, s + 1) }) };
   }
 }
 </script>

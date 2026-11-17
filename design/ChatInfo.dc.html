@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Group details and statistics</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Group details" hint-size="1440px,64px"></dc-import>
+<div class="app" style="width: 1440px; height: 900px; display: flex; gap: 10px; padding: 10px; position: relative">
+  <!-- member list with bulk select -->
+  <section class="sheet" aria-label="Members" style="flex: 1; display: flex; flex-direction: column; padding: 20px 14px">
+    <div class="hbar" style="padding: 0 6px 12px"><a href="Main.dc.html" class="icon-btn" aria-label="Back to chat">&#8592;</a><h1 class="disp" style="margin: 0; font-size: 30px; flex: 1">Design team</h1><span class="tag vio">8 members</span></div>
+    <div class="hbar" style="background: var(--ink); color: #fff; border-radius: 16px; padding: 8px 8px 8px 16px; margin: 0 6px 10px">
+      <b style="flex: 1">3 selected</b>
+      <button class="btn sm tonal">Message</button><button class="btn sm tonal">Change role</button><button class="btn sm danger">Remove from group</button>
+      <button class="icon-btn" aria-label="Clear selection" style="color: #fff">&#215;</button>
+    </div>
+    <sc-for list="{{members}}" as="m" hint-placeholder-count="8">
+      <div class="{{m.cls}}" style="cursor: default">
+        <input type="checkbox" checked="{{m.sel}}" aria-label="Select {{m.name}}" style="width: 20px; height: 20px; accent-color: #0e7c66">
+        <span class="av" style="{{m.av}}">{{m.ini}}</span>
+        <span style="flex: 1"><b style="display: block">{{m.name}}</b><span class="small mute">{{m.seen}}</span></span>
+        <span class="{{m.roleCls}}">{{m.role}}</span>
+      </div>
+    </sc-for>
+  </section>
+
+  <!-- statistics with live chart and collapsible filters -->
+  <section class="sheet" aria-label="Group statistics" style="width: 620px; padding: 22px 24px; display: flex; flex-direction: column; gap: 16px">
+    <div class="hbar"><h2 class="disp" style="margin: 0; font-size: 24px; flex: 1">Activity</h2><span class="tag ok">Live</span><button class="info" aria-label="About these statistics">i</button></div>
+    <div class="sheet2" style="padding: 10px 14px">
+      <button class="hbar" aria-expanded="true" style="border: 0; background: transparent; width: 100%; font: inherit; cursor: pointer; padding: 4px 0"><b style="flex: 1; text-align: left">Filters</b><span class="small mute">2 active · collapse</span><span aria-hidden="true">&#8963;</span></button>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 0 4px"><button class="chip on">Last 7 days</button><button class="chip">30 days</button><button class="chip on">Messages</button><button class="chip">Reactions</button><button class="chip">Joins</button></div>
+    </div>
+    <div style="display: flex; gap: 28px; align-items: baseline">
+      <div><div class="small mute">Messages this week</div><div class="disp" style="font-size: 44px; font-weight: 700">1,284</div></div>
+      <span class="tag ok">+18% vs last week</span>
+    </div>
+    <div style="position: relative; height: 210px; border-bottom: 1px solid var(--line)" role="img" aria-label="Line chart: messages per day over 7 days, rising from 120 to 240, latest value 240 today">
+      <svg width="572" height="210" viewBox="0 0 572 210" aria-hidden="true" style="position: absolute; inset: 0">
+        <path d="M0 160 L95 150 L190 166 L286 120 L381 128 L476 84 L560 52" fill="none" stroke="#0e7c66" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M0 160 L95 150 L190 166 L286 120 L381 128 L476 84 L560 52 L560 210 L0 210 Z" fill="#0e7c66" opacity=".08"/>
+        <line x1="381" y1="0" x2="381" y2="210" stroke="#0f1a24" stroke-dasharray="3 4" opacity=".4"/>
+        <circle cx="381" cy="128" r="6" fill="#fff" stroke="#0e7c66" stroke-width="3"/>
+        <circle cx="560" cy="52" r="5" fill="#0e7c66"/><circle cx="560" cy="52" r="12" fill="#0e7c66" opacity=".2"/>
+      </svg>
+      <span class="tag" style="position: absolute; left: 330px; top: 84px; background: var(--ink); color: #fff">Fri · 176 messages</span>
+    </div>
+    <div class="small mute hbar" style="justify-content: space-between"><span>Sat</span><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Today</span></div>
+    <div class="grid3">
+      <div class="sheet2" style="padding: 14px"><div class="small mute">Most active</div><b>Ada Lin</b></div>
+      <div class="sheet2" style="padding: 14px"><div class="small mute">Peak hour</div><b>10:00 to 11:00</b></div>
+      <div class="sheet2" style="padding: 14px"><div class="small mute">Media shared</div><b>96 files</b></div>
+    </div>
+  </section>
+
+  <!-- context menu with working shortcuts -->
+  <div role="menu" aria-label="Member actions" class="dialog" style="left: 300px; top: 300px; width: 280px; padding: 8px; border-radius: 18px">
+    <sc-for list="{{menu}}" as="it" hint-placeholder-count="6">
+      <button role="menuitem" class="row" style="{{it.style}}"><span style="flex: 1">{{it.label}}</span><span class="kbd">{{it.key}}</span></button>
+    </sc-for>
+  </div>
+</div>
+<div style="position: absolute; left: 60px; top: 484px; z-index: 5"><dc-import name="ElementTools" target="Member row: Alex Chan" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const pastel = ['#c9d7ff', '#bfeedd', '#ffd5c8', '#e8f6a8', '#e3dcff', '#ffe7a8', '#c9d7ff', '#bfeedd'];
+    const members = [['Ada Lin', 'AL', 'online', 'Owner', 1], ['Alex Chan', 'AC', 'last seen 5 min ago', 'Admin', 1], ['Ava Park', 'AP', 'online', 'Member', 1], ['Amir Rahimi', 'AR', 'yesterday', 'Member', 0], ['Ana Souza', 'AS', 'this week', 'Member', 0], ['Ari Cohen', 'AC', 'recently', 'Member', 0], ['Ayo Bello', 'AB', '2 hours ago', 'Member', 0], ['You', 'ME', 'online', 'Admin', 0]]
+      .map((m, i) => ({ name: m[0], ini: m[1], seen: m[2], role: m[3], sel: !!m[4], cls: m[4] ? 'row on' : 'row', roleCls: m[3] === 'Owner' ? 'tag hot' : m[3] === 'Admin' ? 'tag vio' : 'tag', av: `width: 40px; height: 40px; background: ${pastel[i]}` }));
+    const menu = [['Send message', 'Enter'], ['Mention in chat', 'Ctrl M'], ['Copy username', 'Ctrl C'], ['Make admin', 'Ctrl Shift A'], ['Lock this item', 'Ctrl L'], ['Remove from group', 'Del']]
+      .map((m, i) => ({ label: m[0], key: m[1], style: `padding: 10px 12px; ${i === 5 ? 'color: #b8321a' : ''}` }));
+    return { members, menu };
+  }
+}
+</script>
+</body>
+</html>

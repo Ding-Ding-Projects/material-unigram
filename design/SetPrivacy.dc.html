@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings: privacy and locks</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 100%; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Settings" hint-size="1440px,64px"></dc-import>
+<div class="app" style="min-height: 1080px; padding: 10px; display: flex; flex-wrap: wrap; gap: 10px">
+  <nav aria-label="Settings groups" class="sheet" style="flex: 1 1 260px; max-width: 300px; padding: 22px 12px; display: flex; flex-direction: column; gap: 2px">
+    <h1 class="disp" style="margin: 0 12px 14px; font-size: 32px">Settings</h1>
+    <a class="row" href="Settings.dc.html" style="text-decoration: none">Language and voice</a>
+    <a class="row" href="SetAppearance.dc.html" style="text-decoration: none">Appearance</a>
+    <a class="row" href="SetMotion.dc.html" style="text-decoration: none">Motion</a>
+    <a class="row" href="SetNotify.dc.html" style="text-decoration: none">Notifications and sounds</a>
+    <a class="row on" href="SetPrivacy.dc.html" style="text-decoration: none">Privacy and locks</a>
+    <a class="row" href="SetChats.dc.html" style="text-decoration: none">Chats, media and focus</a>
+    <a class="row" href="SetAccounts.dc.html" style="text-decoration: none">Accounts and devices</a>
+    <a class="row" href="SetAdvanced.dc.html" style="text-decoration: none">Advanced and about</a>
+  </nav>
+  <main style="flex: 999 1 640px; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-content: start">
+    <section class="sheet" style="padding: 24px 26px; display: flex; flex-direction: column; gap: 12px">
+      <h2 class="disp" style="margin: 0; font-size: 24px">App lock</h2>
+      <div class="grid2" style="gap: 8px">
+        <button class="sheet2" style="border: 2px solid var(--ink); padding: 14px; font: inherit; text-align: left; cursor: pointer; background: #e8f6a8"><b style="display: block">Windows Hello</b><span class="small mute">Face, fingerprint or PIN</span></button>
+        <button class="sheet2" style="border: 1.5px solid var(--line); padding: 14px; font: inherit; text-align: left; cursor: pointer"><b style="display: block">Passkey</b><span class="small mute">Security key or phone</span></button>
+        <button class="sheet2" style="border: 1.5px solid var(--line); padding: 14px; font: inherit; text-align: left; cursor: pointer"><b style="display: block">PIN</b><span class="small mute">4 to 12 digits</span></button>
+        <button class="sheet2" style="border: 1.5px solid var(--line); padding: 14px; font: inherit; text-align: left; cursor: pointer"><b style="display: block">Password</b><span class="small mute">Stored as a hash</span></button>
+      </div>
+      <div class="set"><div class="t"><b>Lock after</b><span class="small mute">Away from the app</span></div><select style="font: inherit; border: 1.5px solid var(--line); border-radius: 10px; padding: 6px 10px"><option>5 minutes</option><option>1 hour</option></select></div>
+      <div class="set"><div class="t"><b>Hide previews in notifications while locked</b></div><button class="sw on" role="switch" aria-checked="true" aria-label="Hide previews while locked"></button></div>
+    </section>
+    <section class="sheet" style="padding: 24px 26px; display: flex; flex-direction: column; gap: 12px">
+      <div class="hbar"><h2 class="disp" style="margin: 0; font-size: 24px; flex: 1">School mode</h2><button class="sw" role="switch" aria-checked="false" aria-label="School mode"></button></div>
+      <p class="small mute" style="margin: 0; line-height: 1.5">Shows English only and hides the playful extras in every app that shares this setting. Turning it off needs the PIN, password or passkey you choose here.</p>
+      <label class="field"><b>Call it</b><input value="School mode"><span class="small mute">Only this name appears anywhere once you rename it.</span></label>
+      <div class="sheet2" style="padding: 12px 14px; background: var(--amber-c); color: var(--amber)"><b>A convenience lock, not security.</b> Deleting the shared settings file resets it.</div>
+    </section>
+    <section class="sheet" style="padding: 24px 26px; grid-column: 1 / 3">
+      <h2 class="disp" style="margin: 0 0 6px; font-size: 24px">Who can see me</h2>
+      <div class="set"><div class="t"><b>Phone number</b></div><div class="seg"><button>Everybody</button><button class="on">My contacts</button><button>Nobody</button></div></div>
+      <div class="set"><div class="t"><b>Last seen and online</b></div><div class="seg"><button>Everybody</button><button class="on">My contacts</button><button>Nobody</button></div></div>
+      <div class="set"><div class="t"><b>Profile photo</b></div><div class="seg"><button class="on">Everybody</button><button>My contacts</button><button>Nobody</button></div></div>
+      <div class="set"><div class="t"><b>Locked items</b><span class="small mute">7 buttons and settings are locked against accidental clicks. Hold the lock for one second to open it.</span></div><button class="btn sm ghost">Review locks</button></div>
+    </section>
+  </main>
+</div>
+<div style="position: absolute; left: 380px; top: 324px; z-index: 5"><dc-import name="ElementTools" target="Lock choice: Passkey" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1144}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

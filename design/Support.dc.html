@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Recovery desk</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Recovery desk" hint-size="1440px,64px"></dc-import>
+<div class="app" style="width: 1440px; height: 900px; padding: 10px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px">
+  <section class="sheet" aria-label="Support tickets" style="padding: 26px; display: flex; flex-direction: column; gap: 12px">
+    <h1 class="disp" style="margin: 0; font-size: 30px">Recovery desk</h1>
+    <p class="small mute" style="margin: 0">Tickets stay on this computer until you choose to send one.</p>
+    <button class="btn" style="align-self: flex-start">New ticket</button>
+    <div class="row on" style="flex-direction: column; align-items: stretch; gap: 6px"><div class="hbar"><b style="flex: 1">Locked out after changing PIN</b><span class="tag warn">Open</span></div><span class="small mute">#0003 · today 11:20 · 2 log files attached</span></div>
+    <div class="row" style="flex-direction: column; align-items: stretch; gap: 6px; border: 1.5px solid var(--line)"><div class="hbar"><b style="flex: 1">Export stopped at 80%</b><span class="tag ok">Solved</span></div><span class="small mute">#0002 · resumed from the last saved chunk</span></div>
+    <div class="sheet2" style="padding: 16px; margin-top: auto; display: flex; flex-direction: column; gap: 8px">
+      <b>Steps that usually fix a lock-out</b>
+      <ol class="small" style="margin: 0; padding-left: 18px; line-height: 1.8"><li>Use your passkey instead of the PIN</li><li>Use a recovery code from the authenticator</li><li>Reset the app lock (keeps your chats)</li></ol>
+    </div>
+  </section>
+  <section class="sheet" aria-label="Authenticator" style="padding: 26px; display: flex; flex-direction: column; gap: 12px">
+    <div class="hbar"><h2 class="disp" style="margin: 0; font-size: 26px; flex: 1">Authenticator</h2><button class="btn sm tonal">Add</button></div>
+    <p class="small mute" style="margin: 0">One-time codes for your accounts, stored encrypted on this device.</p>
+    <sc-for list="{{codes}}" as="c" hint-placeholder-count="3">
+      <div class="sheet2" style="padding: 16px; display: flex; align-items: center; gap: 14px">
+        <span class="av" style="{{c.av}}">{{c.ini}}</span>
+        <span style="flex: 1"><span class="small mute" style="display: block">{{c.name}}</span><b class="mono" style="font-size: 26px; letter-spacing: .08em">{{c.code}}</b></span>
+        <span style="{{c.ring}}" role="img" aria-label="{{c.left}} seconds left"><b class="small">{{c.left}}</b></span>
+        <button class="icon-btn" aria-label="Copy code for {{c.name}}">&#10697;</button>
+      </div>
+    </sc-for>
+  </section>
+  <section class="sheet" aria-label="QR pairing" style="padding: 26px; display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center; background: var(--ink); color: #fff">
+    <h2 class="disp" style="margin: 0; font-size: 26px; align-self: flex-start">Pair by QR</h2>
+    <p class="small" style="margin: 0; color: var(--ink-mute); align-self: flex-start; text-align: left">Point your camera at a setup code, or drop an image of one here.</p>
+    <div role="img" aria-label="Camera view with a QR code inside the frame" style="width: 300px; height: 300px; border-radius: 28px; background: var(--ink2); position: relative; display: flex; align-items: center; justify-content: center">
+      <span class="mono" style="color: var(--ink-mute)">[CAMERA]</span>
+      <span style="position: absolute; inset: 40px; border: 3px solid var(--lime); border-radius: 22px"></span>
+    </div>
+    <span class="tag" style="background: var(--lime); color: var(--ink)">Found: Mail account (6 digits, 30 s)</span>
+    <div class="hbar"><button class="btn" style="background: var(--lime); color: var(--ink)">Add this account</button><button class="btn" style="background: rgba(255,255,255,.1)">Enter key by hand</button></div>
+  </section>
+</div>
+<div style="position: absolute; left: 480px; top: 394px; z-index: 5"><dc-import name="ElementTools" target="Authenticator code: Mail account" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const codes = [['Mail account', 'MA', '482 019', 21, '#c9d7ff'], ['Code hosting', 'CH', '730 552', 8, '#bfeedd'], ['Cloud storage', 'CS', '119 846', 14, '#ffd5c8']].map(c => ({ name: c[0], ini: c[1], code: c[2], left: c[3],
+      av: `width: 40px; height: 40px; background: ${c[4]}`,
+      ring: `width: 40px; height: 40px; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; background: conic-gradient(${c[3] < 10 ? '#e2482a' : '#0e7c66'} ${c[3] / 30 * 360}deg, #d6dee6 0)` }));
+    return { codes };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Guided tours</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Guided tours" hint-size="1440px,64px"></dc-import>
+<div class="app" style="width: 1440px; height: 900px; padding: 10px; display: flex; gap: 10px; position: relative">
+  <section class="sheet" style="flex: 1; padding: 34px 40px; display: flex; flex-direction: column; gap: 18px">
+    <h1 class="disp" style="margin: 0; font-size: 40px">Guided tours</h1>
+    <p class="mute" style="margin: 0; font-size: 17px">Short walk-throughs on the real screens. Your progress is saved.</p>
+    <div class="grid3">
+      <sc-for list="{{tours}}" as="t" hint-placeholder-count="6">
+        <button class="sheet2" style="border: 1.5px solid var(--line); padding: 20px; font: inherit; text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: 10px; min-height: 160px">
+          <span class="hbar"><b class="disp" style="font-size: 20px; flex: 1">{{t.title}}</b><span class="{{t.tagCls}}">{{t.state}}</span></span>
+          <span class="small mute" style="line-height: 1.5">{{t.body}}</span>
+          <span style="height: 6px; border-radius: 3px; background: var(--line); margin-top: auto"><span style="{{t.bar}}"></span></span>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+  <!-- live tour step over the workspace -->
+  <div class="dialog" role="dialog" aria-label="Tour step" style="right: 40px; bottom: 40px; width: 380px; padding: 22px; background: var(--ink); color: #fff; display: flex; flex-direction: column; gap: 10px">
+    <span class="tag" style="background: var(--lime); color: var(--ink); align-self: flex-start">Tour: Find anything · 2 of 4</span>
+    <b class="disp" style="font-size: 22px">Open the regex builder</b>
+    <span style="color: #c9d4de; line-height: 1.5">Select the .* button beside any search box. Try it now; the tour moves on when the builder opens.</span>
+    <div class="hbar"><button class="btn sm" style="background: rgba(255,255,255,.1)">Back</button><span style="flex: 1"></span><button class="btn sm" style="background: transparent; color: var(--lime)">End tour</button><button class="btn sm" style="background: var(--lime); color: var(--ink)">Show me</button></div>
+  </div>
+</div>
+<div style="position: absolute; left: 300px; top: 424px; z-index: 5"><dc-import name="ElementTools" target="Tour card: Make it yours" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const tours = [['Your first chat', 'Send a message, attach a photo and react.', 100], ['Find anything', 'Search, the regex builder and the palette.', 50], ['Make it yours', 'Theme, colours, motion and wording.', 0], ['Stay safe', 'App lock, two-key confirmation and recovery.', 0], ['Tabs and accounts', 'One tab per account, reopen anything.', 0], ['Built-in tools', 'Converter, drawing and exports.', 0]]
+      .map(t => ({ title: t[0], body: t[1], state: t[2] === 100 ? 'Done' : t[2] ? 'In progress' : '3 min', tagCls: t[2] === 100 ? 'tag ok' : t[2] ? 'tag vio' : 'tag', bar: `display: block; height: 6px; border-radius: 3px; background: #0e7c66; width: ${t[2]}%` }));
+    return { tours };
+  }
+}
+</script>
+</body>
+</html>

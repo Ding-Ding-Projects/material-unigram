@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Media downloads</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Downloads" hint-size="1440px,64px"></dc-import>
+<div class="app" style="width: 1440px; height: 900px; padding: 10px">
+  <section class="sheet" style="height: 100%; padding: 28px 32px; display: flex; flex-direction: column; gap: 14px">
+    <div class="hbar" style="flex-wrap: wrap"><h1 class="disp" style="margin: 0; font-size: 34px; flex: 1">Downloads</h1><span class="mute">3 active · 1.1 GB today</span><button class="btn sm ghost">Pause all</button><button class="btn sm ghost">Open folder</button></div>
+    <div style="display: flex; gap: 8px"><label class="search" style="flex: 1"><span class="sr">Search downloads</span><input placeholder="Search by name or chat"></label><button class="rx" aria-label="Regex builder for download search">.*</button></div>
+    <div class="hbar" style="gap: 6px"><button class="chip on">All</button><button class="chip">Photos</button><button class="chip">Videos</button><button class="chip">Files</button><button class="chip">Failed 1</button></div>
+    <div class="hbar" style="background: var(--ink); color: #fff; border-radius: 16px; padding: 8px 8px 8px 16px"><b style="flex: 1">2 selected</b><button class="btn sm tonal">Open</button><button class="btn sm tonal">Show in folder</button><button class="btn sm danger">Delete files</button></div>
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <sc-for list="{{files}}" as="f" hint-placeholder-count="7">
+        <div class="{{f.cls}}" style="cursor: default">
+          <input type="checkbox" checked="{{f.sel}}" aria-label="Select {{f.name}}" style="width: 20px; height: 20px; accent-color: #0e7c66">
+          <span class="av" style="{{f.av}}">{{f.ext}}</span>
+          <span style="flex: 1; min-width: 0"><b style="display: block">{{f.name}}</b><span class="small mute">{{f.meta}}</span></span>
+          <span style="width: 220px"><span style="display: block; height: 6px; border-radius: 3px; background: var(--line)"><span style="{{f.bar}}"></span></span><span class="small mute">{{f.state}}</span></span>
+          <button class="btn sm ghost">{{f.action}}</button>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+</div>
+<div style="position: absolute; left: 600px; top: 394px; z-index: 5"><dc-import name="ElementTools" target="Download: trail-video.mp4" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const tint = { MP4: '#ffd5c8', PDF: '#c9d7ff', JPG: '#bfeedd', ZIP: '#e8f6a8', MP3: '#e3dcff' };
+    const files = [['trail-video.mp4', 'MP4', 'Hiking club · 412 MB', 58, '58% · 1 min left', 'Pause', 1], ['minutes.pdf', 'PDF', 'Design team · 2.4 MB', 100, 'Done', 'Open', 1], ['photo-041.jpg', 'JPG', 'Family · 3.1 MB', 100, 'Done', 'Open', 0], ['boards.zip', 'ZIP', 'Design team · 88 MB', 22, '22% · 3 min left', 'Pause', 0], ['voice-note.mp3', 'MP3', 'Ada Lin · 1.2 MB', 40, 'Failed: connection lost at 40%', 'Retry', 0], ['map.jpg', 'JPG', 'Hiking club · 5.0 MB', 0, 'Waiting', 'Start now', 0]]
+      .map(f => ({ name: f[0], ext: f[1], meta: f[2], state: f[4], action: f[5], sel: !!f[6], cls: f[6] ? 'row on' : 'row',
+        av: `width: 44px; height: 44px; font-size: 11px; background: ${tint[f[1]]}`,
+        bar: `display: block; height: 6px; border-radius: 3px; width: ${f[3]}%; background: ${f[4].startsWith('Failed') ? '#e2482a' : '#0e7c66'}` }));
+    return { files };
+  }
+}
+</script>
+</body>
+</html>

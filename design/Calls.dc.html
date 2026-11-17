@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Calls</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Calls" hint-size="1440px,64px"></dc-import>
+<div class="app" style="width: 1440px; height: 900px; display: flex; gap: 10px; padding: 10px 10px 10px 0">
+  <nav class="rail" aria-label="Sections" style="width: 84px; border-radius: 0 24px 24px 0">
+    <span class="logo" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 5h16v11H10l-6 4z"/></svg></span>
+    <a href="Main.dc.html"><span class="pill"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>Chats</a>
+    <a href="Contacts.dc.html"><span class="pill"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/></svg></span>Contacts</a>
+    <a href="#" class="on"><span class="pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span>Calls</a>
+  </nav>
+  <section class="sheet" aria-label="Call history" style="width: 440px; display: flex; flex-direction: column; padding: 18px 10px">
+    <div class="hbar" style="padding: 0 8px 12px"><h1 class="disp" style="margin: 0; font-size: 30px; flex: 1">Calls</h1><button class="btn sm">New call</button></div>
+    <div style="display: flex; gap: 8px; padding: 0 8px"><label class="search" style="flex: 1"><span class="sr">Search calls</span><input placeholder="Search call history"></label><button class="rx" aria-label="Regex builder for call search">.*</button></div>
+    <div style="display: flex; gap: 6px; padding: 12px 8px"><button class="chip on">All</button><button class="chip">Missed 2</button><button class="chip">Video</button></div>
+    <sc-for list="{{calls}}" as="c" hint-placeholder-count="7">
+      <button class="{{c.cls}}"><span class="av" style="{{c.av}}">{{c.ini}}</span><span style="flex: 1"><b style="display: block">{{c.name}}</b><span class="small" style="{{c.kindStyle}}">{{c.kind}}</span></span><span class="small mute">{{c.when}}</span></button>
+    </sc-for>
+  </section>
+  <main class="sheet" style="flex: 1; position: relative; overflow: hidden; background: var(--ink); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px">
+    <span class="tag" style="position: absolute; top: 22px; left: 24px; background: rgba(255,255,255,.12); color: #fff">Voice call · 04:17 · encrypted</span>
+    <span class="av" style="width: 160px; height: 160px; border-radius: 52px; background: #bfeedd; font-size: 52px; box-shadow: 0 0 0 14px rgba(212,243,107,.18), 0 0 0 30px rgba(212,243,107,.08)">DT</span>
+    <h2 class="disp" style="margin: 18px 0 0; font-size: 40px">Design team</h2>
+    <span style="color: var(--ink-mute)">Ada is speaking · 3 people in the call</span>
+    <div class="hbar" style="margin-top: 36px; gap: 18px">
+      <button class="icon-btn" aria-label="Mute microphone" style="width: 64px; height: 64px; border-radius: 24px; background: rgba(255,255,255,.12); color: #fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+      <button class="icon-btn" aria-label="Turn on camera" style="width: 64px; height: 64px; border-radius: 24px; background: rgba(255,255,255,.12); color: #fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="13" height="10" rx="2"/><path d="m16 11 5-3v8l-5-3"/></svg></button>
+      <button class="icon-btn" aria-label="Share screen" style="width: 64px; height: 64px; border-radius: 24px; background: rgba(255,255,255,.12); color: #fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></button>
+      <button class="btn danger" style="height: 64px; border-radius: 24px; padding: 0 28px">End call</button>
+    </div>
+  </main>
+</div>
+<div style="position: absolute; left: 380px; top: 304px; z-index: 5"><dc-import name="ElementTools" target="Call history row" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const pastel = ['#bfeedd', '#c9d7ff', '#ffd5c8', '#e8f6a8', '#e3dcff', '#ffe7a8', '#c9d7ff'];
+    const calls = [['Design team', 'DT', 'Ongoing group call', 'now'], ['Alex Chan', 'AC', 'Missed', '11:02'], ['Family', 'FA', 'Outgoing video, 12 min', 'Yesterday'], ['Ava Park', 'AP', 'Incoming, 3 min', 'Yesterday'], ['Amir Rahimi', 'AR', 'Missed', 'Mon'], ['Hiking club', 'HC', 'Group call, 25 min', 'Sun'], ['Ana Souza', 'AS', 'Outgoing, 1 min', 'Sat']]
+      .map((c, i) => ({ name: c[0], ini: c[1], kind: c[2], when: c[3], cls: i === 0 ? 'row on' : 'row', av: `width: 44px; height: 44px; background: ${pastel[i]}`, kindStyle: c[2] === 'Missed' ? 'color: #b8321a; font-weight: 600' : 'color: #4a5a68' }));
+    return { calls };
+  }
+}
+</script>
+</body>
+</html>

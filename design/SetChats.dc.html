@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings: chats, media and focus</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 100%; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Settings" hint-size="1440px,64px"></dc-import>
+<div class="app" style="min-height: 1080px; padding: 10px; display: flex; flex-wrap: wrap; gap: 10px">
+  <nav aria-label="Settings groups" class="sheet" style="flex: 1 1 260px; max-width: 300px; padding: 22px 12px; display: flex; flex-direction: column; gap: 2px">
+    <h1 class="disp" style="margin: 0 12px 14px; font-size: 32px">Settings</h1>
+    <a class="row" href="Settings.dc.html" style="text-decoration: none">Language and voice</a>
+    <a class="row" href="SetAppearance.dc.html" style="text-decoration: none">Appearance</a>
+    <a class="row" href="SetMotion.dc.html" style="text-decoration: none">Motion</a>
+    <a class="row" href="SetNotify.dc.html" style="text-decoration: none">Notifications and sounds</a>
+    <a class="row" href="SetPrivacy.dc.html" style="text-decoration: none">Privacy and locks</a>
+    <a class="row on" href="SetChats.dc.html" style="text-decoration: none">Chats, media and focus</a>
+    <a class="row" href="SetAccounts.dc.html" style="text-decoration: none">Accounts and devices</a>
+    <a class="row" href="SetAdvanced.dc.html" style="text-decoration: none">Advanced and about</a>
+  </nav>
+  <main style="flex: 999 1 640px; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-content: start">
+    <section class="sheet" style="padding: 24px 26px; grid-column: 1 / 3; display: flex; flex-direction: column; gap: 14px">
+      <div class="hbar"><h2 class="disp" style="margin: 0; font-size: 26px; flex: 1">Focus modes</h2><span class="tag vio">Designed with ADHD in mind</span></div>
+      <div class="grid3">
+        <button class="sheet2" style="border: 2px solid var(--ink); padding: 18px; font: inherit; text-align: left; cursor: pointer; background: #e8f6a8; display: flex; flex-direction: column; gap: 6px"><b class="disp" style="font-size: 20px">One thing at a time</b><span class="small mute">Hides every chat except the one you open, until you leave it.</span></button>
+        <button class="sheet2" style="border: 1.5px solid var(--line); padding: 18px; font: inherit; text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: 6px"><b class="disp" style="font-size: 20px">Calm badges</b><span class="small mute">Shows a dot instead of unread counts.</span></button>
+        <button class="sheet2" style="border: 1.5px solid var(--line); padding: 18px; font: inherit; text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: 6px"><b class="disp" style="font-size: 20px">Reply timer</b><span class="small mute">A gentle 10 minute timer, then the chat list comes back.</span></button>
+      </div>
+      <div class="set"><div class="t"><b>Highlight the first line of long messages</b><span class="small mute">Bold first line so you can skim.</span></div><button class="sw on" role="switch" aria-checked="true" aria-label="Highlight first lines"></button></div>
+    </section>
+    <section class="sheet" style="padding: 24px 26px">
+      <h2 class="disp" style="margin: 0 0 6px; font-size: 22px">Chats</h2>
+      <div class="set"><div class="t"><b>Send with Enter</b><span class="small mute">Shift Enter makes a new line.</span></div><button class="sw on" role="switch" aria-checked="true" aria-label="Send with Enter"></button></div>
+      <div class="set"><div class="t"><b>Format bot and channel posts</b><span class="small mute">Shows their bold text, lists and links instead of raw symbols.</span></div><button class="sw on" role="switch" aria-checked="true" aria-label="Format posts"></button></div>
+      <div class="set"><div class="t"><b>Big emoji when sent alone</b></div><button class="sw on" role="switch" aria-checked="true" aria-label="Big emoji"></button></div>
+      <div class="set"><div class="t"><b>Message text size</b></div><div class="seg"><button>S</button><button class="on">M</button><button>L</button></div></div>
+    </section>
+    <section class="sheet" style="padding: 24px 26px">
+      <h2 class="disp" style="margin: 0 0 6px; font-size: 22px">Media</h2>
+      <div class="set"><div class="t"><b>Download photos automatically</b><span class="small mute">Contacts and private chats</span></div><button class="sw on" role="switch" aria-checked="true" aria-label="Download photos"></button></div>
+      <div class="set"><div class="t"><b>Download videos automatically</b><span class="small mute">Up to 15 MB</span></div><button class="sw" role="switch" aria-checked="false" aria-label="Download videos"></button></div>
+      <div class="set"><div class="t"><b>Autoplay GIFs and stickers</b></div><button class="sw on" role="switch" aria-checked="true" aria-label="Autoplay"></button></div>
+      <div class="set"><div class="t"><b>Save to folder</b><span class="mono small mute">Downloads\Material Unigram</span></div><button class="btn sm ghost">Change</button></div>
+    </section>
+  </main>
+</div>
+<div style="position: absolute; left: 760px; top: 324px; z-index: 5"><dc-import name="ElementTools" target="Focus mode: Calm badges" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1144}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

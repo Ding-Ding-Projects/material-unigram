@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shared link preview</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div class="app" role="img" aria-label="Preview image shown when the site link is shared: the app name, a one-line description and a chat window" style="width: 640px; height: 400px; background: var(--ink); color: #fff; border-radius: 24px; overflow: hidden; display: flex">
+  <div style="flex: 1; padding: 36px; display: flex; flex-direction: column; gap: 14px">
+    <span class="logo" style="width: 56px; height: 56px; border-radius: 18px; margin: 0"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H10l-6 4z"/></svg></span>
+    <b class="disp" style="font-size: 40px; line-height: 1">Material Unigram</b>
+    <span style="color: var(--ink-mute); font-size: 17px; line-height: 1.4">An unofficial Material Design 3 redesign of Unigram for Windows.</span>
+    <span class="tag" style="background: var(--lime); color: var(--ink); align-self: flex-start; margin-top: auto">ding-ding-projects.github.io/material-unigram</span>
+  </div>
+  <div style="width: 230px; background: #e7ecf2; margin: 40px 0 40px 0; border-radius: 20px 0 0 20px; padding: 16px; display: flex; flex-direction: column; gap: 8px">
+    <div class="bin" style="max-width: 100%; font-size: 12px; color: var(--text)">Sunday 8:00?</div>
+    <div class="bout" style="max-width: 100%; font-size: 12px; align-self: flex-end">Count me in</div>
+    <div class="bin" style="max-width: 100%; font-size: 12px; color: var(--text)">See you there</div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":640,"height":400}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>

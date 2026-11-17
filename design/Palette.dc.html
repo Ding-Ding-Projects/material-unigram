@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Command palette</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="/_blob/eb8c360684d4e055bab1b5ffb359a01e">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 1440px; position: relative; background: #e7ecf2">
+<dc-import name="TopBar" section="Command palette" hint-size="1440px,64px"></dc-import>
+<div class="app wall" style="width: 1440px; height: 900px; position: relative; overflow: hidden">
+  <div class="scrim" aria-hidden="true" style="background: rgba(15,26,36,.35)"></div>
+  <section role="dialog" aria-label="Command palette" class="dialog" style="left: 320px; top: 90px; width: 800px; padding: 0; overflow: hidden">
+    <div class="hbar" style="padding: 18px 20px; border-bottom: 1.5px solid var(--line)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4a5a68" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <label style="flex: 1"><span class="sr">Command, setting, chat or message</span><input value="dark" style="border: 0; outline: none; font: inherit; font-size: 20px; width: 100%"></label>
+      <button class="rx" aria-label="Regex builder for the palette">.*</button>
+      <span class="kbd">Esc</span>
+    </div>
+    <div style="padding: 10px; max-height: 560px; overflow: auto">
+      <sc-for list="{{groups}}" as="g" hint-placeholder-count="3">
+        <div class="small mute" style="padding: 12px 12px 6px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase">{{g.title}}</div>
+        <sc-for list="{{g.items}}" as="it" hint-placeholder-count="3">
+          <div class="{{it.cls}}" role="option" aria-selected="{{it.on}}"><span class="av" style="{{it.av}}">{{it.ini}}</span><span style="flex: 1; min-width: 0"><b style="display: block">{{it.label}}</b><span class="small mute">{{it.hint}}</span></span><span class="kbd">{{it.key}}</span></div>
+        </sc-for>
+      </sc-for>
+    </div>
+    <div class="hbar small mute" style="padding: 12px 20px; border-top: 1.5px solid var(--line); background: var(--sheet2)"><span class="kbd">&#8593; &#8595;</span> move <span class="kbd">Enter</span> run <span class="kbd">Ctrl Enter</span> open in new tab <span style="flex: 1"></span>Searches 412 commands, every setting and your chats</div>
+  </section>
+</div>
+<div style="position: absolute; left: 760px; top: 364px; z-index: 5"><dc-import name="ElementTools" target="Result: Switch to dark theme" hint-size="640px,470px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mk = (label, hint, key, tint, on) => ({ label, hint, key, on: !!on, ini: label.slice(0, 1), cls: on ? 'row on' : 'row', av: `width: 36px; height: 36px; font-size: 14px; border-radius: 12px; background: ${tint}` });
+    const groups = [
+      { title: 'Commands', items: [mk('Switch to dark theme', 'Appearance', 'Ctrl Shift D', '#0f1a24;color:#d4f36b', 1), mk('Dark theme at sunset', 'Schedule a setting', '', '#e8f6a8')] },
+      { title: 'Settings', items: [mk('Theme: Light, Dark, Follow Windows', 'Settings > Appearance', '', '#c9d7ff'), mk('Darken chat wallpaper at night', 'Settings > Chats and media', '', '#c9d7ff')] },
+      { title: 'Messages', items: [mk('"the dark mode boards look great"', 'Design team · Tue', '', '#bfeedd')] }
+    ];
+    return { groups };
+  }
+}
+</script>
+</body>
+</html>
