@@ -1,5 +1,16 @@
 <Project>
 
+  <!-- The native projects ask for the latest installed Windows SDK ("10.0"). On a machine that
+       also has a newer SDK than the app targets, their .winmd files then claim that newer
+       platform, MSBuild refuses them as references (MSB3851) and the app loses the whole
+       Telegram.Native namespace. Pin them to the SDK the app's target framework names. This file
+       is imported after the .vcxproj sets "10.0", so the pin wins; an explicit
+       /p:WindowsTargetPlatformVersion still overrides it; scripts/bootstrap.ps1 installs
+       this SDK. -->
+  <PropertyGroup Condition="'$(MSBuildProjectExtension)' == '.vcxproj' And '$(WindowsTargetPlatformVersion)' == '10.0'">
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+
   <PropertyGroup>
     <TelegramRoot>$(MSBuildThisFileDirectory)</TelegramRoot>
     <!-- Only these consume vcpkg: the two native components link against it, and the app needs
