@@ -13,7 +13,9 @@ using Telegram.Services;
 using Telegram.Services.Settings;
 using Telegram.Td.Api;
 using Windows.UI;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
@@ -84,7 +86,7 @@ namespace Telegram.Views.Popups
                     IsChecked = get() == color,
                     Background = new SolidColorBrush(color is int value ? ToColor(value) : Colors.Transparent),
                     BorderThickness = new Thickness(1.5),
-                    Content = color == null ? new TextBlock { Text = "A", FontWeight = Windows.UI.Text.FontWeights.Bold } : null
+                    Content = color == null ? new TextBlock { Text = "A", FontWeight = FontWeights.Bold } : null
                 };
 
                 AutomationHelper(swatch, color == null ? Strings.ChatLookDefault : "#" + ((int)color).ToString("X6"));
@@ -110,7 +112,7 @@ namespace Telegram.Views.Popups
 
         private static void AutomationHelper(FrameworkElement element, string name)
         {
-            Windows.UI.Xaml.Automation.AutomationProperties.SetName(element, name);
+            AutomationProperties.SetName(element, name);
             ToolTipService.SetToolTip(element, name);
         }
 

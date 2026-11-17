@@ -34,6 +34,7 @@ using Telegram.Converters;
 using Telegram.Navigation;
 using Telegram.Navigation.Services;
 using Telegram.Services;
+using Telegram.Services.Settings;
 using Telegram.Streams;
 using Telegram.Td;
 using Telegram.Td.Api;

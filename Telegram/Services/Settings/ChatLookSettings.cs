@@ -160,7 +160,7 @@ namespace Telegram.Services.Settings
 
             var dark = baseSettings?.Background?.IsDark ?? false;
             var background = look.WallpaperColor is int wallpaper
-                ? new Background(0, false, dark, string.Empty, null, new BackgroundTypeFill(new BackgroundFillSolid(wallpaper), 0))
+                ? new Background(0, false, dark, string.Empty, null, new BackgroundTypeFill(new BackgroundFillSolid(wallpaper)))
                 : baseSettings?.Background;
 
             return new ThemeSettings
