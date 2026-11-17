@@ -2,7 +2,7 @@
 
 ## 2026-11-17: the app builds and runs
 
-- `build.bat` now produces `Telegramin\winui-unpackagedd\Release\publish\Telegram.exe`.
+- `build.bat` now produces `Telegram/bin/winui-unpackaged/x64/Release/publish/Telegram.exe`.
   Fixes on the way: native projects pinned to Windows SDK 10.0.26100 (`Directory.Build.props`),
   upstream's banned WinRT file types reported as warnings, the wallet engine copied only when
   present, and five compile errors in the per-chat look.
