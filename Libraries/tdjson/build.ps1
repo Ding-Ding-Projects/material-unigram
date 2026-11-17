@@ -72,7 +72,9 @@ function ResolveVcpkgPaths {
     throw "vswhere.exe not found at $vswhere"
   }
 
-  $vs = & $vswhere -latest -prerelease -products * -requires Microsoft.Component.MSBuild -property installationPath
+  # MATERIAL_UNIGRAM_VS pins the dedicated toolchain build.bat installs, so another
+  # Visual Studio that happens to be newer is never picked by accident.
+  $vs = if ($env:MATERIAL_UNIGRAM_VS -and (Test-Path $env:MATERIAL_UNIGRAM_VS)) { $env:MATERIAL_UNIGRAM_VS } else { & $vswhere -latest -prerelease -products * -requires Microsoft.Component.MSBuild -property installationPath }
   if (-not $vs) {
     throw "No Visual Studio installation with MSBuild was found."
   }

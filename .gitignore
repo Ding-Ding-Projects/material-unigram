@@ -311,3 +311,8 @@ _Pvt_Extensions
 !/HANDOFF.md
 !/design/*.md
 !/CLOSEOUT_PROMPT.md
+
+# Material Unigram local toolchain pointer
+/scripts/.toolchain
+/server/.env
+/server/full/.env

@@ -1,0 +1,29 @@
+# Material Unigram proxy (MTProxy + dashboard).
+# Start: host.bat at the repository root, or: docker compose -f server/compose.yaml up -d
+# Settings come from server/.env (not committed). Copy server/.env.example to start.
+name: material-unigram-proxy
+
+services:
+  proxy:
+    image: ghcr.io/ding-ding-projects/material-unigram-proxy:${IMAGE_TAG:-0.1.0}
+    build:
+      context: .
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      PROXY_PORT: ${PROXY_PORT:-443}
+      DASHBOARD_PORT: 8080
+      DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD:?Set DASHBOARD_PASSWORD in server/.env}
+      PUBLIC_HOST: ${PUBLIC_HOST:-}
+      TLS_DOMAIN: ${TLS_DOMAIN:-}
+      PROXY_TAG: ${PROXY_TAG:-}
+    ports:
+      - "${PROXY_PORT:-443}:${PROXY_PORT:-443}"
+      - "${DASHBOARD_HOST_PORT:-8080}:8080"
+    volumes:
+      - proxy-data:/data
+
+volumes:
+  proxy-data:

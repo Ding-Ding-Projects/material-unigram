@@ -1,0 +1,36 @@
+/* Dashboard layout on top of the Ink and Tide tokens in theme.css. */
+html, body { margin: 0; min-height: 100%; }
+body.app { min-height: 100vh; }
+body.center { display: flex; align-items: center; justify-content: center; padding: 16px; }
+.grow { flex: 1; min-width: 0; }
+.wrap { flex-wrap: wrap; }
+.ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.topbar { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: var(--ink); color: #fff; flex-wrap: wrap; }
+.topbar .logo { width: 36px; height: 36px; border-radius: 12px; margin: 0; }
+.brand { font-size: 20px; }
+.muted-on-ink { color: var(--ink-mute); }
+.topsearch input { background: rgba(255, 255, 255, .1); border: 0; border-radius: 12px; height: 40px; padding: 0 12px; color: #fff; font: inherit; width: 220px; max-width: 50vw; }
+.chip.dark { color: #fff; border-color: rgba(255, 255, 255, .3); }
+.regex { margin: 10px 10px 0; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.flags { flex-wrap: wrap; }
+.layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 10px; padding: 10px; }
+.hero, .now, .logbox { padding: 24px 26px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.hero h1 { margin: 0; font-size: 32px; flex: 1; }
+.now h2, .logbox h2 { margin: 0; font-size: 22px; }
+.link { padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.facts { gap: 10px; }
+.fact { padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.big { font-size: 34px; }
+.chart { width: 100%; height: 140px; color: var(--emerald); }
+.logbox { grid-column: 1 / 3; }
+.log { margin: 0; background: var(--ink); color: #c9d4de; border-radius: 14px; padding: 14px; max-height: 360px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; line-height: 1.7; }
+.login { width: min(420px, 100%); padding: 32px; display: flex; flex-direction: column; gap: 14px; }
+.login h1 { margin: 0; font-size: 30px; }
+.login .logo { margin: 0; }
+.login form { gap: 10px; }
+.error { color: #b8321a; min-height: 1.4em; margin: 0; }
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; }
+  .logbox { grid-column: auto; }
+  #provenance { display: none; }
+}
