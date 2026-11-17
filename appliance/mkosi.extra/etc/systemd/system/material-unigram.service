@@ -1,0 +1,14 @@
+[Unit]
+Description=Material Unigram server stack
+Wants=network-online.target docker.service
+After=network-online.target docker.service
+Before=getty@tty1.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/material-unigram-firstboot
+TimeoutStartSec=15min
+
+[Install]
+WantedBy=multi-user.target

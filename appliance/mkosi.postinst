@@ -1,0 +1,11 @@
+#!/bin/sh
+# Runs after the image contents are in place. Current mkosi runs this outside the image with the
+# image root at $BUILDROOT; commands meant for the image go through mkosi-chroot.
+set -eu
+chmod 755 "$BUILDROOT/usr/local/sbin/material-unigram-firstboot"
+mkosi-chroot systemctl enable docker.service material-unigram.service systemd-networkd.service systemd-resolved.service systemd-timesyncd.service
+# Any wired interface gets an address by DHCP.
+mkdir -p "$BUILDROOT/etc/systemd/network"
+printf '[Match]\nName=en* eth*\n\n[Network]\nDHCP=yes\n' > "$BUILDROOT/etc/systemd/network/20-wired.network"
+# No password sign-in on the console; the appliance is managed from the dashboard.
+mkosi-chroot passwd -l root

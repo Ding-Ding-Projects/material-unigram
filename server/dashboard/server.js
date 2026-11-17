@@ -8,6 +8,16 @@ const http = require('node:http');
 const path = require('node:path');
 const { createAuth } = require('./auth');
 const { fetchStats, summarize, shareLinks, lanAddresses } = require('./proxy');
+const full = require('./fullserver');
+const { ensureServerKey } = require('./rsakey');
+
+// proxy: MTProxy in this container. full: the Teamgram stack, checked over the Docker network.
+const MODE = process.env.DASHBOARD_MODE === 'full' ? 'full' : 'proxy';
+const KEYS_DIR = process.env.KEYS_DIR || '/keys';
+if (MODE === 'full') {
+  fs.mkdirSync(KEYS_DIR, { recursive: true });
+  ensureServerKey(KEYS_DIR);
+}
 
 const VERSION = '0.1.0';
 const STARTED_AT = new Date().toISOString();
@@ -84,11 +94,11 @@ const server = http.createServer(async (req, res) => {
   const address = req.socket.remoteAddress || 'unknown';
 
   if (url.pathname === '/healthz') {
-    const { ok } = await fetchStats();
+    const ok = MODE === 'full' ? (await full.serviceHealth()).allUp : (await fetchStats()).ok;
     return json(res, ok ? 200 : 503, { ok, version: VERSION, startedAt: STARTED_AT, proxyPort: PROXY_PORT });
   }
 
-  if (['/theme.css', '/app.css', '/app.js', '/icon.svg', '/login.js'].includes(url.pathname)) {
+  if (['/theme.css', '/app.css', '/app.js', '/full.js', '/icon.svg', '/login.js'].includes(url.pathname)) {
     return serve(res, url.pathname.slice(1));
   }
 
@@ -117,6 +127,24 @@ const server = http.createServer(async (req, res) => {
     return json(res, 200, {}, { 'Set-Cookie': 'mup_session=; Path=/; Max-Age=0' });
   }
 
+  if (url.pathname === '/api/status' && MODE === 'full') {
+    const health = await full.serviceHealth();
+    const key = full.serverKey(KEYS_DIR);
+    return json(res, 200, {
+      mode: 'full',
+      version: VERSION,
+      teamgramCommit: process.env.TEAMGRAM_COMMIT || 'unknown',
+      startedAt: STARTED_AT,
+      running: health.allUp,
+      services: health.services,
+      host: publicHost(),
+      hostIsGuess: !process.env.PUBLIC_HOST,
+      gatewayPort: Number(process.env.GATEWAY_PORT || 10443),
+      publicKey: key && key.publicKey,
+      fingerprint: key && key.fingerprint
+    });
+  }
+
   if (url.pathname === '/api/status') {
     const { ok, stats } = await fetchStats();
     const host = publicHost();
@@ -127,6 +155,7 @@ const server = http.createServer(async (req, res) => {
       log(`share link unavailable: ${error.message}`);
     }
     return json(res, 200, {
+      mode: 'proxy',
       version: VERSION,
       mtproxyCommit: process.env.MTPROXY_COMMIT || 'unknown',
       startedAt: STARTED_AT,
@@ -145,7 +174,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (url.pathname === '/' || url.pathname === '/index.html') {
-    return serve(res, 'index.html');
+    return serve(res, MODE === 'full' ? 'full.html' : 'index.html');
   }
 
   return send(res, 404, 'Not found');

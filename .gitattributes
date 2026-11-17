@@ -75,3 +75,5 @@ Libraries/vcpkg-ports/** text eol=lf
 
 # Shell scripts run inside Linux containers and WSL: keep LF everywhere.
 *.sh text eol=lf
+appliance/mkosi.postinst text eol=lf
+appliance/mkosi.extra/** text eol=lf

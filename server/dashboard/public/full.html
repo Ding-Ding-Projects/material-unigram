@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Material Unigram full server</title>
+<link rel="icon" href="/icon.svg">
+<link rel="stylesheet" href="/theme.css">
+<link rel="stylesheet" href="/app.css">
+<script src="/full.js" defer></script>
+</head>
+<body class="app">
+<header class="topbar">
+  <span class="logo" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/></svg></span>
+  <b class="disp brand">Material Unigram full server</b>
+  <span class="grow"></span>
+  <label class="topsearch"><span class="sr">Search services</span><input id="search" placeholder="Search services"></label>
+  <button id="regexToggle" class="rx" aria-pressed="false" aria-label="Regex builder for service search" title="Regex builder">.*</button>
+  <span id="provenance" class="small muted-on-ink"></span>
+  <button id="signOut" class="chip dark">Sign out</button>
+</header>
+
+<div id="regexPanel" class="sheet regex" hidden>
+  <div class="hbar"><b class="grow">Regex builder</b><span id="regexState" class="tag ok">Valid</span></div>
+  <div class="hbar small flags"><label><input type="checkbox" id="flagI" checked> ignore case</label></div>
+  <p id="regexExplain" class="small mute"></p>
+</div>
+
+<main class="layout">
+  <section class="sheet hero" aria-labelledby="status-title">
+    <div class="hbar wrap"><h1 id="status-title" class="disp">Checking the server...</h1><span id="statusTag" class="tag">Checking</span></div>
+    <p class="mute">A private Telegram-compatible network on this computer: accounts made here can talk to each other, not to people on Telegram.</p>
+    <div class="grid2 facts">
+      <div class="sheet2 fact"><span class="small mute">Server address</span><b id="host" class="mono">-</b></div>
+      <div class="sheet2 fact"><span class="small mute">Port</span><b id="port" class="mono">-</b></div>
+    </div>
+    <div class="sheet2 link">
+      <span class="small mute">Server key fingerprint (Material Unigram checks this)</span>
+      <div class="hbar wrap"><code id="fingerprint" class="mono grow">-</code><button id="copyKey" class="btn sm tonal" disabled>Copy public key</button></div>
+      <p id="hostNote" class="small mute"></p>
+    </div>
+  </section>
+
+  <section class="sheet now" aria-labelledby="services-title">
+    <div class="hbar"><h2 id="services-title" class="disp grow">Services</h2><span id="upCount" class="tag">-</span></div>
+    <ul id="services" class="services"></ul>
+  </section>
+</main>
+</body>
+</html>

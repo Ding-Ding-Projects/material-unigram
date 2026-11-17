@@ -14,14 +14,26 @@
 [CmdletBinding()]
 param(
     [ValidateSet('ask', 'detached', 'logs', 'stop')]
-    [string] $Mode = 'ask'
+    [string] $Mode = 'ask',
+
+    # proxy: MTProxy for your real Telegram account. full: a private Telegram-compatible server.
+    [ValidateSet('proxy', 'full')]
+    [string] $Server = 'proxy'
 )
 
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 $serverDir = Join-Path $root 'server'
-$compose = Join-Path $serverDir 'compose.yaml'
-$envFile = Join-Path $serverDir '.env'
+if ($Server -eq 'full') {
+    $stackDir = Join-Path $serverDir 'full'
+    $label = 'full server'
+} else {
+    $stackDir = $serverDir
+    $label = 'Telegram proxy'
+}
+$compose = Join-Path $stackDir 'compose.yaml'
+$envFile = Join-Path $stackDir '.env'
+$serviceForLogs = if ($Server -eq 'full') { '' } else { 'proxy' }
 
 function Say([string] $text, [string] $color = 'Gray') { Write-Host $text -ForegroundColor $color }
 function Fail([string] $text) { Say "FAILED: $text" 'Red'; exit 1 }
@@ -72,9 +84,22 @@ function Test-Docker {
     }
 }
 
+function New-Secret([int] $bytes = 24) {
+    $buffer = New-Object byte[] $bytes
+    [Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($buffer)
+    return ([Convert]::ToBase64String($buffer) -replace '[^A-Za-z0-9]', '')
+}
+
 function Ensure-Settings {
     if (-not (Test-Path $envFile)) {
-        Copy-Item (Join-Path $serverDir '.env.example') $envFile
+        Copy-Item (Join-Path $stackDir '.env.example') $envFile
+    }
+    if ($Server -eq 'full') {
+        # Internal service credentials: random, written once, never shown.
+        foreach ($name in 'MYSQL_ROOT_PASSWORD', 'MYSQL_PASSWORD', 'MINIO_ROOT_PASSWORD') {
+            if (-not (Read-EnvValue $name)) { Write-EnvValue $name (New-Secret) }
+        }
+        if (-not (Read-EnvValue 'MINIO_ROOT_USER')) { Write-EnvValue 'MINIO_ROOT_USER' ('store' + (New-Secret 6)) }
     }
     $password = Read-EnvValue 'DASHBOARD_PASSWORD'
     if (-not $password -or $password.Length -lt 8) {
@@ -97,21 +122,23 @@ function Start-Detached {
     Test-Docker
     $lan = Ensure-Settings
 
-    Say '==> Getting the proxy image' 'Cyan'
-    if ((Invoke-Compose @('pull', '--quiet')) -ne 0) {
-        Say '    The published image is not available; building it here instead (a few minutes).' 'Yellow'
-        if ((Invoke-Compose @('build')) -ne 0) { Fail 'Building the proxy image failed. Read the error above.' }
+    Say "==> Getting the $label images" 'Cyan'
+    if ((Invoke-Compose @('pull', '--quiet', '--ignore-buildable')) -ne 0 -or (Invoke-Compose @('pull', '--quiet')) -ne 0) {
+        Say '    Some published images are not available; building them here instead (several minutes).' 'Yellow'
+        if ((Invoke-Compose @('build')) -ne 0) { Fail "Building the $label images failed. Read the error above." }
     }
 
     Say '==> Starting' 'Cyan'
     if ((Invoke-Compose @('up', '-d')) -ne 0) { Fail 'docker compose up failed. Read the error above.' }
 
-    $port = Read-EnvValue 'DASHBOARD_HOST_PORT'; if (-not $port) { $port = '8080' }
-    $proxyPort = Read-EnvValue 'PROXY_PORT'; if (-not $proxyPort) { $proxyPort = '443' }
+    $port = Read-EnvValue 'DASHBOARD_HOST_PORT'; if (-not $port) { $port = if ($Server -eq 'full') { '8081' } else { '8080' } }
+    $proxyPort = if ($Server -eq 'full') { Read-EnvValue 'GATEWAY_PORT' } else { Read-EnvValue 'PROXY_PORT' }
+    if (-not $proxyPort) { $proxyPort = if ($Server -eq 'full') { '10443' } else { '443' } }
+    $waitSeconds = if ($Server -eq 'full') { 300 } else { 90 }
 
-    Say '==> Waiting for the proxy to be healthy (up to 90 seconds)' 'Cyan'
+    Say "==> Waiting for the $label to be healthy (up to $waitSeconds seconds)" 'Cyan'
     $healthy = $false
-    for ($i = 0; $i -lt 45; $i++) {
+    for ($i = 0; $i -lt ($waitSeconds / 2); $i++) {
         try {
             $r = Invoke-WebRequest -UseBasicParsing -TimeoutSec 3 "http://127.0.0.1:$port/healthz"
             if ($r.StatusCode -eq 200) { $healthy = $true; break }
@@ -120,7 +147,7 @@ function Start-Detached {
     }
     if (-not $healthy) {
         Invoke-Compose @('logs', '--tail', '40') | Out-Null
-        Fail 'The proxy did not become healthy within 90 seconds. Run host.bat --logs to see why.'
+        Fail "The $label did not become healthy within $waitSeconds seconds. Run host.bat --logs to see why."
     }
 
     $lanOk = $false
@@ -132,16 +159,18 @@ function Start-Detached {
     }
 
     Say ''
-    Say 'The Telegram proxy is running.' 'Green'
+    Say "The $label is running." 'Green'
     if ($lan) {
         Say "  Dashboard:  http://${lan}:$port/" 'White'
-        Say "  Proxy:      ${lan}:$proxyPort" 'White'
+        $what = if ($Server -eq 'full') { 'Server:    ' } else { 'Proxy:     ' }
+        Say "  $what ${lan}:$proxyPort" 'White'
         if ($lanOk) { Say '  Checked: the dashboard answered on the network address, not only on this computer.' 'Green' }
         else { Say '  Warning: the dashboard did not answer on the network address. Windows Firewall may be blocking it.' 'Yellow' }
     } else {
         Say "  Dashboard:  http://127.0.0.1:$port/  (no network address found)" 'Yellow'
     }
-    Say '  The share link for Material Unigram and phones is on the dashboard.'
+    if ($Server -eq 'full') { Say '  The server key fingerprint for Material Unigram is on the dashboard.' }
+    else { Say '  The share link for Material Unigram and phones is on the dashboard.' }
     return 0
 }
 
@@ -149,14 +178,15 @@ function Show-Logs {
     Test-Docker
     $follow = $true
     $filter = ''
-    $service = 'proxy'
     while ($true) {
         if ($follow) {
             Clear-Host
             $state = (& docker compose -f $compose --env-file $envFile ps --format '{{.Service}} {{.State}} {{.Health}}' 2>$null) -join '; '
-            Say "Material Unigram proxy - logs   ($state)" 'Green'
+            Say "Material Unigram $label - logs   ($state)" 'Green'
             Say ('-' * 72) 'DarkGray'
-            $lines = & docker compose -f $compose --env-file $envFile logs --no-color --tail 40 $service 2>&1
+            $logArgs = @('compose', '-f', $compose, '--env-file', $envFile, 'logs', '--no-color', '--tail', '40')
+            if ($serviceForLogs) { $logArgs += $serviceForLogs }
+            $lines = & docker @logArgs 2>&1
             foreach ($line in $lines) {
                 if (-not $filter -or "$line" -match $filter) { Write-Host "$line" }
             }

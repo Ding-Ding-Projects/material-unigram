@@ -1,0 +1,56 @@
+#!/bin/sh
+# First start of the appliance: choose random passwords, write the settings, start the server
+# stack, and put the dashboard address and password on the console sign-in screen.
+set -eu
+
+STACK=/opt/material-unigram/stack
+STATE=/var/lib/material-unigram
+VARIANT="$(head -n1 /etc/material-unigram/variant 2>/dev/null || echo proxy)"
+mkdir -p "$STATE"
+umask 077
+
+random() { openssl rand -base64 "${1:-18}" | tr -dc 'A-Za-z0-9' | head -c "${2:-24}"; }
+
+if [ ! -s "$STATE/settings.env" ]; then
+  {
+    echo "DASHBOARD_PASSWORD=$(random 18 16)"
+    if [ "$VARIANT" = "full" ]; then
+      echo "MYSQL_ROOT_PASSWORD=$(random)"
+      echo "MYSQL_PASSWORD=$(random)"
+      echo "MINIO_ROOT_USER=store$(random 6 6)"
+      echo "MINIO_ROOT_PASSWORD=$(random)"
+    fi
+  } > "$STATE/settings.env"
+fi
+
+# The address other devices use: the one on the default route, refreshed every boot.
+LAN="$(ip -4 route get 1.1.1.1 2>/dev/null | sed -n 's/.* src \([0-9.]*\).*/\1/p')"
+grep -v '^PUBLIC_HOST=' "$STATE/settings.env" > "$STATE/settings.tmp" || true
+echo "PUBLIC_HOST=$LAN" >> "$STATE/settings.tmp"
+mv "$STATE/settings.tmp" "$STATE/settings.env"
+
+if [ "$VARIANT" = "full" ]; then
+  COMPOSE="$STACK/full/compose.yaml"; PORT=8081
+else
+  COMPOSE="$STACK/compose.yaml"; PORT=8080
+fi
+
+# Images ship inside the appliance, so the first start works without internet access to a registry.
+if [ -s /opt/material-unigram/images.tar ] && [ ! -e "$STATE/images-loaded" ]; then
+  docker load -i /opt/material-unigram/images.tar
+  touch "$STATE/images-loaded"
+fi
+
+docker compose -f "$COMPOSE" --env-file "$STATE/settings.env" up -d --no-build
+
+PASSWORD="$(sed -n 's/^DASHBOARD_PASSWORD=//p' "$STATE/settings.env")"
+{
+  echo ""
+  echo "  Material Unigram appliance 0.1.0 ($VARIANT)"
+  echo ""
+  echo "  Open the dashboard on any device at home:"
+  echo "      http://$LAN:$PORT/"
+  echo "  Dashboard password: $PASSWORD"
+  echo "  (Change it in the dashboard settings. Shown here because only someone at this machine can read it.)"
+  echo ""
+} > /etc/issue.d/50-material-unigram.issue

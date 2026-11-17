@@ -316,3 +316,5 @@ _Pvt_Extensions
 /scripts/.toolchain
 /server/.env
 /server/full/.env
+/appliance/.build/
+/appliance/out/
