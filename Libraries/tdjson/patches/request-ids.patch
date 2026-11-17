@@ -1,0 +1,96 @@
+diff --git a/td/telegram/ClientJson.cpp b/td/telegram/ClientJson.cpp
+index a8e93ec18..e3811e126 100644
+--- a/td/telegram/ClientJson.cpp
++++ b/td/telegram/ClientJson.cpp
+@@ -153,6 +153,25 @@ const char *json_receive(double timeout) {
+   return store_string(from_response(*response.object, extra_str, response.client_id));
+ }
+ 
++void json_send_with_id(int client_id, std::int64_t request_id, Slice request) {
++  auto parsed_request = to_request(request);
++  get_manager()->send(client_id, static_cast<ClientManager::RequestId>(request_id), std::move(parsed_request.first));
++}
++
++const char *json_receive_with_id(double timeout, int *client_id, std::int64_t *request_id) {
++  auto response = get_manager()->receive(timeout);
++  if (client_id != nullptr) {
++    *client_id = response.client_id;
++  }
++  if (request_id != nullptr) {
++    *request_id = static_cast<std::int64_t>(response.request_id);
++  }
++  if (!response.object) {
++    return nullptr;
++  }
++  return store_string(from_response(*response.object, string(), 0));
++}
++
+ const char *json_execute(Slice request) {
+   auto parsed_request = to_request(request);
+   return store_string(
+diff --git a/td/telegram/ClientJson.h b/td/telegram/ClientJson.h
+index 0b7ea866b..0ea7c1449 100644
+--- a/td/telegram/ClientJson.h
++++ b/td/telegram/ClientJson.h
+@@ -42,4 +42,10 @@ const char *json_receive(double timeout);
+ 
+ const char *json_execute(Slice request);
+ 
++// Material Unigram: the app keeps its own request ids and reads them back with each response, so
++// these pass them straight through instead of round-tripping them as "@extra" in the JSON.
++void json_send_with_id(int client_id, std::int64_t request_id, Slice request);
++
++const char *json_receive_with_id(double timeout, int *client_id, std::int64_t *request_id);
++
+ }  // namespace td
+diff --git a/td/telegram/td_json_client.cpp b/td/telegram/td_json_client.cpp
+index 47d62bef2..156157374 100644
+--- a/td/telegram/td_json_client.cpp
++++ b/td/telegram/td_json_client.cpp
+@@ -35,12 +35,18 @@ int td_create_client_id() {
+   return td::json_create_client_id();
+ }
+ 
+-void td_send(int client_id, const char *request) {
+-  td::json_send(client_id, td::Slice(request == nullptr ? "" : request));
+-}
+-
+-const char *td_receive(double timeout) {
+-  return td::json_receive(timeout);
++// Material Unigram: request ids travel beside the JSON, as the app's bindings expect.
++void td_send(int client_id, long long request_id, const char *request) {
++  td::json_send_with_id(client_id, request_id, td::Slice(request == nullptr ? "" : request));
++}
++
++const char *td_receive(double timeout, int *client_id, long long *request_id) {
++  std::int64_t id = 0;
++  auto result = td::json_receive_with_id(timeout, client_id, &id);
++  if (request_id != nullptr) {
++    *request_id = id;
++  }
++  return result;
+ }
+ 
+ const char *td_execute(const char *request) {
+diff --git a/td/telegram/td_json_client.h b/td/telegram/td_json_client.h
+index 7ea78bf4c..a73314fd7 100644
+--- a/td/telegram/td_json_client.h
++++ b/td/telegram/td_json_client.h
+@@ -66,7 +66,7 @@ TDJSON_EXPORT int td_create_client_id();
+  * \param[in] client_id TDLib client identifier.
+  * \param[in] request JSON-serialized null-terminated request to TDLib.
+  */
+-TDJSON_EXPORT void td_send(int client_id, const char *request);
++TDJSON_EXPORT void td_send(int client_id, long long request_id, const char *request);
+ 
+ /**
+  * Receives incoming updates and request responses. Must not be called simultaneously from two different threads.
+@@ -74,7 +74,7 @@ TDJSON_EXPORT void td_send(int client_id, const char *request);
+  * \param[in] timeout The maximum number of seconds allowed for this function to wait for new data.
+  * \return JSON-serialized null-terminated incoming update or request response. May be NULL if the timeout expires.
+  */
+-TDJSON_EXPORT const char *td_receive(double timeout);
++TDJSON_EXPORT const char *td_receive(double timeout, int *client_id, long long *request_id);
+ 
+ /**
+  * Synchronously executes a TDLib request.

@@ -11,7 +11,7 @@ real built app. Anything written but unverified stays unticked with its state be
 
 - [x] Public fork created from `TelegramMessenger/Unigram` with an `upstream` remote
 - [x] Agent instructions, roadmap and handoff records added
-- [ ] Root `build.bat` that installs missing dependencies automatically (written: Chocolatey tools, a dedicated Visual Studio 2026 Build Tools install, vcpkg at a pinned baseline; a full native build has not finished yet)
+- [ ] Root `build.bat` that installs missing dependencies automatically (a full build now publishes `Telegram.exe`, which starts and reaches Running; not yet run on a fresh machine)
 - [ ] Root `build-installer.bat` (not started)
 - [ ] API credentials supplied through a local, uncommitted configuration file (never in source)
 
@@ -59,7 +59,7 @@ WSL, and a minimal Linux appliance image. Run from the repository or from the ho
 - [x] MTProxy Docker image and dashboard (`server/`): built, started with `host.bat --detached`, signed in, LAN address checked
 - [x] MTProxy in WSL (`go-host.bat`): built in a dedicated distribution, started, LAN address checked
 - [x] Teamgram full server in Docker (`server/full/`): all seven services up, and a real MTProto handshake offered this install's own key fingerprint
-- [ ] Appliance image (`appliance/`): the proxy image builds (`.img` and `.vhdx`); a boot test is running, not yet confirmed healthy; the full-server image has not been built
+- [ ] Appliance image (`appliance/`): the proxy image builds, boots and starts the stack, and the dashboard answers inside the guest; its health check reports 503 because MTProxy restarts every minute under software emulation (not yet tried on real hardware); the full-server image has not been built
 - [ ] Host assistant (`hostassistant/`): the portable exe builds; steps 1 to 3 driven in the built exe (real Docker check, empty password refused); Start not yet run from it
-- [ ] Sign in to the full server from Material Unigram (written: TDLib patch `Libraries/tdjson/patches/private-server.patch`, `PrivateServerSettings`, `PrivateServerPopup` and the Add account menu; not yet seen working in a running build)
+- [ ] Sign in to the full server from Material Unigram (written and built: TDLib patch `Libraries/tdjson/patches/private-server.patch`, `PrivateServerSettings`, `PrivateServerPopup` and the Add account menu; not yet driven in the running app, because the app's window cannot be captured off-screen)
 - [ ] Share links and the private server's values as QR codes on the dashboard

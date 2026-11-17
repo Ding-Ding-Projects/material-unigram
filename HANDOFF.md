@@ -1,5 +1,19 @@
 # Handoff
 
+## 2026-11-17: the app builds and runs
+
+- `build.bat` now produces `Telegramin\winui-unpackagedd\Release\publish\Telegram.exe`.
+  Fixes on the way: native projects pinned to Windows SDK 10.0.26100 (`Directory.Build.props`),
+  upstream's banned WinRT file types reported as warnings, the wallet engine copied only when
+  present, and five compile errors in the per-chat look.
+- The app crashed in `td_send` at startup: its managed bindings pass a request id beside each
+  request, which stock TDLib 1.8.70 does not accept. `Libraries/tdjson/patches/request-ids.patch`
+  adds that interface. With it the app starts and reaches Running.
+- The appliance image boots, runs first boot and starts the stack (it was missing `docker-cli`).
+- Not verified: anything visual in the app. A WinUI window on an off-screen desktop is not
+  composed, so captures come back blank; upstream's screenshot tool needs the visible desktop or
+  Windows Sandbox, which is not installed here. The wallet does not work without its engine.
+
 ## 2026-11-17: hosted servers and signing in to your own server
 
 - `server/` hosts Telegram's open-source MTProxy with a signed-in dashboard; `server/full/` hosts
