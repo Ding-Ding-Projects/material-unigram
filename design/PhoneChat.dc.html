@@ -27,6 +27,7 @@
   <div class="scrim" aria-hidden="true"></div>
   <section role="dialog" aria-label="Message actions" style="position: absolute; left: 0; right: 0; bottom: 0; background: #fff; border-radius: 28px 28px 0 0; padding: 10px 14px 22px; display: flex; flex-direction: column; gap: 2px">
     <span style="width: 40px; height: 4px; border-radius: 2px; background: var(--line); align-self: center; margin-bottom: 8px"></span>
+    <div style="display: flex; gap: 8px; padding: 0 2px 6px"><label class="search" style="flex: 1; height: 48px"><span class="sr">Search actions</span><input placeholder="Search actions"></label><button class="rx" aria-label="Regex builder for action search">.*</button></div>
     <div class="hbar" style="gap: 8px; padding: 4px 4px 10px"><span class="chip">&#128077;</span><span class="chip">&#10084;</span><span class="chip">&#128514;</span><span class="chip">+</span></div>
     <sc-for list="{{items}}" as="it" hint-placeholder-count="8">
       <div class="{{it.cls}}" style="min-height: 48px"><span style="flex: 1">{{it.label}}</span><span class="small mute">{{it.hint}}</span></div>
@@ -37,7 +38,7 @@
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
   renderVals() {
-    const items = [['Reply', ''], ['Copy', ''], ['Open in a new tab', ''], ['Explain this', ''], ['Edit appearance', 'opens a sheet'], ['Lock this', ''], ['Select several', ''], ['Export', '']].map((m, i) => ({ label: m[0], hint: m[1], cls: i === 4 ? 'row on' : 'row' }));
+    const items = [['Reply', ''], ['Copy', ''], ['Open in a new tab', 'Already open'], ['Explain this', ''], ['Edit appearance', '2 changes'], ['Lock this', 'Off'], ['Select several', ''], ['Export', 'Last: HTML']].map((m, i) => ({ label: m[0], hint: m[1], cls: i === 4 ? 'row on' : 'row' }));
     return { items };
   }
 }

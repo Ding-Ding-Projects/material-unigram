@@ -43,6 +43,18 @@ chrome would leak content or confuse setup) and shows `ElementTools` open on a r
 Every documentation-site board imports `SiteBar` and `ElementTools`. Mobile boards show the same
 actions as a long-press sheet and the appearance editor as a bottom sheet.
 
+### Menus and the palette: search and live state
+
+- Every context menu (`ElementTools`, the member menu on `ChatInfo`, the snippet menu on
+  `Handoff`, the long-press sheet on `PhoneChat`) opens with its own search bar and regex builder
+  button, and the appearance editor has one for its properties.
+- Every action shows its live state where it has one: switches for on and off actions (Lock this,
+  Add to favourites, Dark theme), values (Wallpaper darkness 40%), counts (2 changes, 3 selected)
+  and status (Already open, Signed in, On now).
+- The command palette (`Palette`) has a full search bar with the regex builder row open (pattern,
+  flags, scope, validity, timing), live switches and values on every result, and a live preview of
+  the highlighted action before Enter applies it.
+
 ### Boards by canvas page (one feature category per page)
 
 | Page | Boards |

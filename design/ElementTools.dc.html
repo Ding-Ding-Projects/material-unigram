@@ -12,35 +12,60 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=Figtree:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
 <style>body{margin:0}</style>
 </helmet>
-<div class="app" style="width: 640px; height: 470px; display: flex; gap: 10px; background: transparent; font-family: 'Figtree', system-ui, sans-serif">
-  <div role="menu" aria-label="Actions for {{target}}" class="sheet" style="width: 300px; padding: 8px; box-shadow: 0 18px 44px rgba(15,26,36,.28); border: 1.5px solid var(--line); align-self: flex-start">
-    <div class="small mute" style="padding: 8px 12px 6px">{{target}}</div>
+<div class="app" style="width: 680px; height: 560px; display: flex; gap: 10px; background: transparent; font-family: 'Figtree', system-ui, sans-serif">
+  <div role="menu" aria-label="Actions for {{target}}" class="sheet" style="width: 330px; padding: 8px; box-shadow: 0 18px 44px rgba(15,26,36,.28); border: 1.5px solid var(--line); align-self: flex-start">
+    <div class="small mute" style="padding: 6px 10px 6px">{{target}}</div>
+    <div style="display: flex; gap: 6px; padding: 0 4px 6px">
+      <label class="search" style="flex: 1; height: 38px; border-radius: 12px"><span class="sr">Search actions</span><input placeholder="Search 24 actions" value="{{query}}"></label>
+      <button class="rx" aria-label="Regex builder for action search" style="width: 38px; height: 38px; border-radius: 12px">.*</button>
+    </div>
     <sc-for list="{{items}}" as="it" hint-placeholder-count="10">
-      <div role="menuitem" class="{{it.cls}}" style="padding: 8px 12px"><span style="flex: 1">{{it.label}}</span><span class="kbd">{{it.key}}</span></div>
+      <div role="menuitem" class="{{it.cls}}" style="padding: 7px 10px; gap: 8px">
+        <span style="flex: 1">{{it.label}}</span>
+        <sc-if value="{{it.isSwitch}}" hint-placeholder-val="{{false}}"><span role="switch" aria-checked="{{it.on}}" aria-label="{{it.label}}" class="{{it.swCls}}" style="width: 40px; height: 24px"></span></sc-if>
+        <sc-if value="{{it.hasLive}}" hint-placeholder-val="{{false}}"><span class="{{it.liveCls}}">{{it.live}}</span></sc-if>
+        <span class="kbd">{{it.key}}</span>
+      </div>
     </sc-for>
   </div>
-  <section aria-label="Edit appearance of {{target}}" class="sheet" style="width: 330px; padding: 18px; box-shadow: 0 18px 44px rgba(15,26,36,.28); border: 2px solid var(--violet); display: flex; flex-direction: column; gap: 10px; align-self: flex-start">
-    <div class="hbar"><b class="disp" style="font-size: 18px; flex: 1">Edit appearance</b><span class="tag vio">This element</span></div>
-    <span class="small mute">{{target}}</span>
+  <section aria-label="Edit appearance of {{target}}" class="sheet" style="width: 340px; padding: 18px; box-shadow: 0 18px 44px rgba(15,26,36,.28); border: 2px solid var(--violet); display: flex; flex-direction: column; gap: 10px; align-self: flex-start">
+    <div class="hbar"><b class="disp" style="font-size: 18px; flex: 1">Edit appearance</b><span class="tag vio">Live preview</span></div>
+    <div class="row on" style="cursor: default; outline: 2px dashed var(--violet); outline-offset: 2px"><span class="av" style="width: 36px; height: 36px; background: #bfeedd">DT</span><span style="flex: 1"><b style="display: block">{{target}}</b><span class="small mute">changes show here and in the app as you drag</span></span></div>
+    <div style="display: flex; gap: 6px"><label class="search" style="flex: 1; height: 38px; border-radius: 12px"><span class="sr">Search appearance properties</span><input placeholder="Search 18 properties"></label><button class="rx" aria-label="Regex builder for property search" style="width: 38px; height: 38px; border-radius: 12px">.*</button></div>
     <div class="grid2" style="gap: 8px">
       <div class="field small"><b>Fill</b><span class="hbar"><span style="width: 26px; height: 26px; border-radius: 8px; background: #d3f1e7; border: 1.5px solid var(--line)"></span><span class="mono">#D3F1E7</span></span></div>
       <div class="field small"><b>Text</b><span class="hbar"><span style="width: 26px; height: 26px; border-radius: 8px; background: #121a21"></span><span class="mono">#121A21</span></span></div>
       <label class="field small"><b>Corners · 16 px</b><input type="range" class="range" min="0" max="32" value="16"></label>
       <label class="field small"><b>Text size · 14 px</b><input type="range" class="range" min="11" max="24" value="14"></label>
-      <label class="field small"><b>Font</b><select><option>Figtree</option><option>Bricolage Grotesque</option><option>System</option></select></label>
-      <label class="field small"><b>Spacing</b><select><option>Normal</option><option>Roomy</option><option>Tight</option></select></label>
     </div>
-    <div class="hbar small" style="gap: 6px"><span class="chip on" style="height: 30px">Only this one</span><span class="chip" style="height: 30px">All like it</span></div>
-    <div class="hbar"><span class="tag ok">Contrast 12:1</span><span style="flex: 1"></span><button class="btn sm ghost">Reset</button><button class="btn sm">Done</button></div>
+    <div class="hbar small" style="gap: 6px"><span class="chip on" style="height: 30px">Only this one</span><span class="chip" style="height: 30px">All like it · 6</span></div>
+    <div class="hbar"><span class="tag ok">Contrast 12:1</span><span class="small mute" style="flex: 1">2 changes</span><button class="btn sm ghost">Reset</button><button class="btn sm">Done</button></div>
   </section>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"target":{"editor":"text","default":"Chat list row"},"$preview":{"width":640,"height":470}}'>
+<script type="text/x-dc" data-dc-script data-props='{"target":{"editor":"text","default":"Chat list row"},"$preview":{"width":680,"height":560}}'>
 class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { locked: false, fav: true }; }
   renderVals() {
-    const items = [['Copy', 'Ctrl C'], ['Open in a new tab', 'Ctrl Enter'], ['Explain this', 'F1'], ['Edit appearance', 'Ctrl Shift L'], ['Lock this', 'Ctrl L'], ['Select several', 'Ctrl Click'], ['Search inside', 'Ctrl F'], ['Export', 'Ctrl E'], ['Add to favourites', 'Ctrl D'], ['All shortcuts', 'Ctrl /']]
-      .map((m, i) => ({ label: m[0], key: m[1], cls: i === 3 ? 'row on' : 'row' }));
-    return { items, target: this.props.target ?? 'Chat list row' };
+    const s = this.state;
+    const data = [
+      ['Copy', 'Ctrl C', '', 'Copied 2 min ago'],
+      ['Open in a new tab', 'Ctrl Enter', '', 'Already open'],
+      ['Explain this', 'F1', '', ''],
+      ['Edit appearance', 'Ctrl Shift L', '', '2 changes'],
+      ['Lock this', 'Ctrl L', 'locked', ''],
+      ['Add to favourites', 'Ctrl D', 'fav', ''],
+      ['Select several', 'Ctrl Click', '', '3 selected'],
+      ['Search inside', 'Ctrl F', '', '1,284 items'],
+      ['Export', 'Ctrl E', '', 'Last: HTML'],
+      ['All shortcuts', 'Ctrl /', '', '']
+    ];
+    const items = data.map((m, i) => {
+      const isSwitch = !!m[2], on = isSwitch ? !!s[m[2]] : false;
+      return { label: m[0], key: m[1], isSwitch, on, swCls: on ? 'sw on' : 'sw', hasLive: !!m[3], live: m[3], liveCls: m[3] === 'Already open' || m[3] === '3 selected' ? 'tag ok' : 'tag',
+        cls: i === 3 ? 'row on' : 'row' };
+    });
+    return { items, query: '', target: this.props.target ?? 'Chat list row' };
   }
 }
 </script>

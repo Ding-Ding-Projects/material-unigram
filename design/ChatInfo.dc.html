@@ -63,13 +63,14 @@
   </section>
 
   <!-- context menu with working shortcuts -->
-  <div role="menu" aria-label="Member actions" class="dialog" style="left: 300px; top: 300px; width: 280px; padding: 8px; border-radius: 18px">
+  <div role="menu" aria-label="Member actions" class="dialog" style="left: 300px; top: 300px; width: 320px; padding: 8px; border-radius: 18px">
+    <div style="display: flex; gap: 6px; padding: 4px 4px 6px"><label class="search" style="flex: 1; height: 38px; border-radius: 12px"><span class="sr">Search member actions</span><input placeholder="Search member actions"></label><button class="rx" aria-label="Regex builder for search member actions" style="width: 38px; height: 38px; border-radius: 12px">.*</button></div>
     <sc-for list="{{menu}}" as="it" hint-placeholder-count="6">
-      <button role="menuitem" class="row" style="{{it.style}}"><span style="flex: 1">{{it.label}}</span><span class="kbd">{{it.key}}</span></button>
+      <button role="menuitem" class="row" style="{{it.style}}"><span style="flex: 1">{{it.label}}</span><sc-if value="{{it.hasLive}}" hint-placeholder-val="{{false}}"><span class="tag">{{it.live}}</span></sc-if><span class="kbd">{{it.key}}</span></button>
     </sc-for>
   </div>
 </div>
-<div style="position: absolute; left: 60px; top: 484px; z-index: 5"><dc-import name="ElementTools" target="Member row: Alex Chan" hint-size="640px,470px"></dc-import></div>
+<div style="position: absolute; left: 60px; top: 384px; z-index: 5"><dc-import name="ElementTools" target="Member row: Alex Chan" hint-size="680px,560px"></dc-import></div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":964}}'>
@@ -79,7 +80,7 @@ class Component extends DCLogic {
     const members = [['Ada Lin', 'AL', 'online', 'Owner', 1], ['Alex Chan', 'AC', 'last seen 5 min ago', 'Admin', 1], ['Ava Park', 'AP', 'online', 'Member', 1], ['Amir Rahimi', 'AR', 'yesterday', 'Member', 0], ['Ana Souza', 'AS', 'this week', 'Member', 0], ['Ari Cohen', 'AC', 'recently', 'Member', 0], ['Ayo Bello', 'AB', '2 hours ago', 'Member', 0], ['You', 'ME', 'online', 'Admin', 0]]
       .map((m, i) => ({ name: m[0], ini: m[1], seen: m[2], role: m[3], sel: !!m[4], cls: m[4] ? 'row on' : 'row', roleCls: m[3] === 'Owner' ? 'tag hot' : m[3] === 'Admin' ? 'tag vio' : 'tag', av: `width: 40px; height: 40px; background: ${pastel[i]}` }));
     const menu = [['Send message', 'Enter'], ['Mention in chat', 'Ctrl M'], ['Copy username', 'Ctrl C'], ['Make admin', 'Ctrl Shift A'], ['Lock this item', 'Ctrl L'], ['Remove from group', 'Del']]
-      .map((m, i) => ({ label: m[0], key: m[1], style: `padding: 10px 12px; ${i === 5 ? 'color: #b8321a' : ''}` }));
+      .map((m, i) => ({ label: m[0], key: m[1], hasLive: i === 3 || i === 4, live: i === 3 ? 'Member now' : 'Unlocked', style: `padding: 10px 12px; ${i === 5 ? 'color: #b8321a' : ''}` }));
     return { members, menu };
   }
 }
