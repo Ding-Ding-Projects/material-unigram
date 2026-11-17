@@ -27,6 +27,10 @@ popd
 if not "%ERR%"=="0" goto :failed
 
 echo ==^> Building the app (unpackaged WinUI, x64 Release)
+rem Upstream bans the old WinRT file types in the WinUI build while it is still porting them, and
+rem its own tree has not finished. Reported as warnings instead of errors, so this builds a
+rem running app; the warnings still list every site left to port.
+set "WinUIBannedApisAsErrors=false"
 powershell -NoProfile -ExecutionPolicy Bypass -File "%ROOT%Build.WinUI.ps1" -Unpackaged
 if errorlevel 1 goto :failed
 
