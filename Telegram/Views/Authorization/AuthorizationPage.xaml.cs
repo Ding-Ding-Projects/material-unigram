@@ -10,11 +10,16 @@ using System.Numerics;
 using Telegram.Common;
 using Telegram.Controls;
 using Telegram.Navigation;
+using Telegram.Services;
+using Telegram.Services.Settings;
 using Telegram.Streams;
 using Telegram.ViewModels.Authorization;
 using Telegram.ViewModels.Delegates;
+using Telegram.Views.Host;
+using Telegram.Views.Popups;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
@@ -28,6 +33,25 @@ namespace Telegram.Views.Authorization
         public AuthorizationPage()
         {
             InitializeComponent();
+            PrivateServer.Content = Strings.PrivateServer;
+        }
+
+        // Signs in to a self-hosted server instead of Telegram: the address and key are saved,
+        // then a private-server session replaces this one. The empty Telegram session left behind
+        // is deleted at the next start, as every unauthorized session is.
+        private async void PrivateServer_Click(object sender, RoutedEventArgs e)
+        {
+            var popup = new PrivateServerPopup();
+            var result = await ViewModel.ShowPopupAsync(popup);
+            popup.Commit(result);
+
+            if (result != ContentDialogResult.Primary || !AppSettings.PrivateServer.IsConfigured || ViewModel.Settings.UseTestDC)
+            {
+                return;
+            }
+
+            var root = this.GetParent<RootWindow>();
+            root?.Switch(LifetimeService.Current.Create(test: true));
         }
 
         private bool _waiting = true;

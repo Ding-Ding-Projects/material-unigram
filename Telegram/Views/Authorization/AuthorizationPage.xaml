@@ -227,13 +227,18 @@
                                HorizontalAlignment="Center"
                                Grid.Row="2" />
 
-        <Button x:Name="Proxy"
-                Click="{x:Bind ViewModel.Proxy}"
-                Content="{x:Bind ViewModel.S.ProxySettings, Mode=OneWay}"
-                Style="{StaticResource AccentTextButtonStyle}"
-                HorizontalAlignment="Right"
-                Margin="12,0"
-                Grid.Row="1" />
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="12,0"
+                    Grid.Row="1">
+            <Button x:Name="PrivateServer"
+                    Click="PrivateServer_Click"
+                    Style="{StaticResource AccentTextButtonStyle}" />
+            <Button x:Name="Proxy"
+                    Click="{x:Bind ViewModel.Proxy}"
+                    Content="{x:Bind ViewModel.S.ProxySettings, Mode=OneWay}"
+                    Style="{StaticResource AccentTextButtonStyle}" />
+        </StackPanel>
 
         <Border x:Name="TitleBar"
                 Background="Transparent" />

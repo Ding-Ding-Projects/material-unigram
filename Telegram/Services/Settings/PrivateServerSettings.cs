@@ -22,6 +22,14 @@ namespace Telegram.Services.Settings
 
         private static readonly Regex AddressPattern = new(@"^[A-Za-z0-9.\-\[\]:]+:\d{1,5}$");
 
+        /// <summary>
+        /// Used for private-server sessions only, when this build has no Telegram API id of its
+        /// own. TDLib refuses to start without one; a self-hosted server does not check it, and
+        /// Telegram sessions still need the real values.
+        /// </summary>
+        public const int PlaceholderApiId = 1;
+        public const string PlaceholderApiHash = "00000000000000000000000000000000";
+
         public PrivateServerSettings(ISettingsStore container)
             : base(container)
         {

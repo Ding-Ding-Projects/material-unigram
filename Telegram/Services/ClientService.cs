@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Telegram.Collections;
 using Telegram.Common;
 using Telegram.Td;
+using Telegram.Services.Settings;
 using Telegram.Td.Api;
 using Telegram.ViewModels;
 using Windows.Storage;
@@ -547,6 +548,9 @@ namespace Telegram.Services
                 _client.Send(new SetOption("use_pfs", new OptionValueBoolean(true)));
                 _client.Send(new SetOption("notification_group_count_max", new OptionValueInteger(25)));
                 _client.Send(new SetOption("storage_max_time_from_last_access", new OptionValueInteger(AppSettings.Diagnostics.StorageMaxTimeFromLastAccess)));
+                // A private-server session can start without this build's Telegram API id.
+                var usePlaceholderApi = _settings.UseTestDC && Constants.ApiId == 0 && AppSettings.PrivateServer.IsConfigured;
+
                 _client.Send(new SetTdlibParameters(
                     useTestDc: _settings.UseTestDC,
                     databaseDirectory: System.IO.Path.Combine(AppPaths.LocalPath, $"{_session.Id}"),
@@ -556,8 +560,8 @@ namespace Telegram.Services
                     useChatInfoDatabase: true,
                     useMessageDatabase: useMessageDatabase,
                     useSecretChats: true,
-                    apiId: Constants.ApiId,
-                    apiHash: Constants.ApiHash,
+                    apiId: usePlaceholderApi ? PrivateServerSettings.PlaceholderApiId : Constants.ApiId,
+                    apiHash: usePlaceholderApi ? PrivateServerSettings.PlaceholderApiHash : Constants.ApiHash,
                     systemLanguageCode: _deviceInfoService.SystemLanguageCode,
                     deviceModel: deviceModel,
                     systemVersion: _deviceInfoService.SystemVersion,
