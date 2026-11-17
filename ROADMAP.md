@@ -60,6 +60,6 @@ WSL, and a minimal Linux appliance image. Run from the repository or from the ho
 - [x] MTProxy in WSL (`go-host.bat`): built in a dedicated distribution, started, LAN address checked
 - [x] Teamgram full server in Docker (`server/full/`): all seven services up, and a real MTProto handshake offered this install's own key fingerprint
 - [ ] Appliance image (`appliance/`): the proxy image builds (`.img` and `.vhdx`); a boot test is running, not yet confirmed healthy; the full-server image has not been built
-- [ ] Host assistant (`hostassistant/`): the portable exe builds; not yet driven end to end
+- [ ] Host assistant (`hostassistant/`): the portable exe builds; steps 1 to 3 driven in the built exe (real Docker check, empty password refused); Start not yet run from it
 - [ ] Sign in to the full server from Material Unigram (written: TDLib patch `Libraries/tdjson/patches/private-server.patch`, `PrivateServerSettings`, `PrivateServerPopup` and the Add account menu; not yet seen working in a running build)
 - [ ] Share links and the private server's values as QR codes on the dashboard

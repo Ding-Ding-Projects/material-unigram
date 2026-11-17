@@ -3,6 +3,26 @@
 > what is done, [HANDOFF.md](HANDOFF.md) for the latest state, and [design/](design/) for the
 > redesign references. The original Unigram README follows.
 
+## Host your own server
+
+Material Unigram ships two servers you can run yourself, each as a Docker container
+(`host.bat`, add `--full` for the full server), as plain processes in WSL (`go-host.bat`, proxy
+only), or as a bootable appliance image (`appliance/build-appliance.bat`):
+
+- **Telegram proxy**: Telegram's open-source MTProxy. Your real Telegram account connects
+  through it.
+- **Full private server**: the open-source Teamgram server. Accounts on it can talk to each
+  other but not to people on Telegram. In Material Unigram, right-click **Add account** in
+  Settings and choose **Set up a private server…**, then paste the address and public key from
+  the server dashboard.
+
+The host assistant (`hostassistant/`) does all of this in five steps. These captures are from
+its built portable exe:
+
+| Choose | Check this computer | Settings (empty password refused) |
+| --- | --- | --- |
+| ![Choosing the proxy and Docker](Screenshots/host-assistant/1-choose.png) | ![Docker found running](Screenshots/host-assistant/2-check.png) | ![Settings refusing an empty password](Screenshots/host-assistant/3-settings-refused.png) |
+
 <p align="center">
 <a href="https://apps.microsoft.com/detail/9n97zckpd60q">
 <img src="/Telegram/Assets/Logos/StoreLogo.scale-200.png" width="96" height="96" alt="Unigram logo">

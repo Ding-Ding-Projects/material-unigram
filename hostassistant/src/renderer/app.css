@@ -16,6 +16,8 @@ body.app { min-height: 100vh; }
 .steplist li.on .mark, .steplist li.done .mark { background: var(--lime); color: var(--ink); }
 .page { flex: 1 1 520px; padding: 30px 34px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
 .page section { display: flex; flex-direction: column; gap: 14px; }
+/* display: flex above beats the browser's own [hidden] rule, so every step showed at once. */
+.page section[hidden], [hidden] { display: none !important; }
 .page h1 { margin: 0; font-size: 32px; }
 .sub { margin: 10px 0 0; font-size: 20px; }
 .choices { display: flex; flex-direction: column; gap: 10px; }
