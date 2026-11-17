@@ -1,3 +1,8 @@
+> **Material Unigram** is an unofficial Material Design 3 redesign of Unigram for Windows, in
+> development. It is not affiliated with or endorsed by Telegram. See [ROADMAP.md](ROADMAP.md) for
+> what is done, [HANDOFF.md](HANDOFF.md) for the latest state, and [design/](design/) for the
+> redesign references. The original Unigram README follows.
+
 <p align="center">
 <a href="https://apps.microsoft.com/detail/9n97zckpd60q">
 <img src="/Telegram/Assets/Logos/StoreLogo.scale-200.png" width="96" height="96" alt="Unigram logo">

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Material Unigram documentation home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&amp;family=Roboto+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0b6780}a:hover{color:#08485a}
+button{font:inherit}
+</style>
+</helmet>
+<div style="background: #f6f9fb; color: #171c1f; font-family: 'Roboto Flex', system-ui, sans-serif; font-size: 16px">
+  <header style="display: flex; align-items: center; gap: 16px; padding: 16px 24px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto">
+    <a href="#" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #171c1f; font-weight: 700">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0b6780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4 3 11l6 2 2 7 3-5 5 4z"/></svg>Material Unigram
+    </a>
+    <nav aria-label="Site" style="display: flex; gap: 4px; flex-wrap: wrap; flex: 1">
+      <a href="#" style="padding: 8px 14px; border-radius: 20px; background: #cfe6f1; color: #08485a; text-decoration: none">Get started</a>
+      <a href="#" style="padding: 8px 14px; border-radius: 20px; color: #41484d; text-decoration: none">Guides</a>
+      <a href="#" style="padding: 8px 14px; border-radius: 20px; color: #41484d; text-decoration: none">Features</a>
+      <a href="#" style="padding: 8px 14px; border-radius: 20px; color: #41484d; text-decoration: none">Wiki</a>
+      <a href="#" style="padding: 8px 14px; border-radius: 20px; color: #41484d; text-decoration: none">Download</a>
+    </nav>
+    <div style="display: flex; gap: 8px; align-items: center">
+      <label style="display: flex; align-items: center; gap: 8px; background: #e3e9ed; border-radius: 24px; padding: 0 16px; height: 44px">
+        <span style="position: absolute; left: -9999px">Search the docs</span>
+        <input placeholder="Search the docs" style="border: 0; background: transparent; font: inherit; font-size: 14px; outline: none; width: 180px">
+      </label>
+      <button aria-label="Regex builder for docs search" style="border: 0; background: #cfe6f1; color: #08485a; width: 44px; height: 44px; border-radius: 22px; font-family: 'Roboto Mono', monospace">.*</button>
+      <button aria-label="Language" style="border: 1px solid #c1c8cd; background: transparent; border-radius: 22px; height: 44px; padding: 0 14px">EN / 粵</button>
+    </div>
+  </header>
+
+  <section style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; align-items: center">
+    <div style="display: flex; flex-direction: column; gap: 20px">
+      <span style="font-size: 13px; color: #6b4700; background: #ffe0a6; border-radius: 8px; padding: 4px 10px; width: max-content">In development · no release yet</span>
+      <h1 style="margin: 0; font-size: 52px; line-height: 1.1; font-weight: 700">An unofficial Material Design redesign of Unigram for Windows</h1>
+      <p style="margin: 0; font-size: 18px; color: #41484d; line-height: 1.55">Built on the open-source Unigram client. Start with a task below; each guide walks you through it and shows the real screen.</p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap">
+        <a href="#" style="background: #0b6780; color: #fff; text-decoration: none; border-radius: 24px; padding: 14px 24px; font-weight: 500">Take the guided tour</a>
+        <a href="#" style="border: 1px solid #c1c8cd; color: #0b6780; text-decoration: none; border-radius: 24px; padding: 14px 24px; font-weight: 500">Read the roadmap</a>
+      </div>
+    </div>
+    <div role="img" aria-label="Screenshot placeholder: the chat workspace from the built app" style="aspect-ratio: 16 / 10; border-radius: 24px; background: #e3e9ed; display: flex; align-items: center; justify-content: center; color: #41484d; font-size: 14px">[SCREENSHOT FROM THE BUILT APP]</div>
+  </section>
+
+  <section aria-labelledby="tasks-h" style="max-width: 1200px; margin: 0 auto; padding: 24px 24px 48px">
+    <h2 id="tasks-h" style="margin: 0 0 20px; font-size: 28px; font-weight: 600">What do you want to do?</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+      <sc-for list="{{tasks}}" as="t" hint-placeholder-count="6">
+        <a href="#" style="display: flex; flex-direction: column; gap: 8px; background: #fff; border: 1px solid #dbe4ea; border-radius: 20px; padding: 20px; text-decoration: none; color: inherit">
+          <span style="font-weight: 600; font-size: 18px">{{t.title}}</span>
+          <span style="color: #41484d; font-size: 15px; line-height: 1.5">{{t.body}}</span>
+          <span style="color: #0b6780; font-size: 14px; font-weight: 500; margin-top: 4px">{{t.steps}}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section aria-labelledby="walk-h" style="max-width: 1200px; margin: 0 auto; padding: 0 24px 64px">
+    <div style="background: #fff; border-radius: 28px; padding: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px">
+      <div style="display: flex; flex-direction: column; gap: 12px">
+        <h2 id="walk-h" style="margin: 0; font-size: 24px; font-weight: 600">Interactive walkthrough: search with a regex</h2>
+        <p style="margin: 0; color: #41484d; line-height: 1.5">Pick a step to change the explanation. This is a demonstration on this page; it does not run the installed app.</p>
+        <div role="tablist" aria-label="Walkthrough steps" style="display: flex; gap: 8px; flex-wrap: wrap">
+          <sc-for list="{{walk}}" as="w" hint-placeholder-count="3">
+            <button role="tab" aria-selected="{{w.on}}" onClick="{{w.pick}}" style="{{w.style}}">{{w.label}}</button>
+          </sc-for>
+        </div>
+        <p style="margin: 0; line-height: 1.6">{{walkText}}</p>
+      </div>
+      <pre style="margin: 0; background: #171c1f; color: #e3e9ed; border-radius: 20px; padding: 24px; font-family: 'Roboto Mono', monospace; font-size: 14px; line-height: 1.7; overflow-x: auto">{{walkCode}}</pre>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid #dbe4ea; padding: 24px; text-align: center; font-size: 13px; color: #41484d; line-height: 1.6">
+    Licensed under GPL-3.0, like the Unigram source it is built from. Not affiliated with or endorsed by Telegram.
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { w: 0 }; }
+  renderVals() {
+    const tasks = [
+      { title: 'Install and sign in', body: 'Run the installer, then link the app to your phone with a QR code.', steps: '4 steps' },
+      { title: 'Choose your language', body: 'English, Cantonese or both, and how playful the wording is.', steps: '3 steps' },
+      { title: 'Find any message', body: 'Search chats with plain text or the regex builder beside the search bar.', steps: '5 steps' },
+      { title: 'Organize with tabs', body: 'Keep one tab per account and reopen any page from the New tab catalogue.', steps: '3 steps' },
+      { title: 'Load personal wording', body: 'Drop a wording file on the window to rename things your way.', steps: '2 steps' },
+      { title: 'Tune motion and sound', body: 'Adjust animations, turn action sounds off, or follow reduced motion.', steps: '4 steps' }
+    ];
+    const W = [
+      ['Open the builder', 'Select the .* button beside the search bar. The builder opens below it and keeps its own pattern.', 'Search: [ invoice      ] [.*]'],
+      ['Write a pattern', 'Type a pattern. The explanation lists each token, and an error says exactly where the pattern breaks.', '^invoice-\\d{4}\n^      start of the message\n\\d{4}  four digits'],
+      ['See the matches', 'Matches are highlighted in the chat list as you type, bounded so a slow pattern cannot freeze the app.', '3 matches in 2 chats\nruns on this device only']
+    ];
+    const walk = W.map((w, i) => ({ label: `${i + 1}. ${w[0]}`, on: this.state.w === i, pick: () => this.setState({ w: i }),
+      style: `border: ${this.state.w === i ? '0' : '1px solid #c1c8cd'}; background: ${this.state.w === i ? '#cfe6f1' : 'transparent'}; color: ${this.state.w === i ? '#08485a' : '#41484d'}; border-radius: 8px; padding: 8px 14px; cursor: pointer` }));
+    return { tasks, walk, walkText: W[this.state.w][1], walkCode: W[this.state.w][2] };
+  }
+}
+</script>
+</body>
+</html>

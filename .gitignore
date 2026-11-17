@@ -304,3 +304,9 @@ _Pvt_Extensions
 
 # Tools\Screenshots: its captures and the build it stages for Windows Sandbox.
 /Tools/Screenshots/work/
+
+# Material Unigram fork records
+!/AGENTS.md
+!/ROADMAP.md
+!/HANDOFF.md
+!/design/*.md

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&amp;family=Roboto+Mono:wght@400;500&amp;family=Noto+Sans+HK:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0b6780}a:hover{color:#08485a}
+button{font:inherit}
+</style>
+</helmet>
+<div style="min-height: 1080px; background: #f6f9fb; color: #171c1f; font-family: 'Roboto Flex', 'Noto Sans HK', system-ui, sans-serif; font-size: 14px; display: flex; flex-wrap: wrap">
+
+  <nav aria-label="Settings groups" style="flex: 1 1 260px; max-width: 300px; box-sizing: border-box; padding: 24px 16px; display: flex; flex-direction: column; gap: 4px">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #41484d; padding: 8px 12px; margin-bottom: 12px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to chats
+    </a>
+    <h1 style="margin: 0 12px 16px; font-size: 28px; font-weight: 600">Settings</h1>
+    <sc-for list="{{groups}}" as="g" hint-placeholder-count="9">
+      <button onClick="{{g.pick}}" style="{{g.style}}">{{g.label}}</button>
+    </sc-for>
+  </nav>
+
+  <main style="flex: 999 1 640px; min-width: 0; box-sizing: border-box; padding: 24px 32px 48px; display: flex; flex-direction: column; gap: 20px">
+
+    <!-- Search with adjacent regex builder -->
+    <div style="display: flex; gap: 8px; align-items: center">
+      <label style="flex: 1; display: flex; align-items: center; gap: 10px; background: #e3e9ed; border-radius: 28px; padding: 0 20px; height: 56px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#41484d" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <span style="position: absolute; left: -9999px">Search settings</span>
+        <input value="{{query}}" placeholder="Search every setting" style="border: 0; background: transparent; flex: 1; font: inherit; font-size: 16px; outline: none">
+        <span style="font-size: 12px; color: #41484d">{{modeLabel}}</span>
+      </label>
+      <button onClick="{{toggleRegex}}" aria-expanded="{{regexOpen}}" aria-label="Regex builder for settings search" style="{{regexBtn}}">.*</button>
+    </div>
+
+    <sc-if value="{{regexOpen}}" hint-placeholder-val="{{true}}">
+      <section aria-label="Regex builder" style="background: #fff; border-radius: 24px; padding: 20px 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; border: 1px solid #dbe4ea">
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; justify-content: space-between; align-items: center">
+            <span style="font-weight: 600; font-size: 16px">Regex builder</span>
+            <span style="font-size: 12px; color: #2e6b30; background: #d7f0d3; border-radius: 8px; padding: 2px 8px">Valid · .NET engine</span>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 4px">
+            <span style="font-size: 12px; color: #41484d">Pattern</span>
+            <input value="^(sound|notif)\w*" style="font-family: 'Roboto Mono', monospace; font-size: 15px; padding: 12px 14px; border-radius: 12px; border: 1px solid #c1c8cd; background: #f6f9fb">
+          </label>
+          <div role="group" aria-label="Flags" style="display: flex; gap: 8px; flex-wrap: wrap">
+            <button aria-pressed="true" style="border: 0; background: #cfe6f1; color: #08485a; border-radius: 8px; padding: 6px 12px; cursor: pointer">Ignore case</button>
+            <button aria-pressed="false" style="border: 1px solid #c1c8cd; background: transparent; border-radius: 8px; padding: 6px 12px; cursor: pointer">Multiline</button>
+            <button aria-pressed="false" style="border: 1px solid #c1c8cd; background: transparent; border-radius: 8px; padding: 6px 12px; cursor: pointer">Single line</button>
+            <button aria-pressed="false" style="border: 1px solid #c1c8cd; background: transparent; border-radius: 8px; padding: 6px 12px; cursor: pointer">Explicit capture</button>
+          </div>
+          <div role="group" aria-label="Builder mode" style="display: flex; gap: 0; border: 1px solid #c1c8cd; border-radius: 20px; overflow: hidden; width: max-content">
+            <button style="border: 0; background: #cfe6f1; color: #08485a; padding: 8px 16px; cursor: pointer">Match</button>
+            <button style="border: 0; border-left: 1px solid #c1c8cd; background: transparent; padding: 8px 16px; cursor: pointer">Replace</button>
+            <button style="border: 0; border-left: 1px solid #c1c8cd; background: transparent; padding: 8px 16px; cursor: pointer">Split</button>
+            <button style="border: 0; border-left: 1px solid #c1c8cd; background: transparent; padding: 8px 16px; cursor: pointer">Debug</button>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <span style="font-size: 12px; color: #41484d">Explanation</span>
+          <ol style="margin: 0; padding-left: 18px; line-height: 1.7; font-family: 'Roboto Mono', monospace; font-size: 13px">
+            <li><b>^</b> start of the setting name</li>
+            <li><b>(sound|notif)</b> group 1: "sound" or "notif"</li>
+            <li><b>\w*</b> any word characters, as many as possible</li>
+          </ol>
+          <span style="font-size: 12px; color: #41484d; margin-top: 4px">3 settings match · bounded to 50 ms · runs on this device only</span>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- Language and voice -->
+    <section aria-labelledby="lang-h" style="background: #fff; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 20px">
+      <h2 id="lang-h" style="margin: 0; font-size: 20px; font-weight: 600">Language and voice</h2>
+      <div role="radiogroup" aria-label="Language mode" style="display: flex; border: 1px solid #c1c8cd; border-radius: 20px; overflow: hidden; width: max-content">
+        <sc-for list="{{langs}}" as="l" hint-placeholder-count="3">
+          <button role="radio" aria-checked="{{l.on}}" onClick="{{l.pick}}" style="{{l.style}}">{{l.label}}</button>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+        <label style="display: flex; flex-direction: column; gap: 6px">
+          <span style="display: flex; justify-content: space-between"><span style="font-weight: 500">English playfulness</span><span style="color: #41484d">5 of 5</span></span>
+          <input type="range" min="1" max="5" value="5" style="accent-color: #0b6780">
+          <span style="font-size: 12px; color: #41484d">Sample: "All caught up. Go touch some grass."</span>
+        </label>
+        <label style="display: flex; flex-direction: column; gap: 6px">
+          <span style="display: flex; justify-content: space-between"><span style="font-weight: 500">Cantonese playfulness</span><span style="color: #41484d">5 of 5</span></span>
+          <input type="range" min="1" max="5" value="5" style="accent-color: #0b6780">
+          <span style="font-size: 12px; color: #41484d">示範：「全部睇晒喇，出去行吓啦。」</span>
+        </label>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <sc-for list="{{switches}}" as="s" hint-placeholder-count="3">
+          <div style="display: flex; align-items: center; gap: 16px; padding: 12px 0; border-top: 1px solid #eef2f5">
+            <div style="flex: 1">
+              <div style="font-weight: 500">{{s.label}}</div>
+              <div style="font-size: 12px; color: #41484d">{{s.help}}</div>
+            </div>
+            <button role="switch" aria-checked="{{s.on}}" aria-label="{{s.label}}" onClick="{{s.flip}}" style="{{s.track}}"><span style="{{s.knob}}"></span></button>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- Personal wording -->
+    <section aria-labelledby="pw-h" style="background: #fff; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+      <h2 id="pw-h" style="margin: 0; font-size: 20px; font-weight: 600">Personal wording</h2>
+      <p style="margin: 0; color: #41484d; line-height: 1.5">Load a personal wording file to replace words across the app. It stays on this device, and clearing it restores the original wording.</p>
+      <div style="border: 2px dashed #8fa3ae; border-radius: 20px; padding: 28px; display: flex; align-items: center; gap: 20px; background: #f6f9fb">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0b6780" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        <div style="flex: 1">
+          <div style="font-weight: 600">No file loaded</div>
+          <div style="font-size: 12px; color: #41484d">Drop a JSON file anywhere on the window, or choose one. Up to 256 KB.</div>
+        </div>
+        <button style="border: 0; background: #0b6780; color: #fff; border-radius: 20px; padding: 0 20px; height: 40px; cursor: pointer">Choose file</button>
+        <button disabled style="border: 1px solid #c1c8cd; background: transparent; color: #6f787d; border-radius: 20px; padding: 0 20px; height: 40px">Clear</button>
+      </div>
+    </section>
+
+    <!-- Motion, sounds, safety -->
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+      <section aria-labelledby="mo-h" style="background: #fff; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <h2 id="mo-h" style="margin: 0; font-size: 18px; font-weight: 600">Motion</h2>
+        <div role="group" aria-label="Motion profile" style="display: flex; gap: 6px; flex-wrap: wrap">
+          <button style="border: 1px solid #c1c8cd; background: transparent; border-radius: 8px; padding: 6px 10px; cursor: pointer">Calm</button>
+          <button style="border: 0; background: #cfe6f1; color: #08485a; border-radius: 8px; padding: 6px 10px; cursor: pointer">Standard</button>
+          <button style="border: 1px solid #c1c8cd; background: transparent; border-radius: 8px; padding: 6px 10px; cursor: pointer">Expressive</button>
+          <button style="border: 1px solid #c1c8cd; background: transparent; border-radius: 8px; padding: 6px 10px; cursor: pointer">Playful</button>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 4px"><span>Speed 1.0x</span><input type="range" min="0.25" max="2" step="0.25" value="1" style="accent-color: #0b6780"></label>
+        <a href="#" style="font-weight: 500">Open animation editor</a>
+        <span style="font-size: 12px; color: #41484d">Reduced motion from Windows always wins.</span>
+      </section>
+      <section aria-labelledby="so-h" style="background: #fff; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <h2 id="so-h" style="margin: 0; font-size: 18px; font-weight: 600">Sounds</h2>
+        <div style="display: flex; align-items: center; justify-content: space-between"><span>Action sounds</span><span style="font-size: 12px; color: #2e6b30">On</span></div>
+        <label style="display: flex; flex-direction: column; gap: 4px"><span>Volume 60%</span><input type="range" min="0" max="100" value="60" style="accent-color: #0b6780"></label>
+        <div style="display: flex; align-items: center; justify-content: space-between"><span>Read events aloud</span><span style="font-size: 12px; color: #41484d">Off</span></div>
+        <span style="font-size: 12px; color: #41484d">Cantonese voice: Choose automatically</span>
+      </section>
+      <section aria-labelledby="sa-h" style="background: #fff; border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+        <h2 id="sa-h" style="margin: 0; font-size: 18px; font-weight: 600">Locks and School mode</h2>
+        <div style="display: flex; align-items: center; justify-content: space-between"><span>App lock</span><span style="font-size: 12px; color: #41484d">Windows Hello</span></div>
+        <div style="display: flex; align-items: center; justify-content: space-between"><span>School mode</span><span style="font-size: 12px; color: #41484d">Off</span></div>
+        <span style="font-size: 12px; color: #41484d; line-height: 1.5">School mode is a convenience lock that shows English only. It is not a security boundary.</span>
+      </section>
+    </div>
+
+    <div style="display: flex; gap: 12px; justify-content: flex-end">
+      <button style="border: 1px solid #c1c8cd; background: transparent; border-radius: 20px; padding: 0 20px; height: 40px; cursor: pointer; color: #0b6780">Reset this group</button>
+      <button style="border: 1px solid #c1c8cd; background: transparent; border-radius: 20px; padding: 0 20px; height: 40px; cursor: pointer; color: #0b6780">Export settings</button>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1080}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { group: 0, lang: 2, regex: true, sw: [true, true, false] }; }
+  renderVals() {
+    const names = ['Language and voice', 'Personal wording', 'Appearance', 'Motion', 'Notifications and sounds', 'Chats and media', 'Privacy and locks', 'Accounts and devices', 'Advanced'];
+    const groups = names.map((label, i) => ({ label, pick: () => this.setState({ group: i }),
+      style: `text-align: left; border: 0; border-radius: 24px; padding: 12px 16px; cursor: pointer; color: ${this.state.group === i ? '#08485a' : '#171c1f'}; background: ${this.state.group === i ? '#cfe6f1' : 'transparent'}; font-weight: ${this.state.group === i ? 600 : 400}` }));
+    const langs = ['English', '廣東話', 'Both'].map((label, i) => ({ label, on: this.state.lang === i, pick: () => this.setState({ lang: i }),
+      style: `border: 0; ${i ? 'border-left: 1px solid #c1c8cd;' : ''} padding: 10px 20px; cursor: pointer; background: ${this.state.lang === i ? '#cfe6f1' : 'transparent'}; color: ${this.state.lang === i ? '#08485a' : '#171c1f'}` }));
+    const swData = [
+      { label: 'Show emojis in dialogs', help: 'Adds one emoji to message boxes. Never in buttons or labels.' },
+      { label: 'Follow Windows language', help: 'Use the Windows display language when it is English or Chinese (Hong Kong).' },
+      { label: 'Schedule settings', help: 'Switch language or theme at set times.' }
+    ];
+    const switches = swData.map((s, i) => {
+      const on = this.state.sw[i];
+      return { ...s, on, flip: () => { const sw = this.state.sw.slice(); sw[i] = !sw[i]; this.setState({ sw }); },
+        track: `flex: 0 0 auto; width: 52px; height: 32px; border-radius: 16px; cursor: pointer; padding: 0; position: relative; border: ${on ? '0' : '2px solid #6f787d'}; background: ${on ? '#0b6780' : '#e3e9ed'}`,
+        knob: `position: absolute; top: 50%; transform: translateY(-50%); left: ${on ? '24px' : '6px'}; width: ${on ? 24 : 16}px; height: ${on ? 24 : 16}px; border-radius: 12px; background: ${on ? '#fff' : '#6f787d'}` };
+    });
+    return { groups, langs, switches, query: 'sound', modeLabel: this.state.regex ? 'Regex' : 'Plain text', regexOpen: this.state.regex,
+      toggleRegex: () => this.setState({ regex: !this.state.regex }),
+      regexBtn: `border: 0; width: 56px; height: 56px; border-radius: 28px; cursor: pointer; font-family: 'Roboto Mono', monospace; font-weight: 600; font-size: 16px; background: ${this.state.regex ? '#0b6780' : '#cfe6f1'}; color: ${this.state.regex ? '#fff' : '#08485a'}` };
+  }
+}
+</script>
+</body>
+</html>
